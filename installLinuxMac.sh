@@ -61,7 +61,7 @@ amIop(){
         AMIOP=true
         logmsg "INFO" "${NC} User have root permissions!"
     fi
-    if ${AMIOP} == ${NEEDSUDO}
+    if [ "${AMIOP}" == "${NEEDSUDO}" ]
     then
         logmsg "INFO" "${NC} User Permissions: OK"
     else
