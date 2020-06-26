@@ -132,6 +132,13 @@ envDetector(){
 installTool() {
   case "$(uname -s)" in
     Darwin)
+        if [ -n "$(command -v brew)" ];
+        then
+            logmsg "WARN" "${NC} HomeBrew not installed... installing..."
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+            logmsg "INFO" "${NC} HomeBrew installed! (check log above)"
+        fi
+
         if brew ls --versions $1 > /dev/null; then
             # The package is installed
             logmsg "INFO" "${NC} $1 already installed!"
@@ -221,6 +228,14 @@ downloadRepo(){
         git clone git://github.com/daco-tech/myHomeMaker.git
     fi
     logmsg "INFO" "${NC} Repo Updated!"
+}
+
+###################################################  RUN PLAYBOOK ###################################################
+
+runPlaybooks(){
+    logmsg "INFO" "${NC} Running Playbooks..."
+
+
 }
 
 ## Execute
