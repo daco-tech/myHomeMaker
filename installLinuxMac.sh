@@ -77,7 +77,8 @@ envDetector(){
         DISTRO=none
         if [ -n "$(command -v brew)" ];
         then
-            PKGMNG=brew
+            INSTALLCMD=brew install
+            NEEDSUDO=false
             break
         fi
     ;;
