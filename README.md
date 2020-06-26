@@ -8,12 +8,14 @@ Linux/Mac Setup:
 bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent.com/daco-tech/myHomeMaker/master/installLinuxMac.sh)"
 ```
 
-## General Use Functions
+## Development status
+
+### General Use Functions
 
 - [x] LogLine formater to add colors to this execution (function: logmsg)
 - [x] Say Hello (function: displayAsciiDisclaimer)
 
-## Before start using Ansible
+### Before start using Ansible
 
 
 - [x] Fill Global Vars about environment (function: envDetector)
@@ -23,6 +25,17 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [x] Install Ansible (function: installAnsible)
 - [x] Check if requirements are met to start (Test @installReq & @installAnsible )
 - [ ] Clone Repo
+
+### Ansible Playbooks
+
+- [ ] InstallLinuxSpecific
+- [ ] InstallMacSpecific
+- [ ] InstallGenericApps
+- [ ] ConfigureDotFiles
+- [ ] ConfigureApps
+
+
+
 
 
 
