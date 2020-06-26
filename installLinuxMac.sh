@@ -75,11 +75,8 @@ envDetector(){
     Darwin)
         OS=MacOS
         DISTRO=none
-        if [ -n "$(command -v brew)" ];
-        then
-            INSTALLCMD=brew install
-            NEEDSUDO=false
-        fi
+        INSTALLCMD=brew install
+        NEEDSUDO=false
     ;;
     Linux)
         OS=Linux
