@@ -77,7 +77,7 @@ envDetector(){
         DISTRO=none
         INSTALLCMD="brew install"
         NEEDSUDO=false
-        if [ -n "$(command -v clang)" ];
+        if ![ -x "$(command -v clang)" ];
         then
             logmsg "WARN" "${NC} xcode cli tools not installed... installing..."
 
@@ -87,7 +87,7 @@ envDetector(){
 
         fi
 
-        if [ -n "$(command -v brew)" ];
+        if ![ -x "$(command -v brew)" ];
         then
             logmsg "WARN" "${NC} HomeBrew not installed... installing..."
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
