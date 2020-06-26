@@ -218,7 +218,7 @@ downloadRepo(){
         cd ..
     else
         logmsg "INFO" "${NC} Repo directory does not exist, downloading..."
-        git clone git://github.com:daco-tech/myHomeMaker.git
+        git clone git://github.com/daco-tech/myHomeMaker.git
     fi
     logmsg "INFO" "${NC} Repo Updated!"
 }
