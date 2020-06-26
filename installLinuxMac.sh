@@ -75,7 +75,7 @@ envDetector(){
     Darwin)
         OS=MacOS
         DISTRO=none
-        INSTALLCMD=brew install
+        INSTALLCMD="brew install"
         NEEDSUDO=false
     ;;
     Linux)
@@ -91,22 +91,22 @@ envDetector(){
             DISTRO=Debian
         elif [ -n "$(command -v yum)" ];
         then
-            INSTALLCMD=yum -y
+            INSTALLCMD="yum -y"
             DISTRO=RedHat
 
         elif [ -n "$(command -v dnf)" ];
         then
-            INSTALLCMD=dnf -y
+            INSTALLCMD="dnf -y"
             DISTRO=RedHat
 
         elif [ -n "$(command -v pacman)" ];
         then
-            INSTALLCMD=pacman --noconfirm
+            INSTALLCMD="pacman --noconfirm"
             DISTRO=Arch
 
         elif [ -n "$(command -v emerge)" ];
         then
-            INSTALLCMD=emerge
+            INSTALLCMD="emerge"
             DISTRO=Gentoo
         fi
     ;;
@@ -231,6 +231,7 @@ downloadRepo(){
 
 runPlaybooks(){
     logmsg "INFO" "${NC} Running Playbooks..."
+    cd ansible
 
 
 }
