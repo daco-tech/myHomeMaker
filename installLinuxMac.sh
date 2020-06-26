@@ -81,9 +81,9 @@ envDetector(){
         then
             logmsg "WARN" "${NC} xcode cli tools not installed... installing..."
 
-            xcode-select --install && sleep 1
-            osascript -e 'tell application "System Events"' -e 'tell process "Install Command Line Developer Tools"' -e 'keystroke return' -e 'click button "Agree" of window "License Agreement"' -e 'end tell' -e 'end tell'
-            logmsg "INFO" "${NC} xcode cli tools installed! (check log above)"
+            xcode-select --install
+            logmsg "INFO" "${NC} xcode cli tools installing! Please rerun this script after install!"
+            exit 0
 
         fi
 
