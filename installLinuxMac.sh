@@ -200,16 +200,31 @@ installAnsible(){
         curl https://bootstrap.pypa.io/get-pip.py -o ./tmp/get-pip.py
         python ./tmp/get-pip.py --user
         rm -rf ./tmp/
-        if [ -n "$(command -v pip)" ];
+        if [ "${OS}" == "MacOS" ];
         then
-            pip install --user ansible
-        elif [ -n "$(command -v pip3)" ];
-        then
-            pip3 install --user ansible
+            if ! [ -x "$(command -v pip)" ];
+            then
+                sudo pip install --user ansible
+            elif ! [ -x "$(command -v pip3)" ];
+            then
+                sudo pip3 install --user ansible
+            else
+                logmsg "ERROR" "${NC} Unable to install ansible!"
+                exit 1
+            fi
         else
-            logmsg "ERROR" "${NC} Unable to install ansible!"
-            exit 1
+            if [ -n "$(command -v pip)" ];
+            then
+                pip install --user ansible
+            elif [ -n "$(command -v pip3)" ];
+            then
+                pip3 install --user ansible
+            else
+                logmsg "ERROR" "${NC} Unable to install ansible!"
+                exit 1
+            fi
         fi
+        
     fi
 
     ## Test
