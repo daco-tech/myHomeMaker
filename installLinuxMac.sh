@@ -79,7 +79,6 @@ envDetector(){
         then
             INSTALLCMD=brew install
             NEEDSUDO=false
-            break
         fi
     ;;
     Linux)
