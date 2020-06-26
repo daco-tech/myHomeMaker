@@ -21,8 +21,8 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [x] Create the basic requirements installation tool (function: installTool)
 - [x] Install Requirements (Git, Curl) (function: installReq)
 - [x] Install Ansible (function: installAnsible)
+- [x] Check if requirements are met to start (Test @installReq & @installAnsible )
 - [ ] Clone Repo
-- [ ] Check if requirements are met to start (function: test)
 
 
 
