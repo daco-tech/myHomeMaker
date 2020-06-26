@@ -77,6 +77,22 @@ envDetector(){
         DISTRO=none
         INSTALLCMD="brew install"
         NEEDSUDO=false
+        if [ -n "$(command -v clang)" ];
+        then
+            logmsg "WARN" "${NC} xcode cli tools not installed... installing..."
+
+            xcode-select --install && sleep 1
+            osascript -e 'tell application "System Events"' -e 'tell process "Install Command Line Developer Tools"' -e 'keystroke return' -e 'click button "Agree" of window "License Agreement"' -e 'end tell' -e 'end tell'
+            logmsg "INFO" "${NC} xcode cli tools installed! (check log above)"
+
+        fi
+
+        if [ -n "$(command -v brew)" ];
+        then
+            logmsg "WARN" "${NC} HomeBrew not installed... installing..."
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+            logmsg "INFO" "${NC} HomeBrew installed! (check log above)"
+        fi
     ;;
     Linux)
         OS=Linux
@@ -129,12 +145,7 @@ envDetector(){
 installTool() {
   case "$(uname -s)" in
     Darwin)
-        if [ -n "$(command -v brew)" ];
-        then
-            logmsg "WARN" "${NC} HomeBrew not installed... installing..."
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-            logmsg "INFO" "${NC} HomeBrew installed! (check log above)"
-        fi
+        
 
         if brew ls --versions $1 > /dev/null; then
             # The package is installed
