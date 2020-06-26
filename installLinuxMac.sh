@@ -202,6 +202,26 @@ installAnsible(){
 
 }
 
+downloadRepo(){
+    logmsg "INFO" "${NC} Download Repo..."
+
+    if [ -d "myHomeMaker" ]; 
+    then
+        logmsg "INFO" "${NC} Repo directory exists, updating..."
+
+        cd myHomeMaker
+        git reset --hard
+        git clean -f -d
+        git clean -f -x -d
+        git clean -fxd :/ 
+        git pull
+        cd ..
+    else
+        logmsg "INFO" "${NC} Repo directory does not exist, downloading..."
+        git clone git@github.com:daco-tech/myHomeMaker.git
+    fi
+    logmsg "INFO" "${NC} Repo Updated!"
+}
 
 ## Execute
 displayAsciiDisclaimer
@@ -209,6 +229,7 @@ envDetector
 amIop
 installReq
 installAnsible
+downloadRepo
 
 
 

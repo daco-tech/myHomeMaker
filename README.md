@@ -24,7 +24,7 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [x] Install Requirements (Git, Curl, Python) (function: installReq)
 - [x] Install Ansible (function: installAnsible)
 - [x] Check if requirements are met to start (Test @installReq & @installAnsible )
-- [ ] Clone Repo
+- [x] Clone Repo (function: downloadRepo)
 
 ### Ansible Playbooks
 
