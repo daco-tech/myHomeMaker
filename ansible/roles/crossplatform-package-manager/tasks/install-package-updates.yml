@@ -11,10 +11,15 @@
   package:
     name: "*"
     state: "latest"
-  when: install_all_package_updates
+  when: 
+  - install_all_package_updates
+  - ansible_facts['system'] == "Linux"
+  
 
 - name: Install specified software package updates
   package:
     name: "{{ item }}"
     state: latest
   with_items: "{{ update_packages }}"
+  when: 
+  - ansible_facts['system'] == "Linux"

@@ -10,6 +10,7 @@
   become: true
   become_method: sudo
   connection: local
+  gather_facts: True
   vars:
     install_all_package_updates: true
     install_packages:
