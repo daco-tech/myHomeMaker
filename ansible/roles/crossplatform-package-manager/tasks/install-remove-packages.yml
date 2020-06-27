@@ -1,5 +1,6 @@
 ---
 - name: Install additional software packages
+  become: true
   package:
     name: "{{ item }}"
     state: present
@@ -8,6 +9,7 @@
   - ansible_facts['system'] == "Linux"
 
 - name: Install Linux software packages
+  become: true
   package:
     name: "{{ item }}"
     state: present
@@ -16,10 +18,11 @@
   - ansible_facts['system'] == "Linux"
 
 - name: Remove specified software packages
+  become: true
   package:
     name: "{{ item }}"
     state: absent
-  with_items: "{{ remove_packages }}"
+  with_items: "{{ remove_linux_packages }}"
   when: 
   - ansible_facts['system'] == "Linux"
         

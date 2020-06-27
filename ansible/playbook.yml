@@ -7,7 +7,6 @@
     failed_when: not ansible_env.PWD.endswith('/ansible')
 
 - hosts: localhost
-  become: true
   become_method: sudo
   connection: local
   gather_facts: True
@@ -25,6 +24,7 @@
       - httpie
       - neofetch
       - graphviz
+      - kitty
       # - joplin - not available linux
     install_linux_packages:
       - zsh
@@ -32,6 +32,12 @@
       - net-tools
       - build-essential
       - module-assistant
+      - timeshift
+    remove_linux_packages:
+      - gnome-terminal
+      - gnome-terminal-data
+      - nautilus-extension-gnome-terminal
+      - pop-desktop
     
   roles:
     - crossplatform-package-manager

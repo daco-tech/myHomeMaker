@@ -1,5 +1,6 @@
 ---
 - name: "Working around an Ansible/Aptitude issue..."
+  become: true
   apt:
     pkg: "{{ item }}"
     state: latest
@@ -8,6 +9,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Install all software package updates
+  become: true
   package:
     name: "*"
     state: "latest"
@@ -17,6 +19,7 @@
   
 
 - name: Install specified software package updates
+  become: true
   package:
     name: "{{ item }}"
     state: latest
