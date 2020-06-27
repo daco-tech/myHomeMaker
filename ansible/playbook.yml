@@ -18,9 +18,31 @@
       - pydf
       - glances
       - golang
-      - watch
-    update_packages:
-    remove_packages:
+      - cmake
+      - virtualbox
+      - tmux
+      - wget
+      - httpie
+      - neofetch
+      - graphviz
+      # - joplin - not available linux
+    install_linux_packages:
+      - zsh
+      - powertop
+      - net-tools
+      - build-essential
+      - module-assistant
     
   roles:
     - crossplatform-package-manager
+
+
+
+
+
+  #Virtualization and Cloud Automation
+
+  #checkInstalledInstall vagrant #FIX
+  #checkInstalledInstall vagrant-manager #FIX
+  #checkInstalledInstall watch
+  #Install Geek Terminal

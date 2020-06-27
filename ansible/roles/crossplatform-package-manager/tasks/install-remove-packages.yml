@@ -7,6 +7,14 @@
   when: 
   - ansible_facts['system'] == "Linux"
 
+- name: Install Linux software packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ install_linux_packages }}"
+  when: 
+  - ansible_facts['system'] == "Linux"
+
 - name: Remove specified software packages
   package:
     name: "{{ item }}"
