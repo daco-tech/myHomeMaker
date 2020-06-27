@@ -7,5 +7,19 @@
     failed_when: not ansible_env.PWD.endswith('/ansible')
 
 - hosts: localhost
+  become: true
+  become_method: sudo
   connection: local
+  vars:
+    install_all_package_updates: true
+    install_packages:
+      - htop
+      - pydf
+      - glances
+      - golang
+      - watch
+    update_packages:
+    remove_packages:
+    
   roles:
+    - crossplatform-package-manager

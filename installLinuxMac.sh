@@ -250,8 +250,8 @@ downloadRepo(){
 runPlaybooks(){
     logmsg "INFO" "${NC} Running Playbooks..."
     cd ansible
-
-
+    ansible-playbook playbook.yml
+    cd ..
 }
 
 ## Execute
@@ -261,7 +261,7 @@ amIop
 installReq
 installAnsible
 downloadRepo
-
+runPlaybooks
 
 
 exit 0

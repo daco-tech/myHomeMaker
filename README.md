@@ -58,3 +58,9 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [ ] Copy SSH Keys
 - [ ] Copy Dot Files
 - [ ] Configure Apps
+
+
+
+# Credits:
+
+- Ansible Package Install Role base: https://github.com/brentwg/ansible-role-packages
