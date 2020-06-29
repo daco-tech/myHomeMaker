@@ -7,6 +7,7 @@ install_packages: []
 
 # list of packages to remove
 remove_linux_packages: []
+remove_mac_packages: []
 
 # list of packages to update
 update_packages: []
