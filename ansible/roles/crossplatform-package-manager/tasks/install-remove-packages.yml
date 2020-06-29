@@ -39,7 +39,7 @@
   homebrew:
     name: '{{ item }}'
     state: latest
-  with_items: "{{ install_mac_packages }}"
+  loop: "{{ install_mac_packages }}"
   when: 
     - ansible_facts['system'] == "Darwin"
 
