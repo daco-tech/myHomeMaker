@@ -23,7 +23,7 @@
       - httpie
       - neofetch
       - graphviz
-      - kitty
+      #- kitty
       # - joplin - not available linux
     install_linux_packages:
       - zsh
