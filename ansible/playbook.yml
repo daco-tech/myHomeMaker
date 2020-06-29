@@ -17,13 +17,11 @@
       - glances
       - golang
       - cmake
-      #- virtualbox
       - tmux
       - wget
       - httpie
       - neofetch
       - graphviz
-      #- kitty
       # - joplin - not available linux
     install_linux_packages:
       - zsh
@@ -33,7 +31,11 @@
       - module-assistant
       - timeshift
       - pydf
-    remove_linux_packages:
+      - virtualbox
+      - kitty
+    install_mac_cask_packages:
+      - virtualbox
+      - kitty
     
   roles:
     - crossplatform-package-manager
