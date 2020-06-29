@@ -48,6 +48,8 @@
     name: '{{ item }}'
     state: installed
     with_items: "{{ install_mac_cask_packages }}"
+  when: 
+    - ansible_facts['system'] == "Darwin"
 
 
 - name: Uninstall homebrew packages
