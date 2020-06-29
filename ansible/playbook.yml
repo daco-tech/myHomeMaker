@@ -17,7 +17,7 @@
       - glances
       - golang
       - cmake
-      - virtualbox
+      #- virtualbox
       - tmux
       - wget
       - httpie
