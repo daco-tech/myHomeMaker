@@ -25,5 +25,29 @@
   with_items: "{{ remove_linux_packages }}"
   when: 
   - ansible_facts['system'] == "Linux"
-        
-    
+
+  
+- name: Install homebrew packages
+  homebrew:
+    name: '{{ item }}'
+    state: latest
+  with_items: "{{ install_packages }}"
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+- name: Install homebrew mac only packages
+  homebrew:
+    name: '{{ item }}'
+    state: latest
+  with_items: "{{ install_mac_packages }}"
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+
+- name: Uninstall homebrew packages
+  homebrew:
+    name: '{{ item }}'
+    state: absent
+  with_items: '{{ remove_mac_packages }}'
+  when: 
+    - ansible_facts['system'] == "Darwin"

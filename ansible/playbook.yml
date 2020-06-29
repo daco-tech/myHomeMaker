@@ -34,10 +34,6 @@
       - module-assistant
       - timeshift
     remove_linux_packages:
-      - gnome-terminal
-      - gnome-terminal-data
-      - nautilus-extension-gnome-terminal
-      - pop-desktop
     
   roles:
     - crossplatform-package-manager
