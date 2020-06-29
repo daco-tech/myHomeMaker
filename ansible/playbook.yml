@@ -36,9 +36,11 @@
     install_mac_cask_packages:
       - virtualbox
       - kitty
+      - joplin
     
   roles:
     - crossplatform-package-manager
+    - joplinapp-linux
 
 
 
