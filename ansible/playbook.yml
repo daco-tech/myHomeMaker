@@ -22,6 +22,7 @@
       - httpie
       - neofetch
       - graphviz
+      - wget
       # - joplin - not available linux
     install_linux_packages:
       - zsh
@@ -40,7 +41,13 @@
     
   roles:
     - crossplatform-package-manager
-    - joplinapp-linux
+    - role: joplinapp-linux
+      users:
+      - username: daco
+        settings:
+          - { key: "sidebarVisibility", val: "1" }
+          - { key: "dateFormat", val: "YYYY-MM-DD" }
+          - { key: "sync.target", val: "5" }
 
 
 
