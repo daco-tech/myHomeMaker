@@ -13,7 +13,7 @@
   vars:
     install_all_package_updates: true
     repo_brew_tap: 
-      - caskroom/fonts
+      - homebrew/cask-fonts
     install_packages:
       - htop
       - glances
@@ -41,7 +41,7 @@
       - virtualbox
       - kitty
       - joplin      
-      - font-fira-code #Needs tap first caskroom/fonts
+      - font-fira-code
     
   roles:
     - crossplatform-package-manager
