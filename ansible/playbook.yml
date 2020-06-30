@@ -37,14 +37,17 @@
       - kitty
       - flameshot #screenshot tool
       - fonts-firacode
+      - fonts-powerline
     install_mac_cask_packages:
       - virtualbox
       - kitty
       - joplin      
       - font-fira-code
+      - font-hack-nerd-font
     
   roles:
     - crossplatform-package-manager
+    - nerdfonts
     - role: joplinapp-linux
       users:
       - username: "{{ ansible_user_id }}"
