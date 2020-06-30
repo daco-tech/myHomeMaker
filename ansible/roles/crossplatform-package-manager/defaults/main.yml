@@ -18,3 +18,7 @@ install_linux_packages: []
 # list of mac only install
 install_mac_packages: []
 install_mac_cask_packages: []
+
+
+# list of repository additions
+repo_brew_tap: []

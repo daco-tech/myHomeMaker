@@ -12,6 +12,8 @@
   gather_facts: True
   vars:
     install_all_package_updates: true
+    repo_brew_tap: 
+      - caskroom/fonts
     install_packages:
       - htop
       - glances
@@ -23,7 +25,6 @@
       - neofetch
       - graphviz
       - wget
-      # - joplin - not available linux
     install_linux_packages:
       - zsh
       - powertop
@@ -34,10 +35,13 @@
       - pydf
       - virtualbox
       - kitty
+      - flameshot #screenshot tool
+      - fonts-firacode
     install_mac_cask_packages:
       - virtualbox
       - kitty
-      - joplin
+      - joplin      
+      - font-fira-code #Needs tap first caskroom/fonts
     
   roles:
     - crossplatform-package-manager
@@ -48,14 +52,38 @@
           - { key: "sidebarVisibility", val: "1" }
           - { key: "dateFormat", val: "YYYY-MM-DD" }
           - { key: "sync.target", val: "5" }
-
-
-
-
-
-  #Virtualization and Cloud Automation
-
-  #checkInstalledInstall vagrant #FIX
-  #checkInstalledInstall vagrant-manager #FIX
-  #checkInstalledInstall watch
-  #Install Geek Terminal
+    - role: vscode
+      users:
+        - username: daco
+          visual_studio_code_extensions:
+            - streetsidesoftware.code-spell-checker
+            - wholroyd.jinja
+            - ms-python.python
+            - ms-azuretools.vscode-docker
+            - golang.Go
+          visual_studio_code_settings_overwrite: yes
+          visual_studio_code_settings: {
+            "workbench.colorTheme": "Solarized Dark",
+            "terminal.integrated.fontFamily": "Hack Nerd Font",
+            "files.autoSave": "afterDelay",
+            "editor.formatOnSave": true,
+            "editor.formatOnPaste": true,
+            "editor.tabSize": 4,
+            "editor.insertSpaces": true,
+            "editor.renderWhitespace": "all",
+            "terminal.integrated.fontSize": 14,
+            "editor.fontSize": 15,
+            "[Log]": {
+                "editor.fontSize": 15
+            },
+            "window.zoomLevel": 0,
+            "editor.fontFamily": "Fira Code",
+            "editor.fontLigatures": true,
+            "go.formatTool": "goimports",
+            "go.useLanguageServer": true,
+            "editor.rulers": [80, 100, 120],
+            "editor.renderWhitespace": true,
+            "files.associations": {
+              "Vagrantfile": "ruby"
+            }
+          }

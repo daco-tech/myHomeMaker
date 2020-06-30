@@ -1,0 +1,9 @@
+---
+
+- name: Repo Manager Brew Tap
+  homebrew_tap:
+    name: '{{ item }}'
+    state: present
+  with_items: "{{ repo_brew_tap }}"
+  when: 
+    - ansible_facts['system'] == "Darwin"
