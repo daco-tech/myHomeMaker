@@ -47,14 +47,14 @@
     - crossplatform-package-manager
     - role: joplinapp-linux
       users:
-      - username: daco
+      - username: "{{ ansible_user_id }}"
         settings:
           - { key: "sidebarVisibility", val: "1" }
           - { key: "dateFormat", val: "YYYY-MM-DD" }
           - { key: "sync.target", val: "5" }
     - role: vscode
       users:
-        - username: daco
+        - username: "{{ ansible_user_id }}"
           visual_studio_code_extensions:
             - streetsidesoftware.code-spell-checker
             - wholroyd.jinja
