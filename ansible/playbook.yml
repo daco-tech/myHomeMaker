@@ -64,9 +64,11 @@
             - ms-python.python
             - ms-azuretools.vscode-docker
             - golang.Go
+            - pkief.material-icon-theme
           visual_studio_code_settings_overwrite: yes
           visual_studio_code_settings: {
             "workbench.colorTheme": "Solarized Dark",
+            "workbench.iconTheme": "material-icon-theme",
             "terminal.integrated.fontFamily": "Hack Nerd Font",
             "files.autoSave": "afterDelay",
             "editor.formatOnSave": true,
