@@ -31,7 +31,7 @@
       - net-tools
       - build-essential
       - module-assistant
-      - timeshift
+      - timeshift # Backup Linux
       - pydf
       - virtualbox
       - kitty
