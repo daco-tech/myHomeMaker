@@ -32,7 +32,7 @@
 
 - name: set permissions of zsh for Mac (already installed by default)
   become: yes
-  become_user: '{{ username }}'
+  become_user: '{{ user.username }}'
   file:
     path: '/usr/local/share/zsh'
     mode: 'u=rwx,g=rx,o=rx'
