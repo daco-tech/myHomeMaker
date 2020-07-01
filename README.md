@@ -31,7 +31,7 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [x] InstallLinuxSpecific
 - [x] InstallMacSpecific
 - [x] InstallGenericApps
-- [ ] Configure terminal and zsh settings
+- [x] Configure terminal and zsh settings
 - [x] Install fonts
 - [x] Install and configure vscode
 - [ ] Install Docker and Docker-Compose
