@@ -44,6 +44,8 @@
       - joplin      
       - font-fira-code
       - font-hack-nerd-font
+      - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
+
     
   roles:
     - crossplatform-package-manager
