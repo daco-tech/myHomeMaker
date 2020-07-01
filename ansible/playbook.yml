@@ -52,6 +52,13 @@
   roles:
     - crossplatform-package-manager
     - nerdfonts
+    - role: oh-my-zsh
+      users:
+        - username: "{{ ansible_user_id }}"
+          oh_my_zsh:
+            theme: robbyrussell
+            plugins:
+              - git
     - role: joplinapp-linux
       users:
       - username: "{{ ansible_user_id }}"
@@ -69,6 +76,7 @@
             - ms-azuretools.vscode-docker
             - golang.Go
             - pkief.material-icon-theme
+            - yzhang.markdown-all-in-one
           visual_studio_code_settings_overwrite: yes
           visual_studio_code_settings: {
             "workbench.colorTheme": "Solarized Dark",

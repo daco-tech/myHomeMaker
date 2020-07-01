@@ -26,41 +26,48 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [x] Check if requirements are met to start (Test @installReq & @installAnsible )
 - [x] Clone Repo (function: downloadRepo)
 
-### Ansible Playbooks
+### Ansible Playbooks Setups
 
-- [ ] InstallLinuxSpecific
-- [ ] InstallMacSpecific
-- [ ] InstallGenericApps
+- [x] InstallLinuxSpecific
+- [x] InstallMacSpecific
+- [x] InstallGenericApps
+- [ ] Configure terminal and zsh settings
+- [x] Install fonts
+- [x] Install and configure vscode
+- [ ] Install Docker and Docker-Compose
+- [ ] Install and configure Heroku Cloud CLI tool
+- [ ] Install and configure AWS Cloud CLI tool
+- [ ] Install and configure Azure Cloud CLI tool
+- [ ] Install and configure OpenShift Cloud CLI tool
+- [ ] Install Terraform
+- [ ] Install Vargrant
+- [ ] Install Kubernetes tools (Kubectl, Kubectx, etc)
 - [ ] ConfigureDotFiles
-- [ ] ConfigureApps
+- [ ] Configure Startup Applications (Flameshot@Linux)
 
 
-
-
-
-
-## Linux and Mac Specific Apps
-
-- Kitty (Terminal)
-
-
-
-## Windows Tools Specific Apps
-
-- Cmder (Terminal)
 
 
 ## Global Apps
 
 
 
-## Personal Configuration
+## Personal Configuration (One time Setup Option)
 - [ ] Copy SSH Keys
 - [ ] Copy Dot Files
+- [ ] Configure Git
 - [ ] Configure Apps
+- [ ] Configure Kubernetes local settings
 
 
 
 # Credits:
 
 - Ansible Package Install Role base: https://github.com/brentwg/ansible-role-packages
+- Ansible Mac Homebrew install base: https://github.com/adamchainz/mac-ansible/blob/master/roles/adam_mac/tasks/installs.yml
+- Joplin Linux install Role base: https://github.com/thisdwhitley/ansible-role-joplin
+- VSCode Ansible Role: https://github.com/gantsign/ansible-role-visual-studio-code
+- NerdFonts installation: https://github.com/drew-kun/ansible-nerdfonts
+- ZSH Configuration and Installation: https://github.com/gantsign/ansible-role-oh-my-zsh
+
+
