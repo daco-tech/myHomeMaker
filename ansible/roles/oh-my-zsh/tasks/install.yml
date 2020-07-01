@@ -30,16 +30,6 @@
   loop_control:
     loop_var: username
 
-- name: set permissions of zsh for Mac (already installed by default)
-  become: yes
-  become_user: '{{ user.username }}'
-  file:
-    path: '/usr/local/share/zsh'
-    mode: 'u=rwx,g=rx,o=rx'
-    recurse: yes
-  loop_control:
-    loop_var: username
-
 - name: set default shell for users
   become: yes
   become_user: '{{ username }}'
