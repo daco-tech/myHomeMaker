@@ -5,7 +5,6 @@
 OS=UNKNOWN #Linux, MacOS
 DISTRO=UNKNOWN #Debian, RedHat, Gentoo, Arch or None
 INSTALLCMD=UNKNOWN # APT; YUM; PACMAN; EMERGE
-NEEDSUDO=UNKNOWN #TRUE; FALSE
 AMIOP=UNKNOWN #TRUE; FALSE
 
 
@@ -61,13 +60,6 @@ amIop(){
         AMIOP=true
         logmsg "INFO" "${NC} User have root permissions!"
     fi
-    if [ "${AMIOP}" == "${NEEDSUDO}" ]
-    then
-        logmsg "INFO" "${NC} User Permissions: OK"
-    else
-        logmsg "ERROR" "${NC} Insufficient User Permissions, please run with sudo!"
-        exit 1
-    fi
 }
 envDetector(){
     logmsg "INFO" "${NC} Detecting Environment"
@@ -76,7 +68,6 @@ envDetector(){
         OS=MacOS
         DISTRO=none
         INSTALLCMD="brew install"
-        NEEDSUDO=false
         if ! [ -x "$(command -v clang)" ];
         then
             logmsg "WARN" "${NC} xcode cli tools not installed... installing..."
@@ -96,33 +87,32 @@ envDetector(){
     ;;
     Linux)
         OS=Linux
-        NEEDSUDO=true
         if [ -n "$(command -v apt-get)" ];
         then
-            INSTALLCMD="apt-get -y --allow-unauthenticated install"
+            INSTALLCMD="sudo apt-get -y --allow-unauthenticated install"
             DISTRO=Debian
         elif [ -n "$(command -v apt)" ];
         then
-            INSTALLCMD="apt -f install"
+            INSTALLCMD="sudo apt -f install"
             DISTRO=Debian
         elif [ -n "$(command -v yum)" ];
         then
-            INSTALLCMD="yum -y"
+            INSTALLCMD="sudo yum -y"
             DISTRO=RedHat
 
         elif [ -n "$(command -v dnf)" ];
         then
-            INSTALLCMD="dnf -y"
+            INSTALLCMD="sudo dnf -y"
             DISTRO=RedHat
 
         elif [ -n "$(command -v pacman)" ];
         then
-            INSTALLCMD="pacman --noconfirm"
+            INSTALLCMD="sudo pacman --noconfirm"
             DISTRO=Arch
 
         elif [ -n "$(command -v emerge)" ];
         then
-            INSTALLCMD="emerge"
+            INSTALLCMD="sudo emerge"
             DISTRO=Gentoo
         fi
     ;;

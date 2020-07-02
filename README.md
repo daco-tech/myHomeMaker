@@ -35,6 +35,11 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [x] Install fonts
 - [x] Install and configure vscode
 - [x] Install Docker and Docker-Compose
+- [ ] ConfigureDotFiles
+- [ ] Configure Startup Applications (Flameshot@Linux)
+
+### TODO Later:
+
 - [ ] Install and configure Heroku Cloud CLI tool
 - [ ] Install and configure AWS Cloud CLI tool
 - [ ] Install and configure Azure Cloud CLI tool
@@ -42,21 +47,19 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [ ] Install Terraform
 - [ ] Install Vargrant
 - [ ] Install Kubernetes tools (Kubectl, Kubectx, etc)
-- [ ] ConfigureDotFiles
-- [ ] Configure Startup Applications (Flameshot@Linux)
+
+
 
 
 
 
 ## Global Apps
 
-
+**Check playbook.yml**
 
 ## Personal Configuration (One time Setup Option)
 - [ ] Copy SSH Keys
-- [ ] Copy Dot Files
-- [ ] Configure Git
-- [ ] Configure Apps
+- [ ] Configure Personal Git Settings
 - [ ] Configure Kubernetes local settings
 
 
