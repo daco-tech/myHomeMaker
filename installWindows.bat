@@ -1,1 +1,1 @@
-echo "Not yet implemented! Feel free to contribute to this project!"
+echo "Not yet implemented! Feel free to contribute to this project to add Windows Support or move to linux... it's free!"

@@ -35,8 +35,7 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [x] Install fonts
 - [x] Install and configure vscode
 - [x] Install Docker and Docker-Compose
-- [ ] ConfigureDotFiles
-- [ ] Configure Startup Applications (Flameshot@Linux)
+- [x] ConfigureDotFiles (zshrc)
 
 ### TODO Later:
 
