@@ -1,0 +1,21 @@
+
+- name: Install Docker-Compose
+  homebrew:
+    name: "docker-compose"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+- name: Install Docker
+  homebrew_cask:
+    name: "docker"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+- name: Install Docker Toolbox
+  homebrew_cask:
+    name: "docker-toolbox"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"

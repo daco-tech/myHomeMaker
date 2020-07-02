@@ -1,0 +1,59 @@
+- name: Install Docker Dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+
+- name: Add Docker apt key
+  apt_key:
+    url: https://download.docker.com/linux/{{ ansible_distribution|lower }}/gpg
+    state: present
+
+
+# This is merely an information gathering command, it should never change
+- name: Check debian distribution
+  command: lsb_release -cs
+  register: distro
+  changed_when: False
+
+- name: Add Docker Official Repository
+  apt_repository:
+    filename: docker-ce
+    repo: "deb https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable"
+    state: present
+
+- name: Install Docker CE
+  package:
+    name: "{{ item }}"
+    state: present
+    update-cache: yes
+  with_items:
+    - docker-ce
+    - docker-compose
+  notify:
+    - Reload Docker Daemon
+
+- name: Create Docker Daemon Configuration
+  file:
+    group: root
+    mode: 0755
+    owner: root
+    path: /etc/docker/
+    recurse: yes
+    state: directory
+
+- name: Copy Docker daemon configuration
+  copy:
+    dest: /etc/docker/daemon.json
+    group: root
+    mode: 0644
+    owner: root
+    src: etc_docker_daemon.json
+  notify:
+    - Reload Docker Daemon
+

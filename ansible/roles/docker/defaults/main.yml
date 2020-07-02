@@ -1,0 +1,4 @@
+# List of users to be added to the docker group, so they can interact with
+# docker without sudo
+docker_users: []
+
