@@ -39,6 +39,7 @@
       - fonts-firacode
       - fonts-powerline
       - vlc
+      - stacer
     install_mac_packages:
       - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
     install_mac_cask_packages:
