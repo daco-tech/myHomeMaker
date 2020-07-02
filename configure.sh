@@ -1,11 +1,15 @@
 #!/bin/bash
 
 configGit(){
+    echo "Please provide your GIT e-mail:"
+    read gitMail
+    echo "Please provide your GIT Name:"
+    read gitName
     command -v git >/dev/null 2>&1 || { echo >&2 "git is required but it's not installed. Aborting."; exit 1; }
     git config --global url."git@github.com:".insteadOf "https://github.com/"
     git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
-    git config --global user.email "$2"
-    git config --global user.name "$1"
+    git config --global user.email "$gitMail"
+    git config --global user.name "$gitName"
 }
 
 configSudo(){
@@ -88,10 +92,6 @@ configSudo
 
 ## GIT Config
 echo "..:::: CONFIGURE GIT ::::.."
-echo "Please provide your GIT e-mail:"
-read gitMail
-echo "Please provide your GIT Name:"
-read gitName
-configGit $gitName $gitMail
+configGit
 
 echo "..:: DONE! Mission Accomplished! ::.."
