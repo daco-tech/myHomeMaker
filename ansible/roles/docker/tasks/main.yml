@@ -1,6 +1,8 @@
 ---
 
 - name: Ensure Docker Group is present
+  become: yes
+  become_user: "{{ ansible_user_id }}"
   group:
     name: docker
     state: present

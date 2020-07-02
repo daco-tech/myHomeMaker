@@ -34,7 +34,7 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [x] Configure terminal and zsh settings
 - [x] Install fonts
 - [x] Install and configure vscode
-- [ ] Install Docker and Docker-Compose
+- [x] Install Docker and Docker-Compose
 - [ ] Install and configure Heroku Cloud CLI tool
 - [ ] Install and configure AWS Cloud CLI tool
 - [ ] Install and configure Azure Cloud CLI tool
