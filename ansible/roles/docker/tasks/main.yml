@@ -1,11 +1,11 @@
 ---
 
 - name: Ensure Docker Group is present
-  become: yes
-  become_user: "{{ ansible_user_id }}"
   group:
     name: docker
     state: present
+  when: 
+    - ansible_facts['system'] != "Darwin"
 
 - include_tasks: debian.yml
   tags: debian
@@ -20,3 +20,5 @@
     name: "{{ ansible_user_id }}"
     groups: docker
     append: yes
+  when: 
+    - ansible_facts['system'] != "Darwin"
