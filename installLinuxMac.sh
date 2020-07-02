@@ -245,6 +245,7 @@ runPlaybooks(){
 }
 
 ## Execute
+cd ~/
 displayAsciiDisclaimer
 envDetector
 amIop
