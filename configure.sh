@@ -9,13 +9,20 @@ configGit(){
 }
 
 configSudo(){
-    echo "Checking if you are a sudoer... Enter root password"
-    if su -c "grep -q \"$USER\" /etc/sudoers" ; then
-      echo "Already a sudoer. Nothing to do..."
-    else
-      echo "Enable sudo. Enter the root password:"
-      su -c "echo '$USER    ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers"
-    fi
+    case "$(uname -s)" in
+    Darwin)
+        echo " Using Mac! Sudo not configured!"
+    ;;
+    Linux)
+        echo "Checking if you are a sudoer... Enter root password"
+        if su -c "grep -q \"$USER\" /etc/sudoers" ; then
+        echo "Already a sudoer. Nothing to do..."
+        else
+        echo "Enable sudo. Enter the root password:"
+        su -c "echo '$USER    ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers"
+        fi
+    ;;
+    esac
 }
 
 configSSH()
