@@ -2,10 +2,24 @@
 
 ## TLDR; 
 
+Requirement:
+
 Linux/Mac Setup:
 
 ```bash
 bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent.com/daco-tech/myHomeMaker/master/installLinuxMac.sh)"
+```
+
+Close all open terminal windows, and re-open to run the command:
+
+```bash
+config
+```
+
+To update your setup to the last app versions just run:
+
+```bash
+update
 ```
 
 ## Development status
@@ -48,17 +62,13 @@ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent
 - [ ] Install Kubernetes tools (Kubectl, Kubectx, etc)
 
 
-
-
-
-
 ## Global Apps
 
 **Check playbook.yml**
 
 ## Personal Configuration (One time Setup Option)
-- [ ] Copy SSH Keys
-- [ ] Configure Personal Git Settings
+- [x] Copy SSH Keys
+- [x] Configure Personal Git Settings
 - [ ] Configure Kubernetes local settings
 
 
