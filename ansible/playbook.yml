@@ -40,6 +40,7 @@
       - fonts-powerline
       - vlc
       - stacer
+      - vagrant
     install_mac_packages:
       - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
     install_mac_cask_packages:
@@ -49,6 +50,7 @@
       - font-fira-code
       - font-hack-nerd-font
       - vlc
+      - vagrant
       
 
     
