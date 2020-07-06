@@ -57,8 +57,8 @@ update
 - [ ] Install and configure AWS Cloud CLI tool
 - [ ] Install and configure Azure Cloud CLI tool
 - [ ] Install and configure OpenShift Cloud CLI tool
-- [ ] Install Terraform
-- [ ] Install Vargrant
+- [x] Install Terraform
+- [x] Install Vargrant
 - [ ] Install Kubernetes tools (Kubectl, Kubectx, etc)
 
 
