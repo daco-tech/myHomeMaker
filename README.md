@@ -49,6 +49,8 @@ update
 - [x] Install fonts
 - [x] Install and configure vscode
 - [x] Install Docker and Docker-Compose
+- [x] Install Terraform
+- [x] Install Vargrant
 - [x] ConfigureDotFiles (zshrc)
 
 ### TODO Later:
@@ -57,9 +59,8 @@ update
 - [ ] Install and configure AWS Cloud CLI tool
 - [ ] Install and configure Azure Cloud CLI tool
 - [ ] Install and configure OpenShift Cloud CLI tool
-- [x] Install Terraform
-- [x] Install Vargrant
 - [ ] Install Kubernetes tools (Kubectl, Kubectx, etc)
+- [ ] Add Linux Test in GitHub Actions
 
 
 ## Global Apps
