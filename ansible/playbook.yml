@@ -43,6 +43,7 @@
       - vagrant
       - terraform
     install_mac_packages:
+      - terraform
       - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
     install_mac_cask_packages:
       - virtualbox
@@ -52,7 +53,6 @@
       - font-hack-nerd-font
       - vlc
       - vagrant
-      - terraform
       
 
     
