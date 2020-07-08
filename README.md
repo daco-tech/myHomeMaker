@@ -51,12 +51,12 @@ update
 - [x] Install Docker and Docker-Compose
 - [x] Install Terraform
 - [x] Install Vargrant
+- [x] Install and configure AWS Cloud CLI tool
 - [x] ConfigureDotFiles (zshrc)
 
 ### TODO Later:
 
 - [ ] Install and configure Heroku Cloud CLI tool
-- [ ] Install and configure AWS Cloud CLI tool
 - [ ] Install and configure Azure Cloud CLI tool
 - [ ] Install and configure OpenShift Cloud CLI tool
 - [ ] Install Kubernetes tools (Kubectl, Kubectx, etc)

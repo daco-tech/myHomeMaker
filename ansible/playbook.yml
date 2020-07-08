@@ -25,6 +25,7 @@
       - neofetch
       - graphviz
       - wget
+      - awscli
     install_linux_packages:
       - zsh
       - powertop
