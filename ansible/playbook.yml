@@ -26,6 +26,7 @@
       - graphviz
       - wget
       - awscli
+      - azure-cli
     install_linux_packages:
       - zsh
       - powertop
