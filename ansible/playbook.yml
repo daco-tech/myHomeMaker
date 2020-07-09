@@ -47,6 +47,7 @@
     install_mac_packages:
       - terraform
       - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
+      - watch
     install_mac_cask_packages:
       - virtualbox
       - kitty
