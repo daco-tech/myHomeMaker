@@ -50,6 +50,7 @@
       - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
       - kubectl
+      - jq
     install_mac_cask_packages:
       - virtualbox
       - kitty
