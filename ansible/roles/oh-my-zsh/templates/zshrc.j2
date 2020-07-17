@@ -79,6 +79,7 @@ DISABLE_AUTO_UPDATE="true"
 plugins=({{ oh_my_zsh.plugins | default(oh_my_zsh_plugins) | join(' ') }})
 
 source $ZSH/oh-my-zsh.sh
+source <(kubectl completion zsh)
 
 # User configuration
 
