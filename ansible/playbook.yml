@@ -27,6 +27,7 @@
       - wget
       - awscli
       - azure-cli
+      - bash-completion
     install_linux_packages:
       - zsh
       - powertop
@@ -48,6 +49,7 @@
       - terraform
       - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
+      - kubectl
     install_mac_cask_packages:
       - virtualbox
       - kitty
