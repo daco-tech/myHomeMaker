@@ -60,8 +60,6 @@
       - vlc
       - vagrant
       
-
-    
   roles:
     - crossplatform-package-manager
     - nerdfonts
