@@ -28,6 +28,7 @@
       - awscli
       - azure-cli
       - bash-completion
+      - dep
     install_linux_packages:
       - zsh
       - powertop
