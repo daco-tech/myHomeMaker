@@ -29,6 +29,7 @@
       - azure-cli
       - bash-completion
       - dep
+      - kubectx
     install_linux_packages:
       - zsh
       - powertop
