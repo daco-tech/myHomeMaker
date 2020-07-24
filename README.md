@@ -54,12 +54,13 @@ update
 - [x] Install and configure AWS Cloud CLI tool
 - [x] Install and configure Azure Cloud CLI tool
 - [x] ConfigureDotFiles (zshrc)
+- [x] Install Kubernetes tools [Kubectl (Mac), Kubectx, etc]
 
 ### TODO Later:
 
 - [ ] Install and configure Heroku Cloud CLI tool
 - [ ] Install and configure OpenShift Cloud CLI tool
-- [ ] Install Kubernetes tools (Kubectl, Kubectx, etc)
+- [ ] Install Kubernetes tools (Kubectl linux)
 - [ ] Add Linux Test in GitHub Actions
 
 
