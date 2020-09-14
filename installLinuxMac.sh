@@ -190,21 +190,23 @@ installAnsible(){
         then
             installTool ansible
         else
-            mkdir tmp/
-            curl https://bootstrap.pypa.io/get-pip.py -o ./tmp/get-pip.py
-            python ./tmp/get-pip.py --user
-            rm -rf ./tmp/
-            
-            if [ -n "$(command -v pip)" ];
-            then
-                pip install --user ansible
-            elif [ -n "$(command -v pip3)" ];
-            then
-                pip3 install --user ansible
-            else
-                logmsg "ERROR" "${NC} Unable to install ansible!"
-                exit 1
-            fi
+            #mkdir tmp/
+            #curl https://bootstrap.pypa.io/get-pip.py -o ./tmp/get-pip.py
+            #python ./tmp/get-pip.py --user
+            #rm -rf ./tmp/
+            #
+            #if [ -n "$(command -v pip)" ];
+            #then
+            #    pip install --user ansible
+            #elif [ -n "$(command -v pip3)" ];
+            #then
+            #    pip3 install --user ansible
+            #else
+            #    logmsg "ERROR" "${NC} Unable to install ansible!"
+            #    exit 1
+            #fi
+            sudo apt-add-repository ppa:ansible/ansible
+            installTool ansible
         fi
         
     fi
@@ -240,6 +242,7 @@ downloadRepo(){
 runPlaybooks(){
     logmsg "INFO" "${NC} Running Playbooks..."
     cd myHomeMaker/ansible
+    cat ./playbook.yml
     ansible-playbook playbook.yml
     cd ..
 }

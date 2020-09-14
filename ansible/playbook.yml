@@ -25,12 +25,13 @@
       - neofetch
       - graphviz
       - wget
-      - awscli
-      - azure-cli
       - bash-completion
-      - dep
-      - kubectx
     install_linux_packages:
+      #- awscli
+      #- azure-cli
+      #- kubectx
+      #- terraform
+      #- dep
       - zsh
       - powertop
       - net-tools
@@ -49,10 +50,14 @@
       - terraform
     install_mac_packages:
       - terraform
+      - awscli
+      - azure-cli
+      - kubectx
       - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
       - kubectl
       - jq
+      - dep
     install_mac_cask_packages:
       - virtualbox
       - kitty
