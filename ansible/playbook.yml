@@ -40,10 +40,8 @@
       - net-tools
       - build-essential
       - module-assistant
-      
       - pydf
       - virtualbox
-      
       - flameshot #screenshot tool
       - fonts-firacode
       - fonts-powerline
@@ -55,7 +53,7 @@
       - awscli
       - azure-cli
       - kubectx
-      - https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
+      - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
       - kubectl
       - jq
