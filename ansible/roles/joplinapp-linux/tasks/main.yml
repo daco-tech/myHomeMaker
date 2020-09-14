@@ -4,7 +4,7 @@
     - include_tasks: 
         file: install.yml
         apply:
-          become: true
+          become: false
           become_user: "{{ user.username }}"
       with_items: "{{ users }}"
       loop_control:
