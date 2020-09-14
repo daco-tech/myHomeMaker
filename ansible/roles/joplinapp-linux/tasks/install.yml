@@ -20,9 +20,9 @@
         path: ~/.joplin/VERSION
       register: VERSION_file
     
-    - name: install| check the contents of ~/.joplin/VERSION [{{ user.username }}]
+    - name: install| check the contents of ~/.joplin/VERSION [{{ ansible_env.HOME }}]
       set_fact:
-        VERSION_contents: "{{ lookup('file', '/home/{{ user.username }}/.joplin/VERSION') }}"
+        VERSION_contents: "{{ lookup('file', '{{ ansible_env.HOME }}/.joplin/VERSION') }}"
       when: VERSION_file.stat.exists
     
     - name: install| when there is no VERSION or it's contents don't match, do these
