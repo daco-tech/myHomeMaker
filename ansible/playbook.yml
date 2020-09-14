@@ -32,22 +32,24 @@
       #- kubectx
       #- terraform
       #- dep
+      #- stacer
+      #- kitty
+      #- timeshift # Backup Linux
       - zsh
       - powertop
       - net-tools
       - build-essential
       - module-assistant
-      - timeshift # Backup Linux
+      
       - pydf
       - virtualbox
-      - kitty
+      
       - flameshot #screenshot tool
       - fonts-firacode
       - fonts-powerline
       - vlc
-      - stacer
       - vagrant
-      - terraform
+
     install_mac_packages:
       - terraform
       - awscli
