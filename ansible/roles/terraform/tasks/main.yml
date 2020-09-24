@@ -1,0 +1,24 @@
+---
+- name: Install tfenv Mac
+  homebrew:
+    name: "tfenv"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+- name: Install tfenv Linux
+  git:
+    repo: git@github.com:tfutils/tfenv.git
+    version: master
+    dest: ~/.tfenv
+  # ssh-agent doesn't allow key to pass through remote sudo commands.
+  become: no
+
+- name: Create symlink tfenv
+  file: src=~/.tfenv/bin/* dest=/usr/local/bin state=link
+
+
+- name: Install terraform version {{ terraform_version }}
+  command: tfenv install {{ terraform_version }}
+  args:
+    creates: ~/.tfenv/bin/terraform

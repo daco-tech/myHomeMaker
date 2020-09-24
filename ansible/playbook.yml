@@ -49,7 +49,6 @@
       - vagrant
 
     install_mac_packages:
-      - terraform
       - awscli
       - azure-cli
       - kubectx
@@ -58,6 +57,7 @@
       - kubectl
       - jq
       - dep
+      - tfenv
     install_mac_cask_packages:
       - virtualbox
       - kitty
