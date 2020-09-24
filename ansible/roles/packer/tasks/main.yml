@@ -1,7 +1,14 @@
 ---
-- name: Ensure unzip is installed.
+- name: Ensure unzip is installed Linux.
   become: true
   package: name=unzip state=present
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Ensure unzip is installed Mac.
+  package: name=unzip state=present
+  when: 
+    - ansible_facts['system'] == "Darwin"
 
 - name: Download and unarchive Packer Linux.
   become: true
