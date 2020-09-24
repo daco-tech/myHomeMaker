@@ -17,7 +17,6 @@
     - ansible_facts['system'] == "Linux"
 
 - name: Download and unarchive Packer Mac.
-  become: true
   unarchive:
     src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_darwin_{{ packer_arch }}.zip
     dest: "{{ packer_bin_path }}"
