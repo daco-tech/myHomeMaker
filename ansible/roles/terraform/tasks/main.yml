@@ -1,11 +1,12 @@
 ---
 - name: Install tfenv
+  become: yes
+  become_user: '{{ ansible_user_id }}'
   git:
     repo: git@github.com:tfutils/tfenv.git
     version: master
     dest: ~/.tfenv
   # ssh-agent doesn't allow key to pass through remote sudo commands.
-  become: no
 
 - name: Create symlink tfenv Mac
   file: src=~/.tfenv/bin/tfenv dest=/usr/local/bin/tfenv state=link
