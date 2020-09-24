@@ -49,17 +49,19 @@ update
 - [x] Install fonts
 - [x] Install and configure vscode
 - [x] Install Docker and Docker-Compose
+- [x] Install Terraform
+- [x] Install Vargrant
+- [x] Install and configure AWS Cloud CLI tool
+- [x] Install and configure Azure Cloud CLI tool
 - [x] ConfigureDotFiles (zshrc)
+- [x] Install Kubernetes tools [Kubectl (Mac), Kubectx, etc]
 
 ### TODO Later:
 
 - [ ] Install and configure Heroku Cloud CLI tool
-- [ ] Install and configure AWS Cloud CLI tool
-- [ ] Install and configure Azure Cloud CLI tool
 - [ ] Install and configure OpenShift Cloud CLI tool
-- [ ] Install Terraform
-- [ ] Install Vargrant
-- [ ] Install Kubernetes tools (Kubectl, Kubectx, etc)
+- [ ] Install Kubernetes tools (Kubectl linux)
+- [ ] Add Linux Test in GitHub Actions
 
 
 ## Global Apps

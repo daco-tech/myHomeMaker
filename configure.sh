@@ -10,6 +10,7 @@ configGit(){
     git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
     git config --global user.email "$gitMail"
     git config --global user.name "$gitName"
+    git config pull.rebase true
 }
 
 configSudo(){
