@@ -30,7 +30,6 @@
       #- awscli
       #- azure-cli
       #- kubectx
-      #- terraform
       #- dep
       #- stacer
       #- kitty
@@ -57,7 +56,6 @@
       - kubectl
       - jq
       - dep
-      - tfenv
     install_mac_cask_packages:
       - virtualbox
       - kitty
@@ -69,6 +67,7 @@
       
   roles:
     - packer
+    - terraform
     - crossplatform-package-manager
     - nerdfonts
     - docker
