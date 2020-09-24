@@ -7,11 +7,28 @@
   # ssh-agent doesn't allow key to pass through remote sudo commands.
   become: no
 
-- name: Create symlink tfenv
+- name: Create symlink tfenv Mac
   file: src=~/.tfenv/bin/tfenv dest=/usr/local/bin/tfenv state=link
+  when: 
+    - ansible_facts['system'] == "Darwin"
 
-- name: Create symlink terraform
+- name: Create symlink terraform Mac
   file: src=~/.tfenv/bin/terraform dest=/usr/local/bin/terraform state=link
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+
+- name: Create symlink tfenv Linux
+  become: true
+  file: src=~/.tfenv/bin/tfenv dest=/usr/local/bin/tfenv state=link
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Create symlink terraform Linux
+  become: true
+  file: src=~/.tfenv/bin/terraform dest=/usr/local/bin/terraform state=link
+  when: 
+    - ansible_facts['system'] == "Linux"
 
 - name: Install terraform version {{ terraform_version }}
   command: tfenv install {{ terraform_version }}
