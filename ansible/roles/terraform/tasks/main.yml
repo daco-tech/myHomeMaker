@@ -8,8 +8,10 @@
   become: no
 
 - name: Create symlink tfenv
-  file: src=~/.tfenv/bin/* dest=/usr/local/bin state=link
+  file: src=~/.tfenv/bin/tfenv dest=/usr/local/bin state=link
 
+- name: Create symlink terraform
+  file: src=~/.tfenv/bin/terraform dest=/usr/local/bin state=link
 
 - name: Install terraform version {{ terraform_version }}
   command: tfenv install {{ terraform_version }}
