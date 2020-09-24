@@ -1,12 +1,5 @@
 ---
-- name: Install tfenv Mac
-  homebrew:
-    name: "tfenv"
-    state: latest
-  when: 
-    - ansible_facts['system'] == "Darwin"
-
-- name: Install tfenv Linux
+- name: Install tfenv
   git:
     repo: git@github.com:tfutils/tfenv.git
     version: master
