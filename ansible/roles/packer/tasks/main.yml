@@ -1,0 +1,23 @@
+---
+- name: Ensure unzip is installed.
+  package: name=unzip state=present
+
+- name: Download and unarchive Packer Linux.
+  unarchive:
+    src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_{{ packer_arch }}.zip
+    dest: "{{ packer_bin_path }}"
+    remote_src: true
+    creates: "{{ packer_bin_path }}/packer"
+    mode: 0755
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Download and unarchive Packer Mac.
+  unarchive:
+    src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_darwin_{{ packer_arch }}.zip
+    dest: "{{ packer_bin_path }}"
+    remote_src: true
+    creates: "{{ packer_bin_path }}/packer"
+    mode: 0755
+  when: 
+    - ansible_facts['system'] == "Darwin"

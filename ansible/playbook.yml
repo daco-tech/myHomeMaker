@@ -53,6 +53,7 @@
 
     
   roles:
+    - packer
     - crossplatform-package-manager
     - nerdfonts
     - docker
