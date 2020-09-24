@@ -1,21 +1,18 @@
 ---
-- name: Install tfenv
+- name: Install tfenv Linux
   git:
     repo: git@github.com:tfutils/tfenv.git
     version: master
     dest: /home/{{ ansible_user_id }}/.tfenv
-  # ssh-agent doesn't allow key to pass through remote sudo commands.
+  when: 
+    - ansible_facts['system'] == "Linux"
 
-- name: Create symlink tfenv Mac
-  file: src=/home/{{ ansible_user_id }}/.tfenv/bin/tfenv dest=/usr/local/bin/tfenv state=link
+- name: Install tfenv Mac
+  homebrew:
+    name: "tfenv"
+    state: latest
   when: 
     - ansible_facts['system'] == "Darwin"
-
-- name: Create symlink terraform Mac
-  file: src=/home/{{ ansible_user_id }}/.tfenv/bin/terraform dest=/usr/local/bin/terraform state=link
-  when: 
-    - ansible_facts['system'] == "Darwin"
-
 
 - name: Create symlink tfenv Linux
   become: yes
