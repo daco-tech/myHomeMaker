@@ -27,8 +27,6 @@
       - wget
       - bash-completion
     install_linux_packages:
-      #- awscli
-      #- azure-cli
       #- kubectx
       #- dep
       #- stacer
@@ -48,7 +46,6 @@
       - vagrant
 
     install_mac_packages:
-      - azure-cli
       - kubectx
       - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
@@ -68,6 +65,7 @@
     - packer
     - terraform
     - awscli
+    - azure-cli
     - crossplatform-package-manager
     - nerdfonts
     - docker

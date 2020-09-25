@@ -1,0 +1,15 @@
+---
+
+- name: Install azure-cli Mac
+  homebrew:
+    name: "azure-cli"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+
+- name: Install azure-cli Linux
+  become: true
+  command: curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+  when: 
+    - ansible_facts['system'] == "Linux"
