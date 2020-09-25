@@ -26,6 +26,7 @@
       - graphviz
       - wget
       - bash-completion
+      - fzf #https://github.com/junegunn/fzf
     install_linux_packages:
       #- dep
       #- stacer
