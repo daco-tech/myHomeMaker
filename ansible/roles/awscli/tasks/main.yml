@@ -1,4 +1,11 @@
 ---
+- name: Create awscli tmp folder
+  file:
+    path: /home/{{ ansible_user_id }}/tmp/aws/
+    state: present
+  when: 
+    - ansible_facts['system'] == "Linux"
+
 - name: Download and unarchive awscli Linux.
   become: true
   unarchive:
