@@ -15,6 +15,7 @@
 
 
 - name: Install kubectl
+  become: true
   get_url: url=https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version }}/bin/linux/{{ kubectl_platform }}/kubectl dest={{ kubectl_bin_path }}/
   when: 
     - ansible_facts['system'] == "Linux"
