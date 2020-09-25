@@ -1,4 +1,4 @@
 ---
 awscli_version: "2.0.30"
 awscli_platform: "x86_64"
-awscli_tmp_path: /tmp/aws
+awscli_tmp_path: /home/{{ ansible_user_id }}/tmp/aws
