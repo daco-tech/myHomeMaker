@@ -29,7 +29,7 @@
       - fzf #https://github.com/junegunn/fzf
     install_linux_packages:
       - stacer
-      #- timeshift # Backup Linux
+      - timeshift # Backup Linux
       - zsh
       - powertop
       - net-tools
@@ -55,7 +55,6 @@
       - font-hack-nerd-font
       - vlc
       - vagrant
-      
   roles:
     - kubectx
     - kubectl
