@@ -12,10 +12,6 @@
 
 - stat: path={{ kubectx_bin_path }}/kubectl
   register: stctl
-  when: 
-    - ansible_facts['system'] == "Linux"
-
-
 
 - name: Install kubectl
   become: true
@@ -27,3 +23,5 @@
 - name: Set kubectl exec
   become: true
   file: dest={{ kubectl_bin_path }}/kubectl mode=a+x
+  when: 
+    - ansible_facts['system'] == "Linux"
