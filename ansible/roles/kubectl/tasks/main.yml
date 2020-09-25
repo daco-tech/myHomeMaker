@@ -22,4 +22,5 @@
     - not stctl.stat.exists
 
 - name: Set kubectl exec
+  become: true
   file: dest={{ kubectl_bin_path }}/kubectl mode=a+x
