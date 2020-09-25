@@ -51,6 +51,7 @@ update
 - [x] Install Docker and Docker-Compose
 - [x] Install Terraform
 - [x] Install Vargrant
+- [x] Install Packer
 - [x] Install and configure AWS Cloud CLI tool
 - [x] Install and configure Azure Cloud CLI tool
 - [x] ConfigureDotFiles (zshrc)
