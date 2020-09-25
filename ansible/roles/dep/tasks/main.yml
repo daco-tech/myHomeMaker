@@ -1,0 +1,16 @@
+---
+
+- name: Install dep Mac
+  homebrew:
+    name: "dep"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+
+- name: Install dep Linux
+  shell: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  args:
+    warn: no
+  when: 
+    - ansible_facts['system'] == "Linux"

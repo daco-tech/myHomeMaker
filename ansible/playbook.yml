@@ -28,7 +28,6 @@
       - bash-completion
       - fzf #https://github.com/junegunn/fzf
     install_linux_packages:
-      #- dep
       #- stacer
       #- kitty
       #- timeshift # Backup Linux
@@ -49,7 +48,6 @@
       - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
       - jq
-      - dep
       - nano
     install_mac_cask_packages:
       - virtualbox
@@ -63,6 +61,7 @@
   roles:
     - kubectx
     - kubectl
+    - dep
     - nano_highlights
     - packer
     - terraform
