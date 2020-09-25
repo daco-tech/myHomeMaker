@@ -21,6 +21,7 @@
 
 
 - name: Install awscli version {{ awscli_version }} Linux
+  become: true
   command: /home/{{ ansible_user_id }}/tmp/aws/install
   when: 
     - ansible_facts['system'] == "Linux"
