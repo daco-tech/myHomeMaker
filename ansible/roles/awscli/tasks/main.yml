@@ -27,6 +27,7 @@
     - ansible_facts['system'] == "Linux"
 
 - name: Cleanup awscli tmp folder
+  become: true
   file:
     path: /home/{{ ansible_user_id }}/tmp/aws/
     state: absent
