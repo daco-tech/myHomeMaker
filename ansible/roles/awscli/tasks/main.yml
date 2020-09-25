@@ -8,7 +8,7 @@
     src: https://awscli.amazonaws.com/awscli-exe-linux-{{ awscli_platform }}-{{ awscli_version }}.zip
     dest: /home/{{ ansible_user_id }}/tmp/
     remote_src: true
-    creates: "/home/{{ ansible_user_id }}/tmp/aws/install"
+    creates: "/home/{{ ansible_user_id }}/tmp/aws/install --upgrade"
     mode: 0755
   when: 
     - ansible_facts['system'] == "Linux"
