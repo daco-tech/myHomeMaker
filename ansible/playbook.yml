@@ -28,8 +28,7 @@
       - bash-completion
       - fzf #https://github.com/junegunn/fzf
     install_linux_packages:
-      #- stacer
-      #- kitty
+      - stacer
       #- timeshift # Backup Linux
       - zsh
       - powertop
@@ -51,7 +50,6 @@
       - nano
     install_mac_cask_packages:
       - virtualbox
-      - kitty
       - joplin      
       - font-fira-code
       - font-hack-nerd-font
@@ -61,6 +59,7 @@
   roles:
     - kubectx
     - kubectl
+    - kitty
     - dep
     - nano_highlights
     - packer
