@@ -9,7 +9,8 @@
 
 
 - name: Install azure-cli Linux
-  become: true
-  command: curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+  shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash -
+  args:
+    warn: no
   when: 
     - ansible_facts['system'] == "Linux"
