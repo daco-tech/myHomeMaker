@@ -1,4 +1,6 @@
 ---
+- stat: path=/usr/bin/aws
+  register: st
 
 - name: Download and unarchive awscli Linux.
   become: true
@@ -10,6 +12,7 @@
     mode: 0755
   when: 
     - ansible_facts['system'] == "Linux"
+    - not st.stat.exists
 
 
 - name: Install awscli Mac
@@ -25,6 +28,7 @@
   command: /home/{{ ansible_user_id }}/tmp/aws/install
   when: 
     - ansible_facts['system'] == "Linux"
+    - not st.stat.exists
 
 - name: Cleanup awscli tmp folder
   become: true
@@ -33,3 +37,4 @@
     state: absent
   when: 
     - ansible_facts['system'] == "Linux"
+    - not st.stat.exists
