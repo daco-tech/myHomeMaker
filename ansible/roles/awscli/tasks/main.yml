@@ -1,5 +1,5 @@
 ---
-- stat: path=/usr/bin/aws
+- stat: path=/usr/local/bin/aws
   register: st
 
 - name: Download and unarchive awscli Linux.
@@ -27,7 +27,7 @@
   become: true
   command: /home/{{ ansible_user_id }}/tmp/aws/install
   args:  
-      creates: /usr/bin/aws
+      creates: /usr/local/bin/aws
   when: 
     - ansible_facts['system'] == "Linux"
     - not st.stat.exists
