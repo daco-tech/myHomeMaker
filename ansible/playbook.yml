@@ -32,7 +32,6 @@
       #- stacer
       #- kitty
       #- timeshift # Backup Linux
-      #- kubectl
       - zsh
       - powertop
       - net-tools
@@ -49,7 +48,6 @@
     install_mac_packages:
       - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
-      - kubectl
       - jq
       - dep
       - nano
@@ -64,6 +62,7 @@
       
   roles:
     - kubectx
+    - kubectl
     - nano_highlights
     - packer
     - terraform

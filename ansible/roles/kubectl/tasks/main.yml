@@ -1,0 +1,21 @@
+---
+
+
+
+- name: Install kubectx and kubens Mac
+  homebrew:
+    name: "kubectl"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+
+- stat: path={{ kubectx_bin_path }}/kubectl
+  register: stctl
+
+
+- name: Install kubectl
+  get_url: url=https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version }}/bin/linux/{{ kubectl_platform }}/kubectl dest={{ kubectl_platform }}/
+  when: 
+    - ansible_facts['system'] == "Linux"
+    - not stctl.stat.exists
