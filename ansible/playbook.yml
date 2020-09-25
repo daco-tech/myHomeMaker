@@ -27,7 +27,6 @@
       - wget
       - bash-completion
     install_linux_packages:
-      #- kubectx
       #- dep
       #- stacer
       #- kitty
@@ -46,7 +45,6 @@
       - vagrant
 
     install_mac_packages:
-      - kubectx
       - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
       - kubectl
@@ -62,6 +60,7 @@
       - vagrant
       
   roles:
+    - kubectx
     - packer
     - terraform
     - awscli
