@@ -5,7 +5,7 @@
 - name: Download and unarchive awscli Linux.
   become: true
   unarchive:
-    src: https://awscli.amazonaws.com/awscli-exe-linux-{{ awscli_platform }}-{{ awscli_version }}.zip
+    src: https://awscli.amazonaws.com/awscli-exe-linux-{{ awscli_platform }}.zip
     dest: /home/{{ ansible_user_id }}/tmp/
     remote_src: true
     creates: "/home/{{ ansible_user_id }}/tmp/aws/install --update"
