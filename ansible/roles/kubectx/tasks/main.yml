@@ -1,0 +1,55 @@
+---
+
+
+
+- name: Install kubectx and kubens Mac
+  homebrew:
+    name: "kubectx"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+
+- stat: path={{ kubectx_bin_path }}/kubectx
+  register: stctx
+
+- stat: path={{ kubectx_bin_path }}/kubens
+  register: stns
+
+
+- name: Download and unarchive kubectx Linux.
+  become: true
+  unarchive:
+    src: https://github.com/ahmetb/kubectx/releases/download/{{ kubectx_version }}/kubectx_{{ kubectx_version }}_linux_{{ kubectx_platform }}.tar.gz
+    dest: "{{ kubectx_bin_path }}"
+    remote_src: true
+    creates: "{{ kubectx_bin_path }}/kubectx"
+    mode: 0755
+  when: 
+    - ansible_facts['system'] == "Linux"
+    - not stctx.stat.exists
+
+
+- name: Download and unarchive kubens Linux.
+  become: true
+  unarchive:
+    src: https://github.com/ahmetb/kubectx/releases/download/{{ kubectx_version }}/kubens_{{ kubectx_version }}_linux_{{ kubectx_platform }}.tar.gz
+    dest: "{{ kubectx_bin_path }}"
+    remote_src: true
+    creates: "{{ kubectx_bin_path }}/kubens"
+    mode: 0755
+  when: 
+    - ansible_facts['system'] == "Linux"
+    - not stns.stat.exists
+
+- name: Creates autocomplete directory
+  file:
+    path: /home/{{ ansible_user_id }}/.oh-my-zsh/completions
+    state: directory
+    mode: 0755
+
+- name: Download kubectx autocomplete zsh
+  get_url: url=https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubectx.zsh dest=/home/{{ ansible_user_id }}/.oh-my-zsh/completions/
+
+- name: Download kubens autocomplete zsh
+  get_url: url=https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.zsh dest=/home/{{ ansible_user_id }}/.oh-my-zsh/completions/
