@@ -1,16 +1,10 @@
 ---
-- name: Create awscli tmp folder
-  file:
-    path: /home/{{ ansible_user_id }}/tmp/aws/
-    state: directory
-  when: 
-    - ansible_facts['system'] == "Linux"
 
 - name: Download and unarchive awscli Linux.
   become: true
   unarchive:
     src: https://awscli.amazonaws.com/awscli-exe-linux-{{ awscli_platform }}-{{ awscli_version }}.zip
-    dest: /home/{{ ansible_user_id }}/tmp/aws
+    dest: /home/{{ ansible_user_id }}/tmp/
     remote_src: true
     creates: "/home/{{ ansible_user_id }}/tmp/aws/install"
     mode: 0755
