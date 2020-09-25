@@ -12,6 +12,9 @@
 
 - stat: path={{ kubectx_bin_path }}/kubectl
   register: stctl
+  when: 
+    - ansible_facts['system'] == "Linux"
+
 
 
 - name: Install kubectl
