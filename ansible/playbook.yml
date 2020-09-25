@@ -62,6 +62,7 @@
       
   roles:
     - kubectx
+    - nano_highlights
     - packer
     - terraform
     - awscli
