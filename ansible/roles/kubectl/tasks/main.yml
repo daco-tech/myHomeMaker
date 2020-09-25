@@ -20,3 +20,6 @@
   when: 
     - ansible_facts['system'] == "Linux"
     - not stctl.stat.exists
+
+- name: Set kubectl exec
+  file: dest={{ kubectl_bin_path }}/kubectl mode=a+x
