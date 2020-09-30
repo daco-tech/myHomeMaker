@@ -60,7 +60,7 @@
     - kubectl
     - kitty
     - dep
-    - nano_highlights
+    - nanorc
     - packer
     - terraform
     - awscli
