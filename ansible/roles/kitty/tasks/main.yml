@@ -17,7 +17,7 @@
 
 - name: Create symlink kitty Linux
   become: yes
-  file: src=/home/{{ ansible_user_id }}/.local/kitty.app/bin/kitty dest=/home/{{ ansible_user_id }}/.local/bin/ state=link
+  file: src=/home/{{ ansible_user_id }}/.local/kitty.app/bin/kitty dest=/home/{{ ansible_user_id }}/.local/bin/kitty state=link
   when: 
     - ansible_facts['system'] == "Linux"
 
