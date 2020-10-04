@@ -33,3 +33,4 @@
   when: nerdfonts_mono
   tags:
   - nerdfonts
+...
