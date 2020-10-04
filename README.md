@@ -85,7 +85,7 @@ update
 - Ansible Mac Homebrew install base: https://github.com/adamchainz/mac-ansible/blob/master/roles/adam_mac/tasks/installs.yml
 - Joplin Linux install Role base: https://github.com/thisdwhitley/ansible-role-joplin
 - VSCode Ansible Role: https://github.com/gantsign/ansible-role-visual-studio-code
-- NerdFonts installation: https://github.com/drew-kun/ansible-nerdfonts
 - ZSH Configuration and Installation: https://github.com/gantsign/ansible-role-oh-my-zsh
+- Nerdfonts Ansible Role: https://github.com/drew-kun/ansible-nerdfonts
 
 

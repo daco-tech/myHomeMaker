@@ -1,5 +1,0 @@
----
-- name: Install Nano Highlights
-  shell: curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
-  args:
-    warn: no
