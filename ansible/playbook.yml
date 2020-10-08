@@ -29,6 +29,7 @@
       - fzf #https://github.com/junegunn/fzf
     install_linux_packages:
       - stacer
+      - alacritty
       - timeshift # Backup Linux
       - zsh
       - powertop
@@ -50,6 +51,7 @@
       - nano
     install_mac_cask_packages:
       - virtualbox
+      - alacritty
       - joplin      
       - font-fira-code
       - font-hack-nerd-font
@@ -58,7 +60,7 @@
   roles:
     - kubectx
     - kubectl
-    - kitty
+    #- kitty
     - dep
     - nanorc
     - packer
