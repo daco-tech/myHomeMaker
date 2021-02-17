@@ -77,14 +77,14 @@
             theme: robbyrussell
             plugins:
               - git
-    - role: joplinapp-linux
-      users:
-      - username: "{{ ansible_user_id }}"
-        settings:
-          - { key: "sidebarVisibility", val: "1" }
-          - { key: "dateFormat", val: "YYYY-MM-DD" }
-          - { key: "sync.target", val: "5" }
-    - role: vscode
+    #- role: joplinapp-linux
+    #  users:
+    #  - username: "{{ ansible_user_id }}"
+    #    settings:
+    #      - { key: "sidebarVisibility", val: "1" }
+    #      - { key: "dateFormat", val: "YYYY-MM-DD" }
+    #      - { key: "sync.target", val: "5" }
+    - role: vscodium
       users:
         - username: "{{ ansible_user_id }}"
           visual_studio_code_extensions:
