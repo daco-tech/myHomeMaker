@@ -26,7 +26,6 @@
       - graphviz
       - wget
       - bash-completion
-      - codium
       - fzf #https://github.com/junegunn/fzf
     install_linux_packages:
       - stacer
@@ -44,6 +43,7 @@
       - fonts-powerline
       - vlc
       - vagrant
+      - codium
 
     install_mac_packages:
       - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
@@ -58,6 +58,7 @@
       - font-hack-nerd-font
       - vlc
       - vagrant
+      - vscodium
   roles:
     - kubectx
     - kubectl
