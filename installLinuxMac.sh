@@ -178,6 +178,7 @@ installReq(){
     command -v git >/dev/null 2>&1 || { echo >&2 "git is required but it's not installed. Aborting."; exit 1; }
     command -v curl >/dev/null 2>&1 || { echo >&2 "curl is required but it's not installed. Aborting."; exit 1; }
     command -v python >/dev/null 2>&1 || { echo >&2 "python is required but it's not installed. Aborting."; exit 1; }
+    mkdir -p ~/go/bin
 
 }
 
