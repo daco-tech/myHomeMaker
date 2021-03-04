@@ -8,7 +8,7 @@
     - ansible_facts['system'] == "Darwin"
 
 - file:
-    path: "~{{ user.username }}/go/bin"
+    path: "~{{ username }}/go/bin"
     state: directory
   
 - name: Install dep Linux
