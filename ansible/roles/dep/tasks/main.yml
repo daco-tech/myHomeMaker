@@ -7,10 +7,6 @@
   when: 
     - ansible_facts['system'] == "Darwin"
 
-- file:
-    path: "~{{ username }}/go/bin"
-    state: directory
-  
 - name: Install dep Linux
   shell: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   args:
