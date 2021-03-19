@@ -15,19 +15,6 @@
     repo_brew_tap:
       - homebrew/cask
       - homebrew/cask-fonts
-    install_packages:
-      - htop
-      - glances
-      - golang
-      - cmake
-      - tmux
-      - wget
-      - httpie
-      - neofetch
-      - graphviz
-      - wget
-      - bash-completion
-      - fzf #https://github.com/junegunn/fzf
     install_linux_packages:
       - zypper
       - stacer
@@ -61,6 +48,19 @@
       - vlc
       - vagrant
       - vscodium
+    install_packages:
+      - htop
+      - glances
+      - golang
+      - cmake
+      - tmux
+      - wget
+      - httpie
+      - neofetch
+      - graphviz
+      - wget
+      - bash-completion
+      - fzf #https://github.com/junegunn/fzf
   roles:
     - kubectx
     - kubectl
