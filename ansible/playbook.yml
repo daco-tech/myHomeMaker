@@ -16,7 +16,7 @@
       - homebrew/cask
       - homebrew/cask-fonts
     install_linux_packages:
-      - zypper
+      #- zypper
       - stacer
       - alacritty
       - timeshift # Backup Linux
