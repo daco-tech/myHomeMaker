@@ -67,7 +67,7 @@
     #- kitty
     - dep
     - nanorc
-    - packer
+    #- packer
     - terraform
     - awscli
     - azure-cli
