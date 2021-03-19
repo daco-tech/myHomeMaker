@@ -67,7 +67,7 @@
     - dep
     - nanorc
     - packer
-    - terraform
+    #- terraform
     - awscli
     - azure-cli
     - crossplatform-package-manager
