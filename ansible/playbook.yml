@@ -73,7 +73,7 @@
     - crossplatform-package-manager
     - nerdfonts
     #- docker
-    - role: oh-my-zsh
+    - role: oh-my-zsh {{ ansible_user_id }}
       users:
         - username: "{{ ansible_user_id }}"
           oh_my_zsh:
