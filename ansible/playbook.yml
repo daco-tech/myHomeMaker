@@ -2,9 +2,9 @@
 - hosts: localhost
   connection: local
   tasks:
-  - debug:
-      msg: Check we are running in the directory of the script
-    failed_when: not ansible_env.PWD.endswith('/ansible')
+    - debug:
+        msg: Check we are running in the directory of the script
+      failed_when: not ansible_env.PWD.endswith('/ansible')
 
 - hosts: localhost
   become_method: sudo
@@ -12,7 +12,7 @@
   gather_facts: True
   vars:
     install_all_package_updates: true
-    repo_brew_tap: 
+    repo_brew_tap:
       - homebrew/cask
       - homebrew/cask-fonts
     install_packages:
@@ -29,6 +29,7 @@
       - bash-completion
       - fzf #https://github.com/junegunn/fzf
     install_linux_packages:
+      - zypper
       - stacer
       - alacritty
       - timeshift # Backup Linux
@@ -54,7 +55,7 @@
     install_mac_cask_packages:
       - virtualbox
       - alacritty
-      - joplin      
+      - joplin
       - font-fira-code
       - font-hack-nerd-font
       - vlc
