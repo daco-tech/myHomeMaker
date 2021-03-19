@@ -66,13 +66,13 @@
     #- kitty
     - dep
     - nanorc
-    #- packer
-    #- terraform
-    #- awscli
-    #- azure-cli
+    - packer
+    - terraform
+    - awscli
+    - azure-cli
     - crossplatform-package-manager
     - nerdfonts
-    - docker
+    #- docker
     - role: oh-my-zsh
       users:
         - username: "{{ ansible_user_id }}"
