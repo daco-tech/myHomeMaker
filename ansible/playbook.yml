@@ -73,7 +73,7 @@
     - crossplatform-package-manager
     - nerdfonts
     #- docker
-    - role: oh-my-zsh {{ ansible_user_id | default('daco') }}
+    - role: oh-my-zsh
       users:
         - username: "{{ ansible_user_id | default('daco') }}"
           oh_my_zsh:
