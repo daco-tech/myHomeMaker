@@ -75,7 +75,7 @@
     #- docker
     - role: oh-my-zsh {{ ansible_user_id }}
       users:
-        - username: "{{ ansible_user_id }}"
+        - username: "{{ ansible_user_id | default('daco') }}"
           oh_my_zsh:
             theme: robbyrussell
             plugins:
