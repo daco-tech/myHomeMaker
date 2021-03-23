@@ -67,9 +67,9 @@
     - dep
     - nanorc
     - packer
-    #- terraform
-    #- awscli
-    #- azure-cli
+    - terraform
+    - awscli
+    - azure-cli
     - crossplatform-package-manager
     - nerdfonts
     #- docker
