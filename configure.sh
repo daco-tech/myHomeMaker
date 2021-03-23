@@ -10,7 +10,6 @@ configGit(){
     git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
     git config --global user.email "$gitMail"
     git config --global user.name "$gitName"
-    git config pull.rebase true
 }
 
 configSudo(){
@@ -94,5 +93,9 @@ configSudo
 ## GIT Config
 echo "..:::: CONFIGURE GIT ::::.."
 configGit
+
+## Create tmp dir
+echo "..:::: CREATE TMP DIR ::::.."
+mkdir -p ~/tmp
 
 echo "..:: DONE! Mission Accomplished! ::.."
