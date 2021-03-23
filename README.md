@@ -7,6 +7,7 @@ Requirement:
 Linux/Mac Setup:
 
 ```bash
+bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent.com/daco-tech/myHomeMaker/master/configure.sh)"
 bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent.com/daco-tech/myHomeMaker/master/installLinuxMac.sh)"
 ```
 
