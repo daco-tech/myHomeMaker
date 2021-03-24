@@ -21,7 +21,7 @@
   register: nerdfonts_deps_install_result
   until: nerdfonts_deps_install_result is succeeded
   become: yes
-  when: "'Debian' in ansible_os_family"
+  when: (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
   tags:
   - nerdfonts
 ...

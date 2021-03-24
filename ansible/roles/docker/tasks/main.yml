@@ -9,7 +9,7 @@
 
 - include_tasks: debian.yml
   tags: debian
-  when: ansible_os_family is defined and ansible_os_family == 'Debian'
+  when: ansible_os_family is defined and (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
 - include_tasks: macos.yml
   tags: macos

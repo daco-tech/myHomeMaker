@@ -6,7 +6,7 @@
     state: latest
   with_items:
   - aptitude
-  when: ansible_os_family == 'Debian'
+  when: (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
 - name: Install all software package updates
   become: true
