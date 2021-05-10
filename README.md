@@ -4,7 +4,15 @@
 
 Requirement:
 
-Linux/Mac Setup:
+Mac Setup:
+
+```bash
+xcode-select --install
+bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent.com/daco-tech/myHomeMaker/master/configure.sh)"
+bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent.com/daco-tech/myHomeMaker/master/installLinuxMac.sh)"
+```
+
+Linux Setup:
 
 ```bash
 bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent.com/daco-tech/myHomeMaker/master/configure.sh)"
