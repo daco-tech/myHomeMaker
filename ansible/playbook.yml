@@ -68,7 +68,7 @@
     - nanorc
     - packer
     - terraform
-    - awscli
+    #- awscli
     #- azure-cli
     - crossplatform-package-manager
     - nerdfonts
