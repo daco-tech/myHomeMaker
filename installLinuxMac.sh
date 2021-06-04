@@ -104,7 +104,10 @@ envDetector(){
         then
             INSTALLCMD="sudo dnf -y"
             DISTRO=RedHat
-
+        elif [ -n "$(command -v yay)" ];
+        then
+            INSTALLCMD="sudo yay -S"
+            DISTRO=Arch
         elif [ -n "$(command -v pacman)" ];
         then
             INSTALLCMD="sudo pacman --noconfirm"
@@ -206,7 +209,7 @@ installAnsible(){
             #    logmsg "ERROR" "${NC} Unable to install ansible!"
             #    exit 1
             #fi
-            sudo apt-add-repository ppa:ansible/ansible
+            #sudo apt-add-repository ppa:ansible/ansible
             installTool ansible
         fi
         
