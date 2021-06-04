@@ -110,7 +110,7 @@ envDetector(){
             DISTRO=Arch
         elif [ -n "$(command -v pacman)" ];
         then
-            INSTALLCMD="sudo pacman --noconfirm"
+            INSTALLCMD="sudo pacman -S --noconfirm"
             DISTRO=Arch
 
         elif [ -n "$(command -v emerge)" ];
@@ -151,13 +151,26 @@ installTool() {
     ;;
     Linux)
         INSTALLED=false
-        if [ -n "$(command -v dpkg-query)" ];
+        echo DC $DISTRO
+        if [ $DISTRO = "Arch" ];
         then
-            if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -eq 0 ];
-            then
+            package=firefox
+            if pacman -Qs $1 > /dev/null ; then
                 INSTALLED=true
+            else
+                INSTALLED=false
+            fi
+        elif [ $DISTRO = "Debian" ];
+        then 
+            if [ -n "$(command -v dpkg-query)" ];
+            then
+                if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -eq 0 ];
+                then
+                    INSTALLED=true
+                fi
             fi
         fi
+        
 
         if ${INSTALLED} == false
         then
