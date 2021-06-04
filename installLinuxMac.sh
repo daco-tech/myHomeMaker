@@ -151,7 +151,6 @@ installTool() {
     ;;
     Linux)
         INSTALLED=false
-        echo DC $DISTRO
         if [ $DISTRO = "Arch" ];
         then
             package=firefox
@@ -222,8 +221,18 @@ installAnsible(){
             #    logmsg "ERROR" "${NC} Unable to install ansible!"
             #    exit 1
             #fi
-            #sudo apt-add-repository ppa:ansible/ansible
-            installTool ansible
+
+
+            if [ $DISTRO = "Arch" ];
+            then
+                installTool ansible-core
+            elif [ $DISTRO = "Debian" ];
+            then 
+                sudo apt-add-repository ppa:ansible/ansible
+                installTool ansible
+            else
+                installTool ansible
+            fi
         fi
         
     fi
