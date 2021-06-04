@@ -50,7 +50,7 @@
     install_packages:
       - htop
       - glances
-      - golang
+      #- golang #Arch Issue
       - cmake
       - tmux
       - wget

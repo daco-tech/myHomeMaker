@@ -8,7 +8,7 @@
   - aptitude
   when: (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
-- name: Install all software package updates
+- name: Install all software package updates Debian
   become: true
   package:
     name: "*"
@@ -16,7 +16,7 @@
   when: ((ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')) and (install_all_package_updates)
   
 
-- name: Install specified software package updates
+- name: Install specified debian software package updates
   become: true
   package:
     name: "{{ item }}"
@@ -24,3 +24,19 @@
   with_items: "{{ update_packages }}"
   when: 
   - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
+#- name: Install specified arch software package updates
+#  become: true
+#  yay:
+#    name: "{{ item }}"
+#    state: latest
+#  with_items: "{{ update_packages }}"
+#  when: 
+#  - (ansible_os_family == 'Archlinux')
+
+- name: Install all software package updates Arch
+  become: true
+  pacman:
+    update_cache: yes
+    upgrade: yes
+  when: (ansible_os_family == 'Archlinux') and (install_all_package_updates)
