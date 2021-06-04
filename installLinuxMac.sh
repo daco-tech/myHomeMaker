@@ -104,15 +104,14 @@ envDetector(){
         then
             INSTALLCMD="sudo dnf -y"
             DISTRO=RedHat
-        elif [ -n "$(command -v yay)" ];
-        then
-            INSTALLCMD="sudo yay -S"
-            DISTRO=Arch
         elif [ -n "$(command -v pacman)" ];
         then
             INSTALLCMD="sudo pacman -S --noconfirm"
             DISTRO=Arch
-
+        elif [ -n "$(command -v yay)" ];
+        then
+            INSTALLCMD="sudo yay -S"
+            DISTRO=Arch
         elif [ -n "$(command -v emerge)" ];
         then
             INSTALLCMD="sudo emerge"
@@ -223,18 +222,14 @@ installAnsible(){
             #fi
 
 
-            if [ $DISTRO = "Arch" ];
-            then
-                installTool ansible-core
-            elif [ $DISTRO = "Debian" ];
+            if [ $DISTRO = "Debian" ];
             then 
                 sudo apt-add-repository ppa:ansible/ansible
                 installTool ansible
             else
                 installTool ansible
             fi
-        fi
-        
+        fi  
     fi
 
     ## Test
