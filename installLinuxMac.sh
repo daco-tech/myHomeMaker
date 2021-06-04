@@ -106,7 +106,7 @@ envDetector(){
             DISTRO=RedHat
         elif [ -n "$(command -v pacman)" ];
         then
-            INSTALLCMD="sudo pacman -S --noconfirm"
+            INSTALLCMD="sudo pacman -S "
             DISTRO=Arch
         elif [ -n "$(command -v yay)" ];
         then
@@ -152,7 +152,6 @@ installTool() {
         INSTALLED=false
         if [ $DISTRO = "Arch" ];
         then
-            package=firefox
             if pacman -Qs $1 > /dev/null ; then
                 INSTALLED=true
             else
@@ -205,23 +204,6 @@ installAnsible(){
         then
             installTool ansible
         else
-            #mkdir tmp/
-            #curl https://bootstrap.pypa.io/get-pip.py -o ./tmp/get-pip.py
-            #python ./tmp/get-pip.py --user
-            #rm -rf ./tmp/
-            #
-            #if [ -n "$(command -v pip)" ];
-            #then
-            #    pip install --user ansible
-            #elif [ -n "$(command -v pip3)" ];
-            #then
-            #    pip3 install --user ansible
-            #else
-            #    logmsg "ERROR" "${NC} Unable to install ansible!"
-            #    exit 1
-            #fi
-
-
             if [ $DISTRO = "Debian" ];
             then 
                 sudo apt-add-repository ppa:ansible/ansible

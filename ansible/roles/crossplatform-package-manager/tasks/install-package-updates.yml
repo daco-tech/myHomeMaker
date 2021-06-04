@@ -13,9 +13,7 @@
   package:
     name: "*"
     state: "latest"
-  when: 
-  - install_all_package_updates
-  - ansible_facts['system'] == "Linux"
+  when: ((ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')) and (install_all_package_updates)
   
 
 - name: Install specified software package updates
@@ -25,4 +23,4 @@
     state: latest
   with_items: "{{ update_packages }}"
   when: 
-  - ansible_facts['system'] == "Linux"
+  - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
