@@ -16,28 +16,31 @@
       - homebrew/cask
       - homebrew/cask-fonts
     install_linux_packages:
-      - stacer
+      #- stacer
       #- alacritty
-      - timeshift # Backup Linux
+      #- timeshift # Backup Linux
       - zsh
       - powertop
       - net-tools
-      - build-essential
-      - module-assistant
+      #- build-essential
+      #- module-assistant
       - pydf
       - virtualbox
       - flameshot #screenshot tool
-      - fonts-firacode
-      - fonts-powerline
+      #- fonts-firacode #none
+      #- fonts-powerline #none
       - vlc
-      - vagrant
-      - codium
+      - vagrant 
+      #- codium #vscodium-bin
+      #- golang #Arch Issue
+
     install_mac_packages:
       #- homebrew/cask
       - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
       - jq
       - nano
+      - golang
     install_mac_cask_packages:
       #- virtualbox
       #- alacritty
@@ -50,7 +53,6 @@
     install_packages:
       - htop
       - glances
-      #- golang #Arch Issue
       - cmake
       - tmux
       - wget
