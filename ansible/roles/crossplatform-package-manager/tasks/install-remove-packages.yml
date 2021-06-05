@@ -15,7 +15,13 @@
     state: present
   with_items: "{{ install_linux_packages }}"
   when: 
-  - ansible_facts['system'] == "Linux"
+  - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
+- name: Install AUR packages
+  command:  /usr/bin/packer -S --noconfirm --noedit {{ item }}
+  with_items: "{{ install_linux_packages }}"
+  when: 
+  - (ansible_os_family == 'Archlinux')
 
 - name: Remove specified software packages
   become: true
