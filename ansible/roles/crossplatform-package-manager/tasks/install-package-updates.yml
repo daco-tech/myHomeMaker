@@ -26,11 +26,11 @@
   - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
 - name: Install AUR packages
-  command:  /usr/bin/packer -S --noconfirm --noedit {{ item }}
+  command:  /usr/local/bin/packer -S --noconfirm --noedit {{ item }}
   with_items: "{{ update_packages }}"
   when: 
   - (ansible_os_family == 'Archlinux')
-  
+
 #- name: Install specified arch software package updates
 #  become: true
 #  yay:
