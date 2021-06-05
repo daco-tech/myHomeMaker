@@ -18,6 +18,7 @@
   - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
 - name: Install AUR packages
+  become: true
   command:  /usr/bin/yay -S --noconfirm {{ item }}
   with_items: "{{ install_linux_packages }}"
   when: 

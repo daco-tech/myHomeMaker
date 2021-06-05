@@ -26,6 +26,7 @@
   - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
 - name: Update AUR packages
+  become: true
   command:  /usr/bin/yay -S --noconfirm {{ item }}
   with_items: "{{ update_packages }}"
   when: 
