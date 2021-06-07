@@ -30,8 +30,8 @@
     loop_var: username
 
 - name: Change zsh dir permission
-  #become: yes
-  #become_user: "{{ username }}"
+  become: yes
+  become_user: "{{ username }}"
   file:
     path: /usr/local/share/zsh
     state: directory

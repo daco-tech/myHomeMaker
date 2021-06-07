@@ -245,7 +245,7 @@ downloadRepo(){
 runPlaybooks(){
     logmsg "INFO" "${NC} Running Playbooks..."
     cd myHomeMaker/ansible
-    ansible-playbook playbook.yml
+    ansible-playbook -K playbook.yml
     cd ..
 }
 
