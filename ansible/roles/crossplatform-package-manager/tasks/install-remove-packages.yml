@@ -53,7 +53,7 @@
   homebrew:
     name: "{{ item }}"
     state: present
-    upgrade_all: "yes"
+    #upgrade_all: "yes"
   with_items: "{{ install_mac_cask_packages }}"
   when:
     - ansible_facts['system'] == "Darwin"
