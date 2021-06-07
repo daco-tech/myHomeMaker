@@ -29,6 +29,14 @@
   loop_control:
     loop_var: username
 
+- name: Change zsh dir permission
+become: yes
+  directory:
+    path: /usr/local/share/zsh
+    owner: "root"
+    group: "staff"
+    mode: 0755
+
 - name: set default shell for users
   become: yes
   become_user: "{{ username }}"
