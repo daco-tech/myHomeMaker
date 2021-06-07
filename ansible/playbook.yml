@@ -41,7 +41,8 @@
       - jq
       - nano
       - golang
-    install_mac_cask_packages:
+      - vlc
+    #install_mac_cask_packages:
       #- virtualbox
       #- alacritty
       #- joplin
