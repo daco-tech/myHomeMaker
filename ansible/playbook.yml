@@ -30,7 +30,7 @@
       #- fonts-firacode #none
       #- fonts-powerline #none
       - vlc
-      - vagrant 
+      - vagrant
       #- codium #vscodium-bin
       #- golang #Arch Issue
 
@@ -43,14 +43,14 @@
       - golang
       - vlc
     #install_mac_cask_packages:
-      #- virtualbox
-      #- alacritty
-      #- joplin
-      #- font-fira-code
-      #- font-hack-nerd-font
-      #- vlc
-      #- vagrant
-      #- vscodium
+    #- virtualbox
+    #- alacritty
+    #- joplin
+    #- font-fira-code
+    #- font-hack-nerd-font
+    #- vlc
+    #- vagrant
+    #- vscodium
     install_packages:
       - htop
       - glances

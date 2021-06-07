@@ -44,10 +44,9 @@
 
 - name: Install homebrew mac only packages
   homebrew:
-    #name: '{{ item }}'
-    name: "{{ install_mac_packages }}"
+    name: '{{ item }}'
     state: latest
-  #loop: "{{ install_mac_packages }}"
+  with_items: "{{ install_mac_packages }}"
   when: 
     - ansible_facts['system'] == "Darwin"
 
