@@ -39,6 +39,16 @@
     group: "staff"
     mode: 0755
 
+- name: Change zsh site-functions dir permission
+  become: yes
+  become_user: "root"
+  file:
+    path: /usr/local/share/zsh/site-functions
+    state: directory
+    owner: "root"
+    group: "staff"
+    mode: 0755
+
 - name: set default shell for users
   become: yes
   become_user: "{{ username }}"
