@@ -44,15 +44,16 @@
 - name: Install homebrew mac only packages
   homebrew:
     name: "{{ item }}"
-    state: installed
+    state: latest
   with_items: "{{ install_mac_packages }}"
   when:
     - ansible_facts['system'] == "Darwin"
 
 - name: Install homebrew cask packages
-  homebrew_cask:
+  homebrew:
     name: "{{ item }}"
-    state: installed
+    state: present
+    upgrade_all: "yes"
   with_items: "{{ install_mac_cask_packages }}"
   when:
     - ansible_facts['system'] == "Darwin"
