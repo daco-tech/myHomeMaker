@@ -41,16 +41,15 @@
       - jq
       - nano
       - golang
-      #- vlc
     install_mac_cask_packages:
-      #- virtualbox
-      #- alacritty
-      #- joplin
-      #- font-fira-code
-      #- font-hack-nerd-font
+      - virtualbox
+      - alacritty
+      - joplin
+      - font-fira-code
+      - font-hack-nerd-font
       - vlc
-    #- vagrant
-    #- vscodium
+      - vagrant
+      - vscodium
     install_packages:
       - htop
       - glances
