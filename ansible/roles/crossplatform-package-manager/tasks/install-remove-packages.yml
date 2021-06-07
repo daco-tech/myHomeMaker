@@ -5,8 +5,8 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ install_packages }}"
-  when: 
-  - ansible_facts['system'] == "Linux"
+  when:
+    - ansible_facts['system'] == "Linux"
 
 - name: Install Linux software packages
   become: true
@@ -14,15 +14,15 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ install_linux_packages }}"
-  when: 
-  - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+  when:
+    - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
 - name: Install AUR packages
   become: true
-  command:  /usr/bin/yay -S --noconfirm {{ item }}
+  command: /usr/bin/yay -S --noconfirm {{ item }}
   with_items: "{{ install_linux_packages }}"
-  when: 
-  - (ansible_os_family == 'Archlinux')
+  when:
+    - (ansible_os_family == 'Archlinux')
 
 - name: Remove specified software packages
   become: true
@@ -30,39 +30,37 @@
     name: "{{ item }}"
     state: absent
   with_items: "{{ remove_linux_packages }}"
-  when: 
-  - ansible_facts['system'] == "Linux"
+  when:
+    - ansible_facts['system'] == "Linux"
 
-  
 - name: Install homebrew packages
   homebrew:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: latest
   with_items: "{{ install_packages }}"
-  when: 
+  when:
     - ansible_facts['system'] == "Darwin"
 
 - name: Install homebrew mac only packages
   homebrew:
-    name: '{{ item }}'
-    state: latest
+    name: "{{ item }}"
+    state: installed
   with_items: "{{ install_mac_packages }}"
-  when: 
+  when:
     - ansible_facts['system'] == "Darwin"
 
 - name: Install homebrew cask packages
   homebrew_cask:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: installed
   with_items: "{{ install_mac_cask_packages }}"
-  when: 
+  when:
     - ansible_facts['system'] == "Darwin"
-
 
 - name: Uninstall homebrew packages
   homebrew:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: absent
-  with_items: '{{ remove_mac_packages }}'
-  when: 
+  with_items: "{{ remove_mac_packages }}"
+  when:
     - ansible_facts['system'] == "Darwin"
