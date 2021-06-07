@@ -17,10 +17,26 @@
   when:
     - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
+- name: Install Debian Linux software packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ install_debian_linux_packages }}"
+  when:
+    - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
 - name: Install AUR packages
   become: true
   command: /usr/bin/yay -S --noconfirm {{ item }}
   with_items: "{{ install_linux_packages }}"
+  when:
+    - (ansible_os_family == 'Archlinux')
+
+- name: Install Arch Linux AUR packages
+  become: true
+  command: /usr/bin/yay -S --noconfirm {{ item }}
+  with_items: "{{ install_arch_linux_aur_packages }}"
   when:
     - (ansible_os_family == 'Archlinux')
 

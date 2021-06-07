@@ -15,10 +15,17 @@
     repo_brew_tap:
       - homebrew/cask
       - homebrew/cask-fonts
+    install_arch_linux_aur_packages:
+      - vscodium-bin
+      - go
+      - timeshift-bin
+    install_debian_linux_packages:
+      - codium
+      - golang
+      - timeshift
     install_linux_packages:
-      #- stacer
+      - stacer
       - alacritty
-      #- timeshift # Backup Linux
       - zsh
       - powertop
       - net-tools
@@ -31,9 +38,6 @@
       #- fonts-powerline #none
       - vlc
       - vagrant
-      #- codium #vscodium-bin
-      #- golang #Arch Issue
-
     install_mac_packages:
       #- homebrew/cask
       - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
