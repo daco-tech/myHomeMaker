@@ -17,7 +17,7 @@
       - homebrew/cask-fonts
     install_linux_packages:
       #- stacer
-      #- alacritty
+      - alacritty
       #- timeshift # Backup Linux
       - zsh
       - powertop
