@@ -153,9 +153,9 @@ installTool() {
         if [ $DISTRO = "Arch" ];
         then
             if pacman -Qs $1 > /dev/null ; then
-                INSTALLED=true
-            else
                 INSTALLED=false
+            else
+                INSTALLED=true
             fi
         elif [ $DISTRO = "Debian" ];
         then 
