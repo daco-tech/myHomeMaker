@@ -50,7 +50,7 @@
     - ansible_facts['system'] == "Darwin"
 
 - name: Install homebrew cask packages
-  homebrew:
+  homebrew_cask:
     name: "{{ item }}"
     state: present
     #upgrade_all: "yes"
