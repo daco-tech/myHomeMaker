@@ -21,7 +21,7 @@
       - timeshift-bin
       - stacer
       - ttf-firacode
-      - ttf-powerline
+      - powerline-fonts
     install_debian_linux_packages:
       - codium
       - golang
