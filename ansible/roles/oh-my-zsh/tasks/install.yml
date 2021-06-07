@@ -31,7 +31,7 @@
 
 - name: set default shell for users
   become: yes
-  become_user: root
+  #become_user: root
   user:
     name: "{{ username }}"
     shell: /bin/zsh
