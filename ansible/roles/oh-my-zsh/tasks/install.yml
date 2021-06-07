@@ -31,6 +31,7 @@
 
 - name: set default shell for users
   become: yes
+  become_user: "{{ username }}"
   #become_user: root
   user:
     name: "{{ username }}"
