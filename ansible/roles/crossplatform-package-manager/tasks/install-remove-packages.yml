@@ -34,7 +34,6 @@
     - (ansible_os_family == 'Archlinux')
 
 - name: Install Arch Linux AUR packages
-  become: true
   command: /usr/bin/yay -S --noconfirm {{ item }}
   with_items: "{{ install_arch_linux_aur_packages }}"
   when:
