@@ -20,11 +20,15 @@
       - go
       - timeshift-bin
       - stacer
+      - ttf-firacode
+      - ttf-powerline
     install_debian_linux_packages:
       - codium
       - golang
       - timeshift
       - stacer
+      - fonts-firacode
+      - fonts-powerline
     install_linux_packages:
       - alacritty
       - zsh
@@ -35,8 +39,6 @@
       - pydf
       - virtualbox
       - flameshot #screenshot tool
-      #- fonts-firacode #none
-      #- fonts-powerline #none
       - vlc
       - vagrant
     install_mac_packages:
