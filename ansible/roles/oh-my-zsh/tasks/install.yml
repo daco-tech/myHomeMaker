@@ -1,5 +1,12 @@
 ---
-
+- name: Delete oh-my-zsh user directory
+  file:
+    state: absent
+    path: /home/{{ username }}/.oh-my-zsh
+  with_items: "{{ users | map(attribute='username') | list }}"
+  loop_control:
+    loop_var: username
+    
 - name: clone oh-my-zsh for users
   become: yes
   become_user: "{{ username }}"
