@@ -31,7 +31,7 @@
 
 - name: Change zsh dir permission
   become: yes
-  become_user: "{{ username }}"
+  become_user: "root"
   file:
     path: /usr/local/share/zsh
     state: directory
