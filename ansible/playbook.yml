@@ -29,20 +29,19 @@
       - stacer
       - fonts-firacode
       - fonts-powerline
+      - build-essential
+      - module-assistant
     install_linux_packages:
       - alacritty
       - zsh
       - powertop
       - net-tools
-      #- build-essential
-      #- module-assistant
       - pydf
       - virtualbox
       - flameshot #screenshot tool
       - vlc
       - vagrant
     install_mac_packages:
-      #- homebrew/cask
       - sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
       - jq
@@ -96,6 +95,7 @@
     #      - { key: "sidebarVisibility", val: "1" }
     #      - { key: "dateFormat", val: "YYYY-MM-DD" }
     #      - { key: "sync.target", val: "5" }
+
     #- role: vscode
     #  users:
     #    - username: "{{ ansible_user_id }}"
