@@ -24,7 +24,7 @@
       - golang
       - timeshift
     install_linux_packages:
-      - stacer
+      #- stacer
       - alacritty
       - zsh
       - powertop
