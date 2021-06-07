@@ -38,6 +38,8 @@
     owner: "root"
     group: "staff"
     mode: 0755
+  when:
+    - ansible_facts['system'] == "Darwin"
 
 - name: Change zsh site-functions dir permission
   become: yes
@@ -48,6 +50,8 @@
     owner: "root"
     group: "staff"
     mode: 0755
+  when:
+    - ansible_facts['system'] == "Darwin"
 
 - name: set default shell for users
   become: yes
