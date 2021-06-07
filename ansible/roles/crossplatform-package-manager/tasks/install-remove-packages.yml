@@ -49,11 +49,18 @@
   when:
     - ansible_facts['system'] == "Darwin"
 
+#- name: Install homebrew cask packages
+#  homebrew_cask:
+#    name: "{{ item }}"
+#    state: present
+#    #upgrade_all: "yes"
+#  with_items: "{{ install_mac_cask_packages }}"
+#  when:
+#    - ansible_facts['system'] == "Darwin"
+
 - name: Install homebrew cask packages
-  homebrew_cask:
-    name: "{{ item }}"
-    state: present
-    #upgrade_all: "yes"
+  #become: true
+  command: brew install --cask {{ item }}
   with_items: "{{ install_mac_cask_packages }}"
   when:
     - ansible_facts['system'] == "Darwin"
