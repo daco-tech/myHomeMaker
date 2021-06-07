@@ -19,12 +19,13 @@
       - vscodium-bin
       - go
       - timeshift-bin
+      - stacer
     install_debian_linux_packages:
       - codium
       - golang
       - timeshift
+      - stacer
     install_linux_packages:
-      #- stacer
       - alacritty
       - zsh
       - powertop
