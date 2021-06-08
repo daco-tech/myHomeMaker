@@ -134,8 +134,8 @@
               "terminal.ansiYellow": "#b58901",
               "terminal.selectionBackground": "#003541"
             },
-            "workbench.colorTheme": "Material Theme",
-            "terminal.integrated.fontFamily": "Hack Nerd Font",
+            #"workbench.colorTheme": "Material Theme",
+            "terminal.integrated.fontFamily": "Hack",
             "files.autoSave": "afterDelay",
             "editor.formatOnSave": true,
             "editor.formatOnPaste": true,
