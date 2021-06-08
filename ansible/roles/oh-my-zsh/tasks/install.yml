@@ -4,7 +4,7 @@
   become_user: "{{ username }}"
   file:
     state: absent
-    path: {ansible_env.HOME}/.oh-my-zsh
+    path: {{ lookup('env', 'HOME') }}/.oh-my-zsh
   with_items: "{{ users | map(attribute='username') | list }}"
   loop_control:
     loop_var: username
@@ -14,7 +14,7 @@
   become_user: "{{ username }}"
   ansible.builtin.git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: {ansible_env.HOME}/.oh-my-zsh
+    dest: {{ lookup('env', 'HOME') }}/.oh-my-zsh
     clone: yes
     update: yes
   with_items: "{{ users | map(attribute='username') | list }}"
