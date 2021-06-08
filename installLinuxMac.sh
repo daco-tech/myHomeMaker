@@ -5,6 +5,7 @@
 OS=UNKNOWN #Linux, MacOS
 DISTRO=UNKNOWN #Debian, RedHat, Gentoo, Arch or None
 INSTALLCMD=UNKNOWN # APT; YUM; PACMAN; EMERGE
+ANSIBLEPARAMS="" # Parameters passed to ansible
 AMIOP=UNKNOWN #TRUE; FALSE
 
 
@@ -68,6 +69,7 @@ envDetector(){
         OS=MacOS
         DISTRO=none
         INSTALLCMD="brew install"
+        ANSIBLEPARAMS="-K"
         if ! [ -x "$(command -v clang)" ];
         then
             logmsg "WARN" "${NC} xcode cli tools not installed... installing..."
@@ -245,7 +247,7 @@ downloadRepo(){
 runPlaybooks(){
     logmsg "INFO" "${NC} Running Playbooks..."
     cd myHomeMaker/ansible
-    ansible-playbook -K playbook.yml
+    ansible-playbook ${ANSIBLEPARAMS} playbook.yml
     cd ..
 }
 
