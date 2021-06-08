@@ -23,6 +23,7 @@
       - ttf-firacode
       - powerline-fonts
       - nerd-fonts-hack
+      - azure-cli
     install_debian_linux_packages:
       - codium
       - golang
@@ -48,6 +49,7 @@
       - jq
       - nano
       - golang
+      - azure-cli
     install_mac_cask_packages:
       - virtualbox
       - alacritty
@@ -68,7 +70,6 @@
       - graphviz
       - wget
       - bash-completion
-      - azure-cli
       - fzf #https://github.com/junegunn/fzf
   roles:
     - kubectx
