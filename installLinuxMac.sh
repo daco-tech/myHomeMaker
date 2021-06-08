@@ -152,6 +152,7 @@ installTool() {
     ;;
     Linux)
         INSTALLED=false
+        ANSIBLEPARAMS="-k -K"
         if [ $DISTRO = "Arch" ];
         then
             if pacman -Qs $1 > /dev/null ; then
