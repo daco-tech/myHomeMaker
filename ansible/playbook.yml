@@ -48,6 +48,7 @@
       - jq
       - nano
       - golang
+      - font-hack
     install_mac_cask_packages:
       - virtualbox
       - alacritty
