@@ -26,6 +26,9 @@ def list_extension_dirs(module, executable):
     if executable == 'code-insiders':
         dirname += '-insiders'
 
+    if executable == 'codium':
+        dirname += '-oss'
+
     ext_dir = os.path.expanduser(
         os.path.join('~', dirname, 'extensions'))
 
@@ -75,7 +78,7 @@ def run_module():
 
     executable = module.params['executable']
     if executable != 'code-insiders':
-        executable = 'code'
+        executable = 'codium'
 
     name = module.params['name']
 

@@ -9,4 +9,4 @@ visual_studio_code_config_path: "{{ (ansible_distribution == 'MacOSX') | ternary
 visual_studio_code_package: "{{ (visual_studio_code_build == 'insiders') | ternary('code-insiders', 'codium') }}"
 
 # The CLI executable
-visual_studio_code_exe: "{{ (visual_studio_code_build == 'insiders') | ternary('code-insiders', 'codeium') }}"
+visual_studio_code_exe: "{{ (visual_studio_code_build == 'insiders') | ternary('code-insiders', 'codium') }}"
