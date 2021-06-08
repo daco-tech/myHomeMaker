@@ -48,7 +48,6 @@
       - jq
       - nano
       - golang
-      - font-hack
     install_mac_cask_packages:
       - virtualbox
       - alacritty
@@ -126,7 +125,7 @@
             "files.autoSave": "afterDelay",
             "go.formatTool": "goimports",
             "go.useLanguageServer": true,
-            "terminal.integrated.fontFamily": "Hack",
+            "terminal.integrated.fontFamily": "Hack", #On Mac: Hack Nerd Fonts
             "terminal.integrated.fontSize": 14,
             "window.zoomLevel": 0,
             "workbench.colorCustomizations": {
