@@ -22,6 +22,7 @@
       - stacer
       - ttf-firacode
       - powerline-fonts
+      - nerd-fonts-hack
     install_debian_linux_packages:
       - codium
       - golang
