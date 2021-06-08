@@ -77,7 +77,7 @@
     - packer
     - terraform
     - awscli
-    #- azure-cli
+    - azure-cli
     - crossplatform-package-manager
     - nerdfonts
     #- docker
