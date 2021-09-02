@@ -50,6 +50,7 @@
       - nano
       - golang
       - azure-cli
+
     install_mac_cask_packages:
       - virtualbox
       - alacritty
@@ -98,80 +99,20 @@
     #      - { key: "sync.target", val: "5" }
 
     - role: vscodium
+      vars:
+        terminal_font: "Hack"
       users:
         - username: "{{ ansible_user_id }}"
           #visual_studio_code_extensions:
           visual_studio_code_settings_overwrite: yes
-          visual_studio_code_settings: {
-            "[Log]": {
-                "editor.fontSize": 15
-            },
-            "editor.fontFamily": "Fira Code",
-            "editor.fontLigatures": true,
-            "editor.fontSize": 15,
-            "editor.formatOnPaste": true,
-            "editor.formatOnSave": true,
-            "editor.insertSpaces": true,
-            "editor.renderWhitespace": "all",
-            "editor.rulers": [
-                80,
-                100,
-                120
-            ],
-            "editor.tabSize": 4,
-            "files.associations": {
-                "Vagrantfile": "ruby"
-            },
-            "files.autoSave": "afterDelay",
-            "go.formatTool": "goimports",
-            "go.useLanguageServer": true,
-            "terminal.integrated.fontFamily": "Hack", #On Mac: Hack Nerd Fonts
-            "terminal.integrated.fontSize": 14,
-            "window.zoomLevel": 0,
-            "workbench.colorCustomizations": {
-                "activityBarBadge.background": "#80CBC4",
-                "editorSuggestWidget.highlightForeground": "#80CBC4",
-                "list.activeSelectionForeground": "#80CBC4",
-                "list.highlightForeground": "#80CBC4",
-                "list.inactiveSelectionForeground": "#80CBC4",
-                "pickerGroup.foreground": "#80CBC4",
-                "progressBar.background": "#80CBC4",
-                "scrollbarSlider.activeBackground": "#80CBC450",
-                "tab.activeBorder": "#80CBC4",
-                "terminal.ansiBlack": "#003541",
-                "terminal.ansiBlue": "#268bd2",
-                "terminal.ansiBrightBlack": "#586e75",
-                "terminal.ansiBrightBlue": "#839496",
-                "terminal.ansiBrightCyan": "#93a1a1",
-                "terminal.ansiBrightGreen": "#586e75",
-                "terminal.ansiBrightMagenta": "#6c6ec6",
-                "terminal.ansiBrightRed": "#cb4b16",
-                "terminal.ansiBrightWhite": "#fdf6e3",
-                "terminal.ansiBrightYellow": "#657b83",
-                "terminal.ansiCyan": "#2aa198",
-                "terminal.ansiGreen": "#859901",
-                "terminal.ansiMagenta": "#d33682",
-                "terminal.ansiRed": "#dc322f",
-                "terminal.ansiWhite": "#eee8d5",
-                "terminal.ansiYellow": "#b58901",
-                "terminal.background": "#24262b",
-                "terminal.foreground": "#839496",
-                "terminal.selectionBackground": "#003541",
-                "textLink.foreground": "#80CBC4"
-            }
-        }
-    #- role: vscodium
-    #  users:
-    #    - username: "{{ ansible_user_id }}"
-    #      visual_studio_code_extensions:
-    #        - streetsidesoftware.code-spell-checker
-    #        - wholroyd.jinja
-    #        - ms-python.python
-    #        - ms-azuretools.vscode-docker
-    #        - golang.Go
-    #        - pkief.material-icon-theme
-    #        - yzhang.markdown-all-in-one
-    #      visual_studio_code_settings_overwrite: yes
-    #      visual_studio_code_settings: {
-            
-    #      }
+      when:
+        - ansible_facts['system'] == "Linux"
+    - role: vscodium
+      vars:
+        terminal_font: "Hack Nerd Fonts"
+      users:
+        - username: "{{ ansible_user_id }}"
+          #visual_studio_code_extensions:
+          visual_studio_code_settings_overwrite: yes
+      when:
+        - ansible_facts['system'] == "Darwin"
