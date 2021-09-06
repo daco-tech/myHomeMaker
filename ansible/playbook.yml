@@ -20,7 +20,7 @@
       - go
       - timeshift-bin
       - stacer
-      - ttf-firacode
+      #- ttf-firacode
       - powerline-fonts
       - nerd-fonts-hack
       - azure-cli
