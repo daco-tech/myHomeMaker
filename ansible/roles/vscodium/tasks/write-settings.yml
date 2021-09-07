@@ -15,7 +15,7 @@
   become: yes
   become_user: '{{ user.username }}'
   file:
-    path: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User'
+    path: '~/{{ visual_studio_code_config_path }}/User'
     state: directory
     mode: 'u=rwx,go='
   with_items: '{{ users }}'
@@ -27,7 +27,7 @@
   become_user: '{{ user.username }}'
   template:
     src: settings.json.j2
-    dest: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User/settings.json'
+    dest: '~/{{ visual_studio_code_config_path }}/User/settings.json'
     force: '{{ user.visual_studio_code_settings_overwrite | default(False) | bool }}'
     mode: 'u=rw,g=rw,o=r'
   with_items: '{{ users }}'
