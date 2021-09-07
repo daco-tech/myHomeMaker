@@ -3,7 +3,7 @@
   become: yes
   become_user: '{{ user.username }}'
   file:
-    path: '~/{{ visual_studio_code_config_path }}'
+    path: '{{ visual_studio_code_config_path }}'
     state: directory
     mode: 'u=rwx,go=rx'
   with_items: '{{ users }}'

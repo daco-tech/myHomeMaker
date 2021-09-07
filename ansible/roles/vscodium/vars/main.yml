@@ -3,7 +3,7 @@
 visual_studio_code_config_dirname: "VSCodium"
 
 # Directory under $HOME where where VS Code config is stored
-visual_studio_code_config_path: "{{ (ansible_distribution == 'MacOSX') | ternary('Library/Application Support', '.config') }}/{{ visual_studio_code_config_dirname }}"
+visual_studio_code_config_path: "{{ (ansible_distribution == 'MacOSX') | ternary('~/Library/Application Support', '.config') }}/{{ visual_studio_code_config_dirname }}"
 
 # The package name to install
 visual_studio_code_package: "{{ (visual_studio_code_build == 'insiders') | ternary('code-insiders', 'codium') }}"
