@@ -246,6 +246,12 @@ downloadRepo(){
 ###################################################  RUN PLAYBOOK ###################################################
 
 runPlaybooks(){
+    if [ -d "/usr/local/share/zsh" ]; then
+        logmsg "INFO" "Fix ZSH permissions..."
+        sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
+        chmod u+w /usr/local/share/zsh /usr/local/share/zsh/site-functions
+    fi
+
     logmsg "INFO" "${NC} Running Playbooks..."
     cd myHomeMaker/ansible
     ansible-playbook ${ANSIBLEPARAMS[@]} playbook.yml
