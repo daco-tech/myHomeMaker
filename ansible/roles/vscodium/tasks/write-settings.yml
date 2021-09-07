@@ -10,7 +10,6 @@
   loop_control:
     loop_var: user
     label: '{{ user.username }}'
-  when: "user.visual_studio_code_settings not in ({}, '', None, omit)"
 
 - name: create settings directory
   become: yes
@@ -23,8 +22,6 @@
   loop_control:
     loop_var: user
     label: '{{ user.username }}'
-  when: "user.visual_studio_code_settings not in ({}, '', None, omit)"
-
 - name: write settings
   become: yes
   become_user: '{{ user.username }}'
@@ -37,4 +34,3 @@
   loop_control:
     loop_var: user
     label: '{{ user.username }}'
-  when: "user.visual_studio_code_settings not in ({}, '', None, omit)"
