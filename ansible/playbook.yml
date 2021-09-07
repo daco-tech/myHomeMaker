@@ -60,6 +60,7 @@
       - vlc
       - vagrant
       - vscodium
+      - lens
     install_packages:
       - htop
       - glances
