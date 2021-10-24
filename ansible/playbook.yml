@@ -24,6 +24,7 @@
       - powerline-fonts
       - nerd-fonts-hack
       - azure-cli
+      - vlc-luajit
     install_debian_linux_packages:
       - codium
       - golang
@@ -33,6 +34,7 @@
       - fonts-powerline
       - build-essential
       - module-assistant
+      - vlc
     install_linux_packages:
       - alacritty
       - zsh
@@ -41,7 +43,6 @@
       - pydf
       - virtualbox
       - flameshot #screenshot tool
-      - vlc
       - vagrant
     install_mac_packages:
       #- sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
