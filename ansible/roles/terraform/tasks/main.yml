@@ -2,6 +2,7 @@
 - name: Install tfenv Linux
   git:
     repo: git@github.com:tfutils/tfenv.git
+    accept_hostkey: yes
     version: master
     dest: /home/{{ ansible_user_id }}/.tfenv
   when: 
