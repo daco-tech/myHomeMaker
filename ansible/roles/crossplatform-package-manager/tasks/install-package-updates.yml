@@ -25,6 +25,12 @@
   when: 
   - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
 
+- name: Install yay
+  become: true
+  command:  /usr/bin/pacman -S --noconfirm yay
+  when: 
+  - (ansible_os_family == 'Archlinux')
+  
 - name: Update AUR packages
   become: true
   command:  /usr/bin/yay -S --noconfirm {{ item }}
