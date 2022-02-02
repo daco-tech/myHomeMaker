@@ -36,7 +36,7 @@
       - module-assistant
       - vlc
     install_linux_packages:
-      - alacritty
+      #- alacritty
       - zsh
       - powertop
       - net-tools
