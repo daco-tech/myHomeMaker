@@ -77,12 +77,12 @@
   roles:
     - kubectx
     - kubectl
-    - dep
     - nanorc
     - packer
     - terraform
     - awscli
     - crossplatform-package-manager
+    - dep
     - nerdfonts
     #- docker
     - role: oh-my-zsh
