@@ -50,12 +50,12 @@
   when: 
     - ansible_facts['system'] == "Linux"
 
-- name: Download kubectx autocomplete zsh
-  get_url: url=https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubectx.zsh dest=/home/{{ ansible_user_id }}/.oh-my-zsh/completions/
-  when: 
-    - ansible_facts['system'] == "Linux"
+#- name: Download kubectx autocomplete zsh
+#  get_url: url=https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubectx.zsh dest=/home/{{ ansible_user_id }}/.oh-my-zsh/completions/
+#  when: 
+#    - ansible_facts['system'] == "Linux"
 
-- name: Download kubens autocomplete zsh
-  get_url: url=https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.zsh dest=/home/{{ ansible_user_id }}/.oh-my-zsh/completions/
-  when: 
-    - ansible_facts['system'] == "Linux"
+#- name: Download kubens autocomplete zsh
+#  get_url: url=https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.zsh dest=/home/{{ ansible_user_id }}/.oh-my-zsh/completions/
+#  when: 
+#    - ansible_facts['system'] == "Linux"
