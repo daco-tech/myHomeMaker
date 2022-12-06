@@ -193,7 +193,13 @@ installReq(){
     ## Test
     command -v git >/dev/null 2>&1 || { echo >&2 "git is required but it's not installed. Aborting."; exit 1; }
     command -v curl >/dev/null 2>&1 || { echo >&2 "curl is required but it's not installed. Aborting."; exit 1; }
-    command -v python3 >/dev/null 2>&1 || { echo >&2 "python is required but it's not installed. Aborting."; exit 1; }
+    #command -v python3 >/dev/null 2>&1 || { echo >&2 "python is required but it's not installed. Aborting."; exit 1; }
+    if ! command -v python3 &> /dev/null
+    then
+        echo "python is required but it's not installed. Aborting."
+        exit 1
+    fi
+
     mkdir -p ~/go/bin
 
 }
