@@ -245,10 +245,10 @@ downloadRepo(){
     else
         logmsg "INFO" "${NC} Repo directory does not exist, downloading..."
         git clone git://github.com/daco-tech/myHomeMaker.git
-        cd myHomeMaker
-        git --no-pager diff HEAD^..HEAD
-        cd ..
     fi
+    cd myHomeMaker
+    git --no-pager diff HEAD^..HEAD
+    cd ..
     logmsg "INFO" "${NC} Repo Updated!"
 }
 
