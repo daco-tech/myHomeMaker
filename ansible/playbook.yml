@@ -52,6 +52,7 @@
       - golang
       - azure-cli
       - derailed/k9s/k9s
+      - openlens
     install_mac_cask_packages:
       - virtualbox
       - alacritty
