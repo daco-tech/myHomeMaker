@@ -51,6 +51,10 @@ displayAsciiDisclaimer() {
     logmsg "INFO" "${NC} DACO-TECH - My HomeMaker Started!"
 }
 
+showGitChanges(){
+    export GIT_PAGER=cat && git diff HEAD^..HEAD
+}
+
 amIop(){
     logmsg "INFO" "${NC} Detecting User Level"
     if [ "$EUID" -ne 0 ]
@@ -267,6 +271,7 @@ runPlaybooks(){
 ## Execute
 cd ~/
 displayAsciiDisclaimer
+showGitChanges
 envDetector
 amIop
 installReq
