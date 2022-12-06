@@ -51,10 +51,6 @@ displayAsciiDisclaimer() {
     logmsg "INFO" "${NC} DACO-TECH - My HomeMaker Started!"
 }
 
-showGitChanges(){
-    export GIT_PAGER=cat && git diff HEAD^..HEAD
-}
-
 amIop(){
     logmsg "INFO" "${NC} Detecting User Level"
     if [ "$EUID" -ne 0 ]
@@ -249,6 +245,9 @@ downloadRepo(){
     else
         logmsg "INFO" "${NC} Repo directory does not exist, downloading..."
         git clone git://github.com/daco-tech/myHomeMaker.git
+        cd myHomeMaker
+        git --no-pager diff HEAD^..HEAD
+        cd ..
     fi
     logmsg "INFO" "${NC} Repo Updated!"
 }
@@ -271,7 +270,6 @@ runPlaybooks(){
 ## Execute
 cd ~/
 displayAsciiDisclaimer
-showGitChanges
 envDetector
 amIop
 installReq
