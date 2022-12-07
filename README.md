@@ -68,13 +68,6 @@ update
 - [x] Install Kubernetes tools (Kubectl linux)
 
 
-### TODO Later:
-
-- [ ] Install and configure Heroku Cloud CLI tool
-- [ ] Install and configure OpenShift Cloud CLI tool
-- [ ] Add Linux Test in GitHub Actions
-
-
 ## Global Apps
 
 **Check playbook.yml**
