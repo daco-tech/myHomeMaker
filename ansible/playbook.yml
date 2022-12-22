@@ -82,7 +82,7 @@
     - terraform
     - awscli
     - crossplatform-package-manager
-    - dep
+    #- dep
     - nerdfonts
     #- docker
     - role: oh-my-zsh
