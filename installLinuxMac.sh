@@ -229,6 +229,7 @@ installAnsible(){
 }
 
 downloadRepo(){
+    mkdir ~/.myhomemaker && cd ~/.myhomemaker
     logmsg "INFO" "${NC} Download Repo..."
 
     if [ -d "myHomeMaker" ]; 
@@ -244,7 +245,7 @@ downloadRepo(){
         cd ..
     else
         logmsg "INFO" "${NC} Repo directory does not exist, downloading..."
-        git clone git://github.com/daco-tech/myHomeMaker.git
+        git clone git@github.com:daco-tech/myHomeMaker.git
     fi
     cd myHomeMaker
     git --no-pager diff HEAD^..HEAD
