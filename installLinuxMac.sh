@@ -134,6 +134,15 @@ envDetector(){
 
 }
 
+endinstall(){
+    case "$(uname -s)" in
+        Darwin)
+        ;;
+        Linux)
+            chsh -s $(which zsh)
+        ;;
+    esac
+}
 
 
 installTool() {
@@ -277,6 +286,6 @@ installReq
 installAnsible
 downloadRepo
 runPlaybooks
-
+endinstall
 
 exit 0
