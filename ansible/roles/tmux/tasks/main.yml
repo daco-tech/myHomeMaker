@@ -1,0 +1,10 @@
+#- name: Copy Nano Highlights
+#  copy:
+#    src: .nano/
+#    dest: ~/.nano/
+
+- name: Copy tmux conf
+  template:
+    src: tmux-conf.j2
+    dest: ~/.tmux.conf
+

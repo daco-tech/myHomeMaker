@@ -99,7 +99,16 @@
     #      - { key: "sidebarVisibility", val: "1" }
     #      - { key: "dateFormat", val: "YYYY-MM-DD" }
     #      - { key: "sync.target", val: "5" }
-
+    - role: tmux
+      vars:
+        ctrlkey: "C"
+      when:
+        - ansible_facts['system'] == "Linux"
+    - role: tmux
+      vars:
+        ctrlkey: "^"
+      when:
+        - ansible_facts['system'] == "Darwin"
     - role: vscodium
       vars:
         terminal_font: "Hack"
