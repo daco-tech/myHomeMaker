@@ -38,6 +38,8 @@
 - name: Change zsh dir permission
   become: yes
   become_user: "root"
+  async: 120 # Maximum allowed time in Seconds
+  poll: 05 # Polling Interval in Seconds
   file:
     path: /usr/local/share/zsh
     state: directory

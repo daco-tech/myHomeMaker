@@ -273,7 +273,7 @@ runPlaybooks(){
 
     logmsg "INFO" "${NC} Running Playbooks..."
     cd myHomeMaker/ansible
-    ansible-playbook ${ANSIBLEPARAMS[@]} playbook.yml
+    ansible-playbook ${ANSIBLEPARAMS[@]} playbook.yml --ask-become-pass
     cd ..
 }
 
