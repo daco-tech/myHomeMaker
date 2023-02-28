@@ -20,3 +20,6 @@ bind -n M-Down select-pane -D
 
 # Enable mouse mode (tmux 2.1 and above)
 set -g mouse on
+
+# Enable Highlight Prefix Key
+set -g status-right '#{prefix_highlight} | %a %Y-%m-%d %H:%M'
