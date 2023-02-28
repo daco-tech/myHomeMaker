@@ -110,7 +110,7 @@
     - role: tmux
       vars:
         ctrlkey: "^"
-        splitv: "\\"
+        splitv: "\\\\"
         splith: "-"
       when:
         - ansible_facts['system'] == "Darwin"
