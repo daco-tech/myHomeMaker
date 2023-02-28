@@ -1,11 +1,11 @@
-# remap prefix from '{{ vars.ctrlkey }}-b' to '{{ vars.ctrlkey }}-a'
-unbind {{ vars.ctrlkey }}-b
-set-option -g prefix {{ vars.ctrlkey }}-a
-bind-key {{ vars.ctrlkey }}-a send-prefix
+# remap prefix from '{{ vars.ctrlkey }}b' to '{{ vars.ctrlkey }}a'
+unbind {{ vars.ctrlkey }}b
+set-option -g prefix {{ vars.ctrlkey }}a
+bind-key {{ vars.ctrlkey }}a send-prefix
 
 # split panes using | and -
-bind | split-window -h
-bind - split-window -v
+bind {{ vars.splitv }} split-window -h
+bind {{ vars.splith }} split-window -v
 unbind '"'
 unbind %
 

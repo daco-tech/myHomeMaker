@@ -101,12 +101,16 @@
     #      - { key: "sync.target", val: "5" }
     - role: tmux
       vars:
-        ctrlkey: "C"
+        ctrlkey: "C-"
+        splitv: "|"
+        splith: "-"
       when:
         - ansible_facts['system'] == "Linux"
     - role: tmux
       vars:
         ctrlkey: "^"
+        splitv: "\\"
+        splith: "-"
       when:
         - ansible_facts['system'] == "Darwin"
     - role: vscodium
