@@ -1,7 +1,7 @@
-# remap prefix from '{{ var.ctrlkey }}-b' to '{{ var.ctrlkey }}-a'
-unbind {{ var.ctrlkey }}-b
-set-option -g prefix {{ var.ctrlkey }}-a
-bind-key {{ var.ctrlkey }}-a send-prefix
+# remap prefix from '{{ vars.ctrlkey }}-b' to '{{ vars.ctrlkey }}-a'
+unbind {{ vars.ctrlkey }}-b
+set-option -g prefix {{ vars.ctrlkey }}-a
+bind-key {{ vars.ctrlkey }}-a send-prefix
 
 # split panes using | and -
 bind | split-window -h
