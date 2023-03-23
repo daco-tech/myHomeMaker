@@ -105,6 +105,7 @@
         ctrlkey: "C-"
         splitv: "\\\\"
         splith: "-"
+        city: "Ermesinde"
       when:
         - ansible_facts['system'] == "Linux"
     - role: tmux
@@ -112,6 +113,7 @@
         ctrlkey: "^"
         splitv: "\\\\"
         splith: "-"
+        city: "Porto"
       when:
         - ansible_facts['system'] == "Darwin"
     - role: vscodium
