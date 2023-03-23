@@ -103,7 +103,7 @@
     - role: tmux
       vars:
         ctrlkey: "C-"
-        splitv: "~"
+        splitv: "\\"
         splith: "-"
       when:
         - ansible_facts['system'] == "Linux"
