@@ -8,7 +8,7 @@
 - name: clone tmux plugin - {{ plugin.name }}
   ansible.builtin.git:
     repo: https://git::@github.com/{{ plugin.git }}
-    dest: ~/.tmux/{{ plugin.folder }}
+    dest: ~/.tmux/plugins/{{ plugin.folder }}
     clone: yes
     update: yes
   with_items: "{{ plugins }}"
