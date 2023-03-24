@@ -5,15 +5,15 @@
 
 #Clone Plugins
 
-- name: clone tmux plugin - {{ plugins.name }}
+- name: clone tmux plugin - {{ plugin.name }}
   ansible.builtin.git:
-    repo: https://git::@github.com/{{ plugins.git }}
-    dest: ~/.tmux/{{ plugins.folder }}
+    repo: https://git::@github.com/{{ plugin.git }}
+    dest: ~/.tmux/{{ plugin.folder }}
     clone: yes
     update: yes
-  with_items: "{{ plugins | map(attribute='plugins') | list }}"
+  with_items: "{{ plugins }}"
   loop_control:
-    loop_var: plugins
+    loop_var: plugin
     
 
 - name: Copy tmux conf
