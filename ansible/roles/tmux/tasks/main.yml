@@ -13,7 +13,7 @@
     update: yes
   with_items: "{{ plugins | map(attribute='plugin') | list }}"
   loop_control:
-    loop_var: plugin
+    loop_var: plugins
     
 
 - name: Copy tmux conf
