@@ -3,6 +3,19 @@
 #    src: .nano/
 #    dest: ~/.nano/
 
+#Clone Plugins
+
+- name: clone tmux plugin - {{ plugin.name }}
+  ansible.builtin.git:
+    repo: https://git::@github.com/{{ plugin.git }}
+    dest: ~/.tmux/{{ plugin.folder }}
+    clone: yes
+    update: yes
+  with_items: "{{ plugins | map(attribute='plugin') | list }}"
+  loop_control:
+    loop_var: plugin
+    
+
 - name: Copy tmux conf
   template:
     src: tmux-conf.j2
