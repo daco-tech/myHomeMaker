@@ -1,0 +1,23 @@
+#- name: Copy Nano Highlights
+#  copy:
+#    src: .nano/
+#    dest: ~/.nano/
+
+#Clone Plugins
+
+- name: clone powerline fonts
+  ansible.builtin.git:
+    repo: https://github.com/powerline/fonts.git
+    depth: 1
+    dest: ./tmpfonts/
+    clone: yes
+    update: yes
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+- name: Install powerline fonts
+  become: true
+  command: ./tmpfonts/install.sh
+  when: 
+    - ansible_facts['system'] == "Darwin"
+

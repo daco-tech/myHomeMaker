@@ -82,6 +82,7 @@
     - packer
     - terraform
     - awscli
+    - powerline-fonts
     - crossplatform-package-manager
     #- dep
     - nerdfonts
