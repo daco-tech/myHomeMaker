@@ -1,9 +1,4 @@
-#- name: Copy Nano Highlights
-#  copy:
-#    src: .nano/
-#    dest: ~/.nano/
-
-#Clone Plugins
+#Fonts
 
 - name: clone powerline fonts
   ansible.builtin.git:
@@ -20,4 +15,13 @@
   command: ./tmpfonts/install.sh
   when: 
     - ansible_facts['system'] == "Darwin"
+
+# Powerline
+    - name: clone powerline
+  ansible.builtin.git:
+    repo: https://github.com/powerline/powerline.git
+    depth: 1
+    dest: ~/powerline/
+    clone: yes
+    update: yes
 
