@@ -42,9 +42,9 @@
       - powertop
       - net-tools
       - pydf
-      - virtualbox
+      #- virtualbox
       - flameshot #screenshot tool
-      - vagrant
+      #- vagrant
     install_mac_packages:
       #- sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
       - watch
@@ -53,15 +53,16 @@
       - golang
       - azure-cli
       - derailed/k9s/k9s
+      - romkatv/powerlevel10k/powerlevel10k
       #- openlens
     install_mac_cask_packages:
-      - virtualbox
+      #- virtualbox
       - alacritty
       #- joplin
       - font-fira-code
       - font-hack-nerd-font
       - vlc
-      - vagrant
+      #- vagrant
       - vscodium
     install_packages:
       - htop
