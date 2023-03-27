@@ -17,7 +17,7 @@
     - ansible_facts['system'] == "Darwin"
 
 # Powerline
-    - name: clone powerline
+- name: clone powerline
   ansible.builtin.git:
     repo: https://github.com/powerline/powerline.git
     depth: 1
