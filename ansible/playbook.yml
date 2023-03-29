@@ -80,7 +80,7 @@
     - kubectx
     - kubectl
     - nanorc
-    - packer
+    #- packer
     - terraform
     - awscli
     - powerline-fonts
