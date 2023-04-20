@@ -20,7 +20,7 @@ export KUBECTX_CURRENT_BGCOLOR=$(tput setab 7) # white background
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_COMMAND='fd --type f'
 
-export KUBECONFIG=~/.kube/config:$(find . -type f | tr '\n' ':')
+export KUBECONFIG=~/.kube/config:$(find ~/.kube/config/ -type f | tr '\n' ':')
 
 # IMPORT BASH PROFILE
 BASH_PROFILE=~/.bash_profile
