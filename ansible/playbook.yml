@@ -65,6 +65,7 @@
       #- vagrant
       - vscodium
     install_packages:
+      - kubespy
       - htop
       - glances
       - cmake
