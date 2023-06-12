@@ -144,3 +144,8 @@ alias config="~/myHomeMaker/configure.sh"
 alias gfp="git add .; git commit -m "Fast Push"; git push;"
 alias code="codium"
 alias brew cask="brew install --cask"
+source <(kubectl completion zsh)
+alias kubectl=kubecolor
+# make completion work with kubecolor
+compdef kubecolor=kubectl
+alias k="kubectl"

@@ -54,6 +54,7 @@
       - azure-cli
       - derailed/k9s/k9s
       - romkatv/powerlevel10k/powerlevel10k
+      - hidetatz/tap/kubecolor
       #- openlens
     install_mac_cask_packages:
       #- virtualbox
