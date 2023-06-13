@@ -15,6 +15,8 @@ update_packages: []
 # list of linux only install
 install_linux_packages: []
 
+install_go_linux_packages: []
+
 # list of mac only install
 install_mac_packages: []
 install_mac_cask_packages: []

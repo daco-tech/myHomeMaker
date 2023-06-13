@@ -1,0 +1,7 @@
+---
+
+- name: Install using golang go install
+  #become: true
+  command:  go install {{ item }}
+  when: 
+  - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS') or (ansible_os_family == 'Archlinux')

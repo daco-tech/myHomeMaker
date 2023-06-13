@@ -66,6 +66,9 @@
       - vlc
       #- vagrant
       - vscodium
+    install_go_linux_packages:
+      - github.com/hidetatz/kubecolor/cmd/kubecolor@latest
+      - github.com/pulumi/kubespy@latest
     install_packages:
       - htop
       - glances
