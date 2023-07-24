@@ -69,6 +69,7 @@
     install_go_linux_packages:
       - github.com/hidetatz/kubecolor/cmd/kubecolor@latest
       - github.com/pulumi/kubespy@latest
+      - github.com/terraform-docs/terraform-docs@v0.16.0
     install_packages:
       - htop
       - glances
