@@ -57,6 +57,7 @@
       - hidetatz/tap/kubecolor
       - kubespy
       - terraform-docs
+      - tfsec
       #- openlens
     install_mac_cask_packages:
       #- virtualbox
