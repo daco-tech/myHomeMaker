@@ -28,9 +28,6 @@
       - vlc-luajit
     install_debian_linux_packages:
       #- codium
-      - golang
-      - timeshift
-      - stacer
       - fonts-firacode
       - fonts-powerline
       - build-essential
@@ -38,6 +35,9 @@
       - vlc
     install_linux_packages:
       #- alacritty
+      - golang
+      - timeshift
+      - stacer
       - zsh
       - powertop
       - net-tools
