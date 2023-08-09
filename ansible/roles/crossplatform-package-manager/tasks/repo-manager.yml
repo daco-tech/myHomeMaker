@@ -14,11 +14,7 @@
     key: "{{ item }}"
   with_items: "{{ rpm_keys }}"
   when: 
-    - ansible_facts['distribution'] == "CentOS" # CentOS 8,7,6
-    - ansible_facts['distribution'] == "Nobara" # Nobara Linux
-    - ansible_facts['distribution'] == "Amazon" # Amazon Linux
-    - ansible_facts['distribution'] == "Fedora" # Fedora 33,32,31,..
-    - (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "8") # CentOS 8 only
+    - ansible_distribution == "CentOS" or ansible_distribution == "Nobara" or ansible_distribution == "Amazon" or ansible_distribution == "Fedora"
 
 
 - name: Repo Manager RedHat Add new repo
@@ -30,8 +26,4 @@
     enabled: yes
   with_items: "{{ rpm_repo }}"
   when: 
-    - ansible_facts['distribution'] == "CentOS" # CentOS 8,7,6
-    - ansible_facts['distribution'] == "Nobara" # Nobara Linux
-    - ansible_facts['distribution'] == "Amazon" # Amazon Linux
-    - ansible_facts['distribution'] == "Fedora" # Fedora 33,32,31,..
-    - (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "8") # CentOS 8 only
+    - ansible_distribution == "CentOS" or ansible_distribution == "Nobara" or ansible_distribution == "Amazon" or ansible_distribution == "Fedora"
