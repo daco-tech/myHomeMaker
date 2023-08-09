@@ -9,6 +9,7 @@
     - ansible_facts['system'] == "Darwin"
 
 - name: Repo Manager RedHat Import keys from url
+  become: true
   ansible.builtin.rpm_key:
     state: present
     key: "{{ item }}"
@@ -18,6 +19,7 @@
 
 
 - name: Repo Manager RedHat Add new repo
+  become: true
   ansible.builtin.yum_repository:
     name: "{{ item.name }}"
     description: "{{ item.description }}"
