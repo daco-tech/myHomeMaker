@@ -97,15 +97,15 @@ envDetector(){
         then
             INSTALLCMD="sudo apt -f install"
             DISTRO=Debian
+        elif [ -n "$(command -v dnf)" ];
+        then
+            INSTALLCMD="sudo dnf -y"
+            DISTRO=RedHat
         elif [ -n "$(command -v yum)" ];
         then
             INSTALLCMD="sudo yum -y"
             DISTRO=RedHat
 
-        elif [ -n "$(command -v dnf)" ];
-        then
-            INSTALLCMD="sudo dnf -y"
-            DISTRO=RedHat
         elif [ -n "$(command -v pacman)" ];
         then
             INSTALLCMD="sudo pacman -S "
@@ -199,6 +199,8 @@ installReq(){
     installTool git
     installTool curl
     installTool python
+    installTool ansible
+
     ## Test
     command -v git >/dev/null 2>&1 || { echo >&2 "git is required but it's not installed. Aborting."; exit 1; }
     command -v curl >/dev/null 2>&1 || { echo >&2 "curl is required but it's not installed. Aborting."; exit 1; }
@@ -228,6 +230,10 @@ installAnsible(){
                 installTool ansible
             else
                 installTool ansible
+            fi
+            if [ $DISTRO = "RedHat" ];
+            then 
+                sudo yum install ansible zsh util-linux-ng
             fi
         fi  
     fi
