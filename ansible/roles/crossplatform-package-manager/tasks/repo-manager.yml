@@ -19,10 +19,10 @@
 
 - name: Repo Manager RedHat Add new repo
   ansible.builtin.yum_repository:
-    name: "{{ {{ item }}.name }}"
-    description: "{{ {{ item }}.description }}"
-    baseurl: "{{ {{ item }}.url }}"
-    gpgcheck: "{{ {{ item }}.gpg }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.url }}"
+    gpgcheck: "{{ item.gpg }}"
     enabled: yes
   with_items: "{{ rpm_repo }}"
   when: 
