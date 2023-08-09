@@ -27,3 +27,6 @@ repo_brew_tap: []
 
 # list of rpm keys
 rpm_keys: []
+
+# list of rpm repos
+rpm_repo: []

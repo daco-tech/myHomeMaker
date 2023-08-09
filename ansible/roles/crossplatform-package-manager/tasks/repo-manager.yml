@@ -19,3 +19,19 @@
     - ansible_facts['distribution'] == "Amazon" # Amazon Linux
     - ansible_facts['distribution'] == "Fedora" # Fedora 33,32,31,..
     - (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "8") # CentOS 8 only
+
+
+- name: Repo Manager RedHat Add new repo
+  ansible.builtin.yum_repository:
+    name: "{{ {{ item }}.name }}"
+    description: "{{ {{ item }}.description }}"
+    baseurl: "{{ {{ item }}.url }}"
+    gpgcheck: "{{ {{ item }}.gpg }}"
+    enabled: yes
+  with_items: "{{ rpm_repo }}"
+  when: 
+    - ansible_facts['distribution'] == "CentOS" # CentOS 8,7,6
+    - ansible_facts['distribution'] == "Nobara" # Nobara Linux
+    - ansible_facts['distribution'] == "Amazon" # Amazon Linux
+    - ansible_facts['distribution'] == "Fedora" # Fedora 33,32,31,..
+    - (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "8") # CentOS 8 only
