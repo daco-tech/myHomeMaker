@@ -24,3 +24,6 @@ install_mac_cask_packages: []
 
 # list of repository additions
 repo_brew_tap: []
+
+# list of rpm keys
+rpm_keys: []

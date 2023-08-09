@@ -7,3 +7,15 @@
   with_items: "{{ repo_brew_tap }}"
   when: 
     - ansible_facts['system'] == "Darwin"
+
+- name: Repo Manager RedHat Import keys from url
+  ansible.builtin.rpm_key:
+    state: present
+    key: {{ item }}
+  with_items: "{{ rpm_keys }}"
+  when: 
+    - ansible_facts['distribution'] == "CentOS" # CentOS 8,7,6
+    - ansible_facts['distribution'] == "Nobara" # Nobara Linux
+    - ansible_facts['distribution'] == "Amazon" # Amazon Linux
+    - ansible_facts['distribution'] == "Fedora" # Fedora 33,32,31,..
+    - (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "8") # CentOS 8 only
