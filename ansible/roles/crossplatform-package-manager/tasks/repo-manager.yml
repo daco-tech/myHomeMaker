@@ -23,7 +23,7 @@
     description: "{{ item.description }}"
     baseurl: "{{ item.url }}"
     gpgcheck: "{{ item.gpg }}"
-    enabled: yes
+    state: "present"
   with_items: "{{ rpm_repo }}"
   when: 
     - ansible_distribution == "CentOS" or ansible_distribution == "Nobara" or ansible_distribution == "Amazon" or ansible_distribution == "Fedora"

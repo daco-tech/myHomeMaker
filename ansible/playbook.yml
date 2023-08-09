@@ -19,8 +19,7 @@
     rpm_keys:
       - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
     rpm_repo:
-      codium:
-        name: codium
+      - name: codium
         description: Codium Repo
         url: https://download.vscodium.com/rpms/
         gpg: yes
