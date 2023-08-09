@@ -126,7 +126,7 @@
         splith: "-"
         city: "Ermesinde"
       when:
-        - ansible_facts['system'] == "Linux"
+        - ansible_system == "Linux"
     - role: tmux
       vars:
         ctrlkey: "^"
@@ -134,7 +134,7 @@
         splith: "-"
         city: "Porto"
       when:
-        - ansible_facts['system'] == "Darwin"
+        - ansible_system == "Darwin"
     - role: vscodium
       vars:
         terminal_font: "Hack"
@@ -143,7 +143,7 @@
           #visual_studio_code_extensions:
           visual_studio_code_settings_overwrite: yes
       when:
-        - ansible_facts['system'] == "Linux"
+        - ansible_system == "Linux"
     - role: vscodium
       vars:
         terminal_font: "Hack Nerd Fonts"
@@ -152,4 +152,4 @@
           #visual_studio_code_extensions:
           visual_studio_code_settings_overwrite: yes
       when:
-        - ansible_facts['system'] == "Darwin"
+        - ansible_system == "Darwin"
