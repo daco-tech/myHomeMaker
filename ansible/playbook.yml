@@ -94,6 +94,7 @@
       - bash-completion
       - fzf #https://github.com/junegunn/fzf
   roles:
+    - mactweaks
     - kubectx
     - kubectl
     - nanorc

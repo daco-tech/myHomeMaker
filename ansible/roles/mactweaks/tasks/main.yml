@@ -1,0 +1,14 @@
+---
+- name: Enable Bluetooth AAC Codec for bluetooth
+  become_method: sudo
+  become: true
+  shell: defaults write bluetoothaudiod "Enable AAC codec" -bool true
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+- name: Enable Bluetooth AptX Codec for bluetooth
+  become_method: sudo
+  become: true
+  shell: defaults write bluetoothaudiod "Enable AptX codec" -bool true
+  when: 
+    - ansible_facts['system'] == "Darwin"
