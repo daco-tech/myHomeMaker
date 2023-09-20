@@ -61,7 +61,7 @@
       - golang
       - azure-cli
       - derailed/k9s/k9s
-      - romkatv/powerlevel10k/powerlevel10k
+      #- romkatv/powerlevel10k/powerlevel10k
       - hidetatz/tap/kubecolor
       - kubespy
       - terraform-docs
