@@ -65,7 +65,7 @@
       #- romkatv/powerlevel10k/powerlevel10k
       - hidetatz/tap/kubecolor
       - kubespy
-      - terraform-docs
+      #- terraform-docs
       - tfsec
       #- openlens
     install_mac_cask_packages:
@@ -81,13 +81,13 @@
     install_go_linux_packages:
       - github.com/hidetatz/kubecolor/cmd/kubecolor@latest
       - github.com/pulumi/kubespy@latest
-      - github.com/terraform-docs/terraform-docs@v0.16.0
+      #- github.com/terraform-docs/terraform-docs@v0.16.0
       - github.com/aquasecurity/tfsec/cmd/tfsec@latest
     install_packages:
       - htop
       - glances
       - cmake
-      - tmux
+      #- tmux
       - wget
       - httpie
       - neofetch
@@ -101,7 +101,7 @@
     - kubectl
     - nanorc
     #- packer
-    - terraform
+    #- terraform
     - awscli
     - powerline-fonts
     - crossplatform-package-manager
@@ -122,14 +122,14 @@
     #      - { key: "sidebarVisibility", val: "1" }
     #      - { key: "dateFormat", val: "YYYY-MM-DD" }
     #      - { key: "sync.target", val: "5" }
-    - role: tmux
-      vars:
-        ctrlkey: "C-"
-        splitv: "\\\\"
-        splith: "-"
-        city: "Ermesinde"
-      when:
-        - ansible_system == "Linux"
+    #- role: tmux
+    #  vars:
+    #    ctrlkey: "C-"
+    #    splitv: "\\\\"
+    #    splith: "-"
+    #    city: "Ermesinde"
+    #  when:
+    #    - ansible_system == "Linux"
     - role: tmux
       vars:
         ctrlkey: "^"
