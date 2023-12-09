@@ -1,3 +1,4 @@
 {
-    "editor.fontFamily": "Fire Font"
+    "editor.fontFamily": "Fire Font",
+    "ansible.python.interpreterPath": "/bin/python3"
 }

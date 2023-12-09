@@ -41,6 +41,7 @@
       - build-essential
       - module-assistant
       - vlc
+      - nala
     install_linux_packages:
       #- alacritty
       - golang
