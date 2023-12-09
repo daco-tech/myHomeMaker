@@ -15,9 +15,9 @@ plugins:
     folder: vim-tmux-navigator
     git: christoomey/vim-tmux-navigator
 
-  - name: Continuum
-    folder: tmux-continuum
-    git: tmux-plugins/tmux-continuum
+  #- name: Continuum
+  #  folder: tmux-continuum
+  #  git: tmux-plugins/tmux-continuum
 
   - name: Resurrect
     folder: tmux-resurrect
