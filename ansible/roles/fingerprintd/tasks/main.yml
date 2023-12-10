@@ -60,8 +60,16 @@
     - ansible_facts['system'] == "Linux"
 
 - name: Enables Fingerprint pam
+  become: yes
   ansible.builtin.lineinfile:
     path: /etc/pam.d/common-auth
     regexp: '^auth sufficient pam_fprintd.so'
     line: auth sufficient pam_fprintd.so
   when: enroled_finger.stdout == 1
+
+- name: Update PAM
+  shell: pam-auth-update
+  become: yes
+  when: 
+    - ansible_facts['system'] == "Linux"
+ 
