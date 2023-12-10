@@ -47,9 +47,21 @@
   when: 
     - ansible_facts['system'] == "Linux"
 
+- name: Enroll Fingerprint
+  shell: fprintd-enroll
+  when: 
+    - ansible_facts['system'] == "Linux"
+    - enroled_finger.stdout == 0
+
+- name: Get Enroled Fingerprint
+  shell: fprintd-list $USER | grep "#0" | wc -l
+  register: enroled_finger
+  when: 
+    - ansible_facts['system'] == "Linux"
+
 - name: Enables Fingerprint pam
   ansible.builtin.lineinfile:
     path: /etc/pam.d/common-auth
     regexp: '^auth sufficient pam_fprintd.so'
     line: auth sufficient pam_fprintd.so
-  when: enroled_finger | int = 1
+  when: enroled_finger.stdout == 1
