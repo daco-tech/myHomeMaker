@@ -51,7 +51,7 @@
   shell: fprintd-enroll
   when: 
     - ansible_facts['system'] == "Linux"
-    - enroled_finger.stdout == 0
+    - enroled_finger.stdout == "0"
 
 - name: Get Enroled Fingerprint
   shell: fprintd-list $USER | grep "#0" | wc -l
@@ -65,7 +65,7 @@
     path: /etc/pam.d/common-auth
     regexp: '^auth sufficient pam_fprintd.so'
     line: auth sufficient pam_fprintd.so
-  when: enroled_finger.stdout == 1
+  when: enroled_finger.stdout == "1"
 
 - name: Update PAM
   shell: pam-auth-update
