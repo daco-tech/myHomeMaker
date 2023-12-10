@@ -83,7 +83,6 @@
       - github.com/pulumi/kubespy@latest
       #- github.com/terraform-docs/terraform-docs@v0.16.0
       - github.com/aquasecurity/tfsec/cmd/tfsec@latest
-      - github.com/derailed/k9s@latest
     install_packages:
       - htop
       - glances
