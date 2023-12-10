@@ -7,8 +7,11 @@
   when: 
     - ansible_facts['system'] == "Linux"
 
-- apt_repository:
-  repo: ppa:uunicorn/open-fprintd
+- name: Install open-fprintd repo
+  become: yes
+  shell: add-apt-repository ppa:uunicorn/open-fprintd 
+  args:
+    warn: no
   when: 
     - ansible_facts['system'] == "Linux"
 
@@ -17,6 +20,7 @@
   apt:
     name: open-fprintd
     state: present
+    update_cache: yes
   when: 
     - ansible_facts['system'] == "Linux"
 
