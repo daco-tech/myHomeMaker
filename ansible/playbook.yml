@@ -100,7 +100,7 @@
     - kubectx
     - kubectl
     - nanorc
-    - fingerprintd
+    #- fingerprintd
     #- packer
     #- terraform
     - awscli
