@@ -44,7 +44,7 @@
       - nala
     install_linux_packages:
       #- alacritty
-      - golang
+      #- golang
       - timeshift
       - stacer
       - zsh
