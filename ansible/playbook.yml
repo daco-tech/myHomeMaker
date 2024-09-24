@@ -80,7 +80,7 @@
       - alt-tab
     install_go_linux_packages:
       - github.com/hidetatz/kubecolor/cmd/kubecolor@latest
-      - github.com/pulumi/kubespy@latest
+      #- github.com/pulumi/kubespy@latest
       #- github.com/terraform-docs/terraform-docs@v0.16.0
       - github.com/aquasecurity/tfsec/cmd/tfsec@latest
     install_packages:
