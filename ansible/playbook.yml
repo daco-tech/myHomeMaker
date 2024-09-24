@@ -43,8 +43,8 @@
       - vlc
       - nala
     install_linux_packages:
-      #- alacritty
-      #- golang
+      - alacritty
+      - golang
       - timeshift
       - stacer
       - zsh
