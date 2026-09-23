@@ -1,3 +1,42 @@
 theme = GitHub Dark High Contrast
 desktop-notifications = true
 shell-integration-features = sudo,ssh-env
+
+### Visual configuration
+window-theme = system
+macos-titlebar-style = tabs
+unfocused-split-opacity = 0.6
+font-family = JetBrains Mono
+
+copy-on-select = clipboard
+focus-follows-mouse = true
+font-thicken = true
+# font-feature = -liga
+macos-non-native-fullscreen = true
+mouse-hide-while-typing = true
+
+# scrollback-limit in bytes, roughly 125,000 lines
+scrollback-limit = 50000000
+
+shell-integration = zsh
+# note: see zsh/.zshrc "ghostty integration"
+
+### Keybindings
+# super==cmd, alt==opt
+# move between tabs is cmd+alt+arrow
+keybind = super+alt+left=previous_tab
+keybind = super+alt+right=next_tab
+# move between panes is cmd+arrow
+keybind = super+left=goto_split:previous
+keybind = super+right=goto_split:next
+# cmd+s sends :w<enter> - so cmd-s works in vim in terminal
+keybind = super+s=text:\x1b:w\n
+
+### Misc settings
+quit-after-last-window-closed = true
+window-new-tab-position = end
+window-save-state = never
+
+# window-colorspace = srgb
+window-colorspace = display-p3
+keybind = shift+enter=text:\n

@@ -94,6 +94,7 @@
       - visual-studio-code
       - alt-tab
       - ghostty
+      - font-jetbrains-mono
     install_go_linux_packages:
       - github.com/hidetatz/kubecolor/cmd/kubecolor@latest
       #- github.com/pulumi/kubespy@latest

@@ -2,6 +2,13 @@
 
 {% set oh_my_zsh = user.oh_my_zsh|default({}) %}
 
+# ghostty integration
+# Ghostty's shell-integration is normally injected automatically via
+# ZDOTDIR, but oh-my-zsh takes over $ZDOTDIR/.zshrc loading, which can skip
+# that auto-injection - so it's sourced explicitly here instead.
+if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
+    builtin source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
+fi
 
 autoload -Uz compinit
 compinit

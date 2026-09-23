@@ -238,7 +238,12 @@ downloadRepo(){
         git clean -f -d
         git clean -f -x -d
         git clean -fxd :/ 
-        git pull
+        # Use fetch + hard reset instead of `git pull` so this still updates
+        # correctly even if the remote's history was rewritten (e.g. a
+        # force-push), which would otherwise make a plain `git pull` fail
+        # with "divergent branches" and silently leave this clone stale.
+        git fetch origin
+        git reset --hard origin/master
         cd ..
     else
         logmsg "INFO" "${NC} Repo directory does not exist, downloading..."

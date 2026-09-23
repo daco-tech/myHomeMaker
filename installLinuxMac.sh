@@ -313,14 +313,21 @@ downloadRepo(){
         git clean -f -d
         git clean -f -x -d
         git clean -fxd :/ 
-        git pull
+        # Use fetch + hard reset instead of `git pull` so this still updates
+        # correctly even if the remote's history was rewritten (e.g. a
+        # force-push), which would otherwise make a plain `git pull` fail
+        # with "divergent branches" and silently leave this clone stale.
+        git fetch origin
+        git reset --hard origin/master
         cd ..
     else
         logmsg "INFO" "${NC} Repo directory does not exist, downloading..."
         git clone https://github.com/daco-tech/myHomeMaker
     fi
     cd myHomeMaker
-    git --no-pager diff HEAD^..HEAD
+    # HEAD^ doesn't exist right after a squashed/shallow history, so guard
+    # this informational diff instead of letting it print a fatal git error.
+    git rev-parse --verify -q HEAD^ >/dev/null && git --no-pager diff HEAD^..HEAD
     cd ..
     logmsg "INFO" "${NC} Repo Updated!"
 }
