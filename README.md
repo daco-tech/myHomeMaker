@@ -76,7 +76,9 @@ Homebrew on macOS and Homebrew on Linux ("Linuxbrew") - bootstrapped
 automatically by `installLinuxMac.sh`/`installVM.sh` if not already present.
 macOS-only GUI apps and fonts (Homebrew casks) live in the same `Brewfile`,
 guarded by an `if OS.mac?` block, since Homebrew casks aren't available on
-Linux.
+Linux. That block also declares the default set of VS Code extensions
+(installed via `brew bundle`'s `vscode` entries, using the `code` CLI shim
+from the `visual-studio-code` cask).
 
 Anything with no Homebrew formula/cask (native GUI apps, system fonts,
 distro package-manager-only tools) is still installed via the native package
