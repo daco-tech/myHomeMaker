@@ -1,0 +1,24 @@
+---
+
+- name: Ensure Docker Group is present
+  group:
+    name: docker
+    state: present
+  when: 
+    - ansible_facts['system'] != "Darwin"
+
+- include_tasks: debian.yml
+  tags: debian
+  when: ansible_os_family is defined and (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
+- include_tasks: macos.yml
+  tags: macos
+  when: ansible_facts['system'] == "Darwin"
+
+- name: Add the user to the Docker group
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
+  when: 
+    - ansible_facts['system'] != "Darwin"

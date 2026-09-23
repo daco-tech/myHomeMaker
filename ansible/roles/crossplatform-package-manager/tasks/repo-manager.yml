@@ -1,0 +1,31 @@
+---
+
+- name: Repo Manager Brew Tap
+  homebrew_tap:
+    name: '{{ item }}'
+    state: present
+  with_items: "{{ repo_brew_tap }}"
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+- name: Repo Manager RedHat Import keys from url
+  become: true
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ item }}"
+  with_items: "{{ rpm_keys }}"
+  when: 
+    - ansible_distribution == "CentOS" or ansible_distribution == "Nobara" or ansible_distribution == "Amazon" or ansible_distribution == "Fedora"
+
+
+- name: Repo Manager RedHat Add new repo
+  become: true
+  ansible.builtin.yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.url }}"
+    gpgcheck: "{{ item.gpg }}"
+    state: "present"
+  with_items: "{{ rpm_repo }}"
+  when: 
+    - ansible_distribution == "CentOS" or ansible_distribution == "Nobara" or ansible_distribution == "Amazon" or ansible_distribution == "Fedora"

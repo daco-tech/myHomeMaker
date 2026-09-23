@@ -1,0 +1,22 @@
+---
+# podman on macOS runs containers inside a lightweight Linux VM, so a
+# "machine" has to exist and be running before `podman` (or `docker`,
+# via the alias) can be used.
+
+- name: Check if a podman machine already exists
+  command: podman machine list --noheading
+  register: podman_machine_list
+  changed_when: false
+  failed_when: false
+
+- name: Initialize the default podman machine
+  command: podman machine init
+  when: podman_machine_list.stdout | trim == ""
+
+- name: Start the default podman machine
+  command: podman machine start
+  register: podman_machine_start
+  changed_when: "'already running' not in (podman_machine_start.stderr | default(''))"
+  failed_when:
+    - podman_machine_start.rc != 0
+    - "'already running' not in (podman_machine_start.stderr | default(''))"

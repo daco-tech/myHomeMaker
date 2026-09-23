@@ -1,0 +1,35 @@
+---
+- name: Install tfenv Linux
+  git:
+    repo: git@github.com:tfutils/tfenv.git
+    accept_hostkey: yes
+    version: master
+    dest: /home/{{ ansible_user_id }}/.tfenv
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Install tfenv Mac
+  homebrew:
+    name: "tfenv"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+
+- name: Create symlink tfenv Linux
+  become: yes
+  file: src=/home/{{ ansible_user_id }}/.tfenv/bin/tfenv dest=/usr/local/bin/tfenv state=link
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Create symlink terraform Linux
+  become: yes
+  file: src=/home/{{ ansible_user_id }}/.tfenv/bin/terraform dest=/usr/local/bin/terraform state=link
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Install terraform version {{ terraform_version }}
+  command: tfenv install {{ terraform_version }}
+
+- name: Use terraform version {{ terraform_version }}
+  command: tfenv use {{ terraform_version }}

@@ -1,0 +1,12 @@
+---
+- name: Ensure ~/.config/ghostty directory exists
+  file:
+    path: ~/.config/ghostty
+    state: directory
+    mode: "0755"
+
+- name: Copy Ghostty config
+  copy:
+    src: config
+    dest: ~/.config/ghostty/config
+    mode: "u=rw,go=r"

@@ -1,0 +1,75 @@
+---
+- name: uninstall fprintd
+  become: yes
+  apt:
+    name: fprintd
+    state: absent
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Install open-fprintd repo
+  become: yes
+  shell: add-apt-repository ppa:uunicorn/open-fprintd 
+  args:
+    warn: no
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: install open-fprintd
+  become: yes
+  apt:
+    name: open-fprintd
+    state: present
+    update_cache: yes
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: install fprintd-clients
+  become: yes
+  apt:
+    name: fprintd-clients
+    state: present
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: install python3-validity
+  become: yes
+  apt:
+    name: python3-validity
+    state: present
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+
+- name: Get Enroled Fingerprint
+  shell: fprintd-list $USER | grep "#0" | wc -l
+  register: enroled_finger
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Enroll Fingerprint
+  shell: fprintd-enroll
+  when: 
+    - ansible_facts['system'] == "Linux"
+    - enroled_finger.stdout == "0"
+
+- name: Get Enroled Fingerprint
+  shell: fprintd-list $USER | grep "#0" | wc -l
+  register: enroled_finger
+  when: 
+    - ansible_facts['system'] == "Linux"
+
+- name: Enables Fingerprint pam
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/common-auth
+    regexp: '^auth sufficient pam_fprintd.so'
+    line: auth sufficient pam_fprintd.so
+  when: enroled_finger.stdout == "1"
+
+- name: Update PAM
+  shell: pam-auth-update
+  become: yes
+  when: 
+    - ansible_facts['system'] == "Linux"
+ 

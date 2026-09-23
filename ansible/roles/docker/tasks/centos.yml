@@ -1,0 +1,27 @@
+
+# This role needs testing
+# This assert might look redundant at first but its a good extra
+# because it breaks current PhotonOS machines
+- name: Check compatibility
+  assert:
+    that: ansible_os_family is defined and ansible_os_family == 'RedHat'
+    msg: "This task is only safe to run on Red Hat at Family OS"
+
+- name: Install Docker Dependencies
+  package:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+
+- name: Add Docker CE Repository
+  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  args:
+    creates: /etc/yum.repos.d/docker-ce.repo
+
+- name: Install Docker CE
+  package:
+    name: docker-ce
+    state: present

@@ -1,0 +1,36 @@
+---
+- name: create config directories for users
+  become: yes
+  become_user: '{{ user.username }}'
+  file:
+    path: '{{ visual_studio_code_config_path }}'
+    state: directory
+    mode: 'u=rwx,go=rx'
+  with_items: '{{ users }}'
+  loop_control:
+    loop_var: user
+    label: '{{ user.username }}'
+
+- name: create settings directory
+  become: yes
+  become_user: '{{ user.username }}'
+  file:
+    path: '~/{{ visual_studio_code_config_path }}/User'
+    state: directory
+    mode: 'u=rwx,go='
+  with_items: '{{ users }}'
+  loop_control:
+    loop_var: user
+    label: '{{ user.username }}'
+- name: write settings
+  become: yes
+  become_user: '{{ user.username }}'
+  template:
+    src: settings.json.j2
+    dest: '~/{{ visual_studio_code_config_path }}/User/settings.json'
+    force: '{{ user.visual_studio_code_settings_overwrite | default(False) | bool }}'
+    mode: 'u=rw,g=rw,o=r'
+  with_items: '{{ users }}'
+  loop_control:
+    loop_var: user
+    label: '{{ user.username }}'

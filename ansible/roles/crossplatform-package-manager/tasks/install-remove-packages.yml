@@ -1,0 +1,179 @@
+---
+- name: Install additional software packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ install_packages }}"
+  when:
+    - ansible_facts['system'] == "Linux"
+
+- name: Install Linux software packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ install_linux_packages }}"
+  when:
+    - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
+- name: Install Debian Linux software packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ install_debian_linux_packages }}"
+  when:
+    - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
+- name: Install AUR packages
+  become: true
+  command: /usr/bin/yay -S --noconfirm {{ item }}
+  with_items: "{{ install_linux_packages }}"
+  when:
+    - (ansible_os_family == 'Archlinux')
+
+- name: Install Arch Linux AUR packages
+  command: /usr/bin/yay -S --noconfirm {{ item }}
+  with_items: "{{ install_arch_linux_aur_packages }}"
+  when:
+    - (ansible_os_family == 'Archlinux')
+
+- name: Remove specified software packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ remove_linux_packages }}"
+  when:
+    - ansible_facts['system'] == "Linux"
+
+- name: Install homebrew packages
+  homebrew:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ install_packages }}"
+  when:
+    - ansible_facts['system'] == "Darwin"
+
+- name: Install homebrew mac only packages
+  homebrew:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ install_mac_packages }}"
+  when:
+    - ansible_facts['system'] == "Darwin"
+
+#- name: Install homebrew cask packages
+#  homebrew_cask:
+#    name: "{{ item }}"
+#    state: present
+#    #upgrade_all: "yes"
+#  with_items: "{{ install_mac_cask_packages }}"
+#  when:
+#    - ansible_facts['system'] == "Darwin"
+
+- name: Check if AltTab.app was already installed (before this run)
+  stat:
+    path: /Applications/AltTab.app
+  register: alttab_already_installed
+  when:
+    - ansible_facts['system'] == "Darwin"
+
+- name: Install homebrew cask packages
+  #become: true
+  command: brew install --cask --force {{ item }}
+  environment:
+    NONINTERACTIVE: "1"
+    HOMEBREW_NO_ENV_HINTS: "1"
+  with_items: "{{ install_mac_cask_packages }}"
+  when:
+    - ansible_facts['system'] == "Darwin"
+
+- name: Check if VSCodium is installed
+  stat:
+    path: /Applications/VSCodium.app
+  register: vscodium_app
+  when:
+    - ansible_facts['system'] == "Darwin"
+
+- name: Remove VSCodium (replaced by Visual Studio Code)
+  command: brew uninstall --cask --force vscodium
+  when:
+    - ansible_facts['system'] == "Darwin"
+    - vscodium_app.stat.exists
+
+- name: Check if AltTab.app is installed
+  stat:
+    path: /Applications/AltTab.app
+  register: alttab_app
+  when:
+    - ansible_facts['system'] == "Darwin"
+
+- name: Show every window individually in AltTab (not grouped by app)
+  shell: defaults write com.lwouis.alt-tab-macos showAppsOrWindows -string 1
+  when:
+    - ansible_facts['system'] == "Darwin"
+    - alttab_app.stat.exists
+    - not alttab_already_installed.stat.exists
+
+- name: Check current macOS login items
+  shell: osascript -e 'tell application "System Events" to get the name of every login item'
+  register: login_items
+  changed_when: false
+  when:
+    - ansible_facts['system'] == "Darwin"
+    - alttab_app.stat.exists
+    - not alttab_already_installed.stat.exists
+
+- name: Add AltTab as a login item (auto-start on login)
+  shell: osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/AltTab.app", hidden:false, name:"AltTab"}'
+  when:
+    - ansible_facts['system'] == "Darwin"
+    - alttab_app.stat.exists
+    - not alttab_already_installed.stat.exists
+    - "'AltTab' not in login_items.stdout"
+
+- name: Launch AltTab (applies preferences, triggers permission prompts on first run)
+  shell: open -a AltTab
+  when:
+    - ansible_facts['system'] == "Darwin"
+    - alttab_app.stat.exists
+    - not alttab_already_installed.stat.exists
+
+- name: Uninstall homebrew packages
+  homebrew:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ remove_mac_packages }}"
+  when:
+    - ansible_facts['system'] == "Darwin"
+
+- name: Install Slidev CLI globally (npm)
+  community.general.npm:
+    name: "@slidev/cli"
+    global: true
+    state: present
+  become: "{{ ansible_facts['system'] == 'Linux' }}"
+
+- name: Install OpenCode CLI globally (npm, Debian-family Linux only)
+  # macOS uses the Homebrew formula and Arch Linux uses the AUR package
+  # (see install_mac_packages / install_arch_linux_aur_packages); Debian-family
+  # distros have no native package, so fall back to npm.
+  community.general.npm:
+    name: opencode-ai
+    global: true
+    state: present
+  become: true
+  when:
+    - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
+- name: Install Oh My OpenCode CLI globally (npm)
+  # Only fetches/caches the CLI (`oh-my-opencode`/`omo`); running its
+  # interactive `install` command (provider auth, subscription setup) is
+  # left to the user to do manually.
+  community.general.npm:
+    name: oh-my-opencode
+    global: true
+    state: present
+  become: "{{ ansible_facts['system'] == 'Linux' }}"

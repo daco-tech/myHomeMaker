@@ -1,0 +1,24 @@
+plugins:
+  - name: Dracula
+    folder: tmux
+    git: dracula/tmux
+    
+  - name: Perfix Highlight
+    folder: tmux-prefix-highlight
+    git: tmux-plugins/tmux-prefix-highlight
+
+  - name: tpm
+    folder: tpm
+    git: tmux-plugins/tpm
+
+  - name: VIMNavigator
+    folder: vim-tmux-navigator
+    git: christoomey/vim-tmux-navigator
+
+  #- name: Continuum
+  #  folder: tmux-continuum
+  #  git: tmux-plugins/tmux-continuum
+
+  - name: Resurrect
+    folder: tmux-resurrect
+    git: tmux-plugins/tmux-resurrect

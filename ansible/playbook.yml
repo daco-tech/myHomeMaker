@@ -1,0 +1,180 @@
+#!/usr/bin/env ansible-playbook
+- hosts: localhost
+  connection: local
+  tasks:
+    - debug:
+        msg: Check we are running in the directory of the script
+      failed_when: not ansible_env.PWD.endswith('/ansible')
+
+- hosts: localhost
+  strategy: free
+  become_method: sudo
+  connection: local
+  gather_facts: True
+  vars:
+    install_all_package_updates: true
+    repo_brew_tap: []
+    rpm_keys:
+      - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
+    rpm_repo:
+      - name: codium
+        description: Codium Repo
+        url: https://download.vscodium.com/rpms/
+        gpg: yes
+        file: vscodium.repo
+    install_arch_linux_aur_packages:
+      - vscodium-bin
+      - go
+      - timeshift-bin
+      - stacer
+      #- ttf-firacode
+      - powerline-fonts
+      - nerd-fonts-hack
+      - azure-cli
+      - vlc-luajit
+      - github-cli
+      - nodejs
+      - npm
+      - podman
+      - podman-compose
+      - podman-docker
+      - opencode-bin
+    install_debian_linux_packages:
+      #- codium
+      - fonts-firacode
+      - fonts-powerline
+      - build-essential
+      - module-assistant
+      - vlc
+      - nala
+      - gh
+      - nodejs
+      - npm
+      - podman
+      - podman-compose
+      - podman-docker
+    install_linux_packages:
+      - golang
+      - timeshift
+      - stacer
+      - zsh
+      - powertop
+      - net-tools
+      - pydf
+      #- virtualbox
+      - flameshot #screenshot tool
+      #- vagrant
+    install_mac_packages:
+      #- sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
+      - watch
+      - jq
+      - nano
+      - golang
+      - azure-cli
+      - k9s
+      #- romkatv/powerlevel10k/powerlevel10k
+      - kubecolor
+      - kubespy
+      #- terraform-docs
+      - tfsec
+      #- openlens
+      - gh
+      - opencode
+      - node
+      - podman
+      - podman-compose
+    install_mac_cask_packages:
+      #- virtualbox
+      #- joplin
+      - font-fira-code
+      - font-hack-nerd-font
+      - vlc
+      #- vagrant
+      - copilot-cli
+      - visual-studio-code
+      - alt-tab
+      - ghostty
+    install_go_linux_packages:
+      - github.com/hidetatz/kubecolor/cmd/kubecolor@latest
+      #- github.com/pulumi/kubespy@latest
+      #- github.com/terraform-docs/terraform-docs@v0.16.0
+      #- github.com/aquasecurity/tfsec/cmd/tfsec@latest
+    install_packages:
+      - htop
+      - glances
+      - cmake
+      #- tmux
+      - wget
+      - httpie
+      - fastfetch
+      - graphviz
+      - wget
+      - bash-completion
+      - fzf #https://github.com/junegunn/fzf
+  roles:
+    - mactweaks
+    - kubectx
+    - kubectl
+    - nanorc
+    #- fingerprintd
+    #- packer
+    #- terraform
+    - awscli
+    - powerline-fonts
+    - crossplatform-package-manager
+    - podman
+    #- dep
+    - nerdfonts
+    #- docker
+    - role: oh-my-zsh
+      users:
+        - username: "{{ ansible_user_id | default('daco') }}"
+          oh_my_zsh:
+            theme: robbyrussell
+            plugins:
+              - git
+    #- role: joplinapp-linux
+    #  users:
+    #  - username: "{{ ansible_user_id }}"
+    #    settings:
+    #      - { key: "sidebarVisibility", val: "1" }
+    #      - { key: "dateFormat", val: "YYYY-MM-DD" }
+    #      - { key: "sync.target", val: "5" }
+    #- role: tmux
+    #  vars:
+    #    ctrlkey: "C-"
+    #    splitv: "\\\\"
+    #    splith: "-"
+    #    city: "Ermesinde"
+    #  when:
+    #    - ansible_system == "Linux"
+    - role: tmux
+      vars:
+        ctrlkey: "^"
+        splitv: "\\\\"
+        splith: "-"
+        city: "Porto"
+      when:
+        - ansible_system == "Darwin"
+    - role: ghostty
+      when:
+        - ansible_system == "Darwin"
+    - role: vscodium
+      vars:
+        terminal_font: "Hack"
+      users:
+        - username: "{{ ansible_user_id | default('daco') }}"
+          #visual_studio_code_extensions:
+          visual_studio_code_settings_overwrite: yes
+      when:
+        - ansible_system == "Linux"
+    - role: vscodium
+      vars:
+        terminal_font: "Hack Nerd Fonts"
+        visual_studio_code_flavor: vscode
+      users:
+        - username: "{{ ansible_user_id }}"
+          #visual_studio_code_extensions:
+          visual_studio_code_settings_overwrite: yes
+      when:
+        - ansible_system == "Darwin"

@@ -1,0 +1,20 @@
+---
+# Expose a Docker-API-compatible socket via podman's own socket service so
+# tools that talk to /var/run/docker.sock (e.g. some docker-compose
+# implementations, IDE integrations) keep working against podman.
+
+- name: Enable lingering for the user (keeps the podman socket alive without a login session)
+  become: yes
+  command: loginctl enable-linger {{ ansible_user_id }}
+  changed_when: false
+
+- name: Enable and start the rootless podman API socket
+  become: yes
+  become_user: "{{ ansible_user_id }}"
+  systemd:
+    name: podman.socket
+    scope: user
+    enabled: yes
+    state: started
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_facts['user_uid'] }}"

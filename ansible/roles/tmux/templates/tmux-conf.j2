@@ -1,0 +1,65 @@
+source "~/powerline/powerline/bindings/tmux/powerline.conf"
+
+# remap prefix from '{{ vars.ctrlkey }}b' to '{{ vars.ctrlkey }}a'
+unbind {{ vars.ctrlkey }}b
+set-option -g prefix {{ vars.ctrlkey }}a
+bind-key {{ vars.ctrlkey }}a send-prefix
+
+# split panes using | and -
+bind {{ vars.splitv }} split-window -h
+bind {{ vars.splith }} split-window -v
+unbind '"'
+unbind %
+
+# reload config file (change file location to your the tmux.conf you want to use)
+bind r source-file ~/.tmux.conf
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Enable mouse mode (tmux 2.1 and above)
+set -g mouse on
+
+# Enable Highlight Prefix Key
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g status-right '#{prefix_highlight} | %a %Y-%m-%d %H:%M'
+
+# Tmux Dracula
+set -g @plugin 'dracula/tmux'
+# Set 256 colors
+set -s default-terminal 'screen-256color' #'tmux-256color'
+# Config Dracula Theme
+set -g @dracula-show-fahrenheit false
+set -g @dracula-show-powerline true
+set -g @dracula-show-network false
+set -g @dracula-show-left-icon session
+set -g @dracula-cpu-usage true
+set -g @dracula-ram-usage true
+set -g @dracula-day-month true
+set -g @dracula-military-time true
+set -g @dracula-show-flags true 
+set -g @dracula-fixed-location {{ vars.city }}
+set -g @dracula-plugins "weather"
+set -g @dracula-show-flags true
+
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+#set -g @plugin 'tmux-plugins/tmux-continuum'
+
+
+# restore vim sessions
+set -g @resurrect-strategy-vim 'session'
+# restore neovim sessions
+set -g @resurrect-strategy-nvim 'session'
+# restore panes
+set -g @resurrect-capture-pane-contents 'on'
+# restore last saved environment (automatically)
+#set -g @continuum-restore 'on'
+
+# reload config file (change file location to your the tmux.conf you want to use)
+bind r source-file ~/.tmux.conf
+
+set -g @plugin 'tmux-plugins/tpm'
+run '~/.tmux/plugins/tpm/tpm'

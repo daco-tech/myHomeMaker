@@ -1,0 +1,32 @@
+---
+# for software package updates
+install_all_package_updates: true
+
+# list of packages to install
+install_packages: []
+
+# list of packages to remove
+remove_linux_packages: []
+remove_mac_packages: []
+
+# list of packages to update
+update_packages: []
+
+# list of linux only install
+install_linux_packages: []
+
+install_go_linux_packages: []
+
+# list of mac only install
+install_mac_packages: []
+install_mac_cask_packages: []
+
+
+# list of repository additions
+repo_brew_tap: []
+
+# list of rpm keys
+rpm_keys: []
+
+# list of rpm repos
+rpm_repo: []

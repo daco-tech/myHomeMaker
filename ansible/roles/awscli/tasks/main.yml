@@ -1,0 +1,42 @@
+---
+- stat: path=/usr/local/bin/aws
+  register: st
+
+- name: Download and unarchive awscli Linux.
+  become: true
+  unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-{{ awscli_platform }}-{{ awscli_version }}.zip
+    dest: /home/{{ ansible_user_id }}/tmp/
+    remote_src: true
+    creates: "/home/{{ ansible_user_id }}/tmp/aws/install --update"
+    mode: 0755
+  when: 
+    - ansible_facts['system'] == "Linux"
+    - not st.stat.exists
+
+
+- name: Install awscli Mac
+  homebrew:
+    name: "awscli"
+    state: latest
+  when: 
+    - ansible_facts['system'] == "Darwin"
+
+
+- name: Install awscli version {{ awscli_version }} Linux
+  become: true
+  command: /home/{{ ansible_user_id }}/tmp/aws/install
+  args:  
+      creates: /usr/local/bin/aws
+  when: 
+    - ansible_facts['system'] == "Linux"
+    - not st.stat.exists
+
+- name: Cleanup awscli tmp folder
+  become: true
+  file:
+    path: /home/{{ ansible_user_id }}/tmp/aws/
+    state: absent
+  when: 
+    - ansible_facts['system'] == "Linux"
+    - not st.stat.exists

@@ -1,0 +1,9 @@
+- name: Copy Nano Highlights
+  copy:
+    src: .nano/
+    dest: ~/.nano/
+
+- name: Copy NanoRC
+  copy:
+    src: .nanorc
+    dest: ~/.nanorc

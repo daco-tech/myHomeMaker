@@ -1,0 +1,4 @@
+---
+kubectx_version: "v0.9.1"
+kubectx_platform: "x86_64"
+kubectx_bin_path: /usr/local/bin

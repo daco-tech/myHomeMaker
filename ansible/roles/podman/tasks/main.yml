@@ -1,0 +1,13 @@
+---
+# Podman is installed as a drop-in replacement for Docker.
+# Package installation itself is handled by crossplatform-package-manager
+# (see install_debian_linux_packages / install_arch_linux_aur_packages /
+# install_mac_packages in playbook.yml). This role only takes care of the
+# extra setup Podman needs to behave like Docker (VM on macOS, API socket
+# on Linux) plus the docker/docker-compose shell aliases.
+
+- include_tasks: macos.yml
+  when: ansible_facts['system'] == "Darwin"
+
+- include_tasks: linux.yml
+  when: ansible_facts['system'] == "Linux"

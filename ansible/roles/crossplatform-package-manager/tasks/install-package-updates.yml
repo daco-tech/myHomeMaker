@@ -1,0 +1,86 @@
+---
+- name: "Working around an Ansible/Aptitude issue..."
+  become: true
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+  - aptitude
+  when: (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
+- name: Install all software package updates Debian
+  become: true
+  package:
+    name: "*"
+    state: "latest"
+  when: ((ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')) and (install_all_package_updates)
+  
+
+- name: Install specified debian software package updates
+  become: true
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ update_packages }}"
+  when: 
+  - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
+
+- name: Install yay
+  become: true
+  command:  /usr/bin/pacman -S --noconfirm yay
+  when: 
+  - (ansible_os_family == 'Archlinux')
+  
+- name: Update AUR packages
+  become: true
+  command:  /usr/bin/yay -S --noconfirm {{ item }}
+  with_items: "{{ update_packages }}"
+  when: 
+  - (ansible_os_family == 'Archlinux')
+
+#- name: Install specified arch software package updates
+#  become: true
+#  yay:
+#    name: "{{ item }}"
+#    state: latest
+#  with_items: "{{ update_packages }}"
+#  when: 
+#  - (ansible_os_family == 'Archlinux')
+
+- name: Install all software package updates Arch
+  become: true
+  pacman:
+    update_cache: yes
+    upgrade: yes
+  when: (ansible_os_family == 'Archlinux') and (install_all_package_updates)
+
+- name: Update Homebrew itself and refresh formula/cask info
+  command: brew update
+  environment:
+    HOMEBREW_NO_ENV_HINTS: "1"
+    HOMEBREW_NO_AUTO_UPDATE: "1"
+  changed_when: false
+  when: (ansible_facts['system'] == "Darwin") and (install_all_package_updates)
+
+- name: Upgrade all outdated Homebrew formulae to their latest versions
+  command: brew upgrade
+  environment:
+    NONINTERACTIVE: "1"
+    HOMEBREW_NO_ENV_HINTS: "1"
+  changed_when: false
+  when: (ansible_facts['system'] == "Darwin") and (install_all_package_updates)
+
+- name: Upgrade all outdated Homebrew casks to their latest versions (including ones with auto_updates)
+  command: brew upgrade --cask --greedy --force
+  environment:
+    NONINTERACTIVE: "1"
+    HOMEBREW_NO_ENV_HINTS: "1"
+  changed_when: false
+  when: (ansible_facts['system'] == "Darwin") and (install_all_package_updates)
+
+- name: Remove old/unused Homebrew versions and cached downloads
+  command: brew cleanup --prune=all
+  environment:
+    HOMEBREW_NO_ENV_HINTS: "1"
+  changed_when: false
+  when: (ansible_facts['system'] == "Darwin") and (install_all_package_updates)
