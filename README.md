@@ -70,7 +70,18 @@ update
 
 ## Global Apps
 
-**Check playbook.yml**
+Cross-platform CLI tools (macOS + Linux) are declared once in the root
+[`Brewfile`](./Brewfile) and installed via `brew bundle` on both OSes, using
+Homebrew on macOS and Homebrew on Linux ("Linuxbrew") - bootstrapped
+automatically by `installLinuxMac.sh`/`installVM.sh` if not already present.
+macOS-only GUI apps and fonts (Homebrew casks) live in the same `Brewfile`,
+guarded by an `if OS.mac?` block, since Homebrew casks aren't available on
+Linux.
+
+Anything with no Homebrew formula/cask (native GUI apps, system fonts,
+distro package-manager-only tools) is still installed via the native package
+manager - see `install_debian_linux_packages` / `install_arch_linux_aur_packages`
+/ `install_linux_packages` in **playbook.yml**.
 
 ## Personal Configuration (One time Setup Option)
 - [x] Copy SSH Keys

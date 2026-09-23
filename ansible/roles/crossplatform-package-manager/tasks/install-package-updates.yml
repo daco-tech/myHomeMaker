@@ -60,7 +60,7 @@
     HOMEBREW_NO_ENV_HINTS: "1"
     HOMEBREW_NO_AUTO_UPDATE: "1"
   changed_when: false
-  when: (ansible_facts['system'] == "Darwin") and (install_all_package_updates)
+  when: (ansible_facts['system'] in ["Darwin", "Linux"]) and (install_all_package_updates)
 
 - name: Upgrade all outdated Homebrew formulae to their latest versions
   command: brew upgrade
@@ -68,9 +68,10 @@
     NONINTERACTIVE: "1"
     HOMEBREW_NO_ENV_HINTS: "1"
   changed_when: false
-  when: (ansible_facts['system'] == "Darwin") and (install_all_package_updates)
+  when: (ansible_facts['system'] in ["Darwin", "Linux"]) and (install_all_package_updates)
 
 - name: Upgrade all outdated Homebrew casks to their latest versions (including ones with auto_updates)
+  # Homebrew casks only exist on macOS - skip this on Linux.
   command: brew upgrade --cask --greedy --force
   environment:
     NONINTERACTIVE: "1"
@@ -83,4 +84,4 @@
   environment:
     HOMEBREW_NO_ENV_HINTS: "1"
   changed_when: false
-  when: (ansible_facts['system'] == "Darwin") and (install_all_package_updates)
+  when: (ansible_facts['system'] in ["Darwin", "Linux"]) and (install_all_package_updates)

@@ -6,7 +6,7 @@
     state: present
   with_items: "{{ repo_brew_tap }}"
   when: 
-    - ansible_facts['system'] == "Darwin"
+    - ansible_facts['system'] in ["Darwin", "Linux"]
 
 - name: Repo Manager RedHat Import keys from url
   become: true

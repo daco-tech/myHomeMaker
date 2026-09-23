@@ -2,6 +2,11 @@
 # for software package updates
 install_all_package_updates: true
 
+# Homebrew Bundle file (see repo root Brewfile) applied via `brew bundle` -
+# the single source of truth for CLI tools installed on both macOS and
+# Linux, plus macOS-only GUI apps/fonts (Homebrew casks).
+brewfile_path: "{{ playbook_dir }}/../Brewfile"
+
 # list of packages to install
 install_packages: []
 
@@ -30,3 +35,4 @@ rpm_keys: []
 
 # list of rpm repos
 rpm_repo: []
+

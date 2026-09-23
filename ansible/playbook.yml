@@ -13,6 +13,11 @@
   gather_facts: True
   vars:
     install_all_package_updates: true
+    # Homebrew Bundle file (repo root) - the single source of truth for CLI
+    # tools installed on both macOS and Linux, plus macOS-only GUI apps/fonts
+    # (Homebrew casks). Applied by the crossplatform-package-manager role via
+    # `brew bundle`. See ../Brewfile.
+    brewfile_path: "{{ playbook_dir }}/../Brewfile"
     repo_brew_tap: []
     rpm_keys:
       - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
@@ -22,23 +27,18 @@
         url: https://download.vscodium.com/rpms/
         gpg: yes
         file: vscodium.repo
+    # The lists below are now limited to packages with no Homebrew
+    # equivalent (GUI apps, system fonts, kernel/systemd-adjacent tools) -
+    # everything else moved to the Brewfile.
     install_arch_linux_aur_packages:
       - vscodium-bin
-      - go
       - timeshift-bin
       - stacer
       #- ttf-firacode
       - powerline-fonts
       - nerd-fonts-hack
-      - azure-cli
       - vlc-luajit
-      - github-cli
-      - nodejs
-      - npm
-      - podman
-      - podman-compose
       - podman-docker
-      - opencode-bin
     install_debian_linux_packages:
       #- codium
       - fonts-firacode
@@ -47,14 +47,8 @@
       - module-assistant
       - vlc
       - nala
-      - gh
-      - nodejs
-      - npm
-      - podman
-      - podman-compose
       - podman-docker
     install_linux_packages:
-      - golang
       - timeshift
       - stacer
       - zsh
@@ -64,54 +58,10 @@
       #- virtualbox
       - flameshot #screenshot tool
       #- vagrant
-    install_mac_packages:
-      #- sshpass #https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
-      - watch
-      - jq
-      - nano
-      - golang
-      - azure-cli
-      - k9s
-      #- romkatv/powerlevel10k/powerlevel10k
-      - kubecolor
-      - kubespy
-      #- terraform-docs
-      - tfsec
-      #- openlens
-      - gh
-      - opencode
-      - node
-      - podman
-      - podman-compose
-    install_mac_cask_packages:
-      #- virtualbox
-      #- joplin
-      - font-fira-code
-      - font-hack-nerd-font
-      - vlc
-      #- vagrant
-      - copilot-cli
-      - visual-studio-code
-      - alt-tab
-      - ghostty
-      - font-jetbrains-mono
-    install_go_linux_packages:
-      - github.com/hidetatz/kubecolor/cmd/kubecolor@latest
-      #- github.com/pulumi/kubespy@latest
-      #- github.com/terraform-docs/terraform-docs@v0.16.0
-      #- github.com/aquasecurity/tfsec/cmd/tfsec@latest
-    install_packages:
-      - htop
-      - glances
-      - cmake
-      #- tmux
-      - wget
-      - httpie
-      - fastfetch
-      - graphviz
-      - wget
-      - bash-completion
-      - fzf #https://github.com/junegunn/fzf
+    install_mac_packages: []
+    install_mac_cask_packages: []
+    install_go_linux_packages: []
+    install_packages: []
   roles:
     - mactweaks
     - kubectx

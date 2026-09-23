@@ -1,13 +1,4 @@
 ---
-- name: Install additional software packages
-  become: true
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ install_packages }}"
-  when:
-    - ansible_facts['system'] == "Linux"
-
 - name: Install Linux software packages
   become: true
   package:
@@ -48,45 +39,22 @@
   when:
     - ansible_facts['system'] == "Linux"
 
-- name: Install homebrew packages
-  homebrew:
-    name: "{{ item }}"
-    state: latest
-  with_items: "{{ install_packages }}"
+- name: Run brew bundle (installs all cross-platform CLI tools, plus macOS-only GUI apps/fonts, from the repo Brewfile)
+  # Homebrew refuses to run as root, so this always runs as the invoking
+  # user - never add `become: true` here.
+  command: brew bundle --file="{{ brewfile_path }}"
+  environment:
+    NONINTERACTIVE: "1"
+    HOMEBREW_NO_ENV_HINTS: "1"
+  register: brew_bundle_result
+  changed_when: "'Installing' in brew_bundle_result.stdout or 'Upgrading' in brew_bundle_result.stdout"
   when:
-    - ansible_facts['system'] == "Darwin"
-
-- name: Install homebrew mac only packages
-  homebrew:
-    name: "{{ item }}"
-    state: latest
-  with_items: "{{ install_mac_packages }}"
-  when:
-    - ansible_facts['system'] == "Darwin"
-
-#- name: Install homebrew cask packages
-#  homebrew_cask:
-#    name: "{{ item }}"
-#    state: present
-#    #upgrade_all: "yes"
-#  with_items: "{{ install_mac_cask_packages }}"
-#  when:
-#    - ansible_facts['system'] == "Darwin"
+    - ansible_facts['system'] in ["Darwin", "Linux"]
 
 - name: Check if AltTab.app was already installed (before this run)
   stat:
     path: /Applications/AltTab.app
   register: alttab_already_installed
-  when:
-    - ansible_facts['system'] == "Darwin"
-
-- name: Install homebrew cask packages
-  #become: true
-  command: brew install --cask --force {{ item }}
-  environment:
-    NONINTERACTIVE: "1"
-    HOMEBREW_NO_ENV_HINTS: "1"
-  with_items: "{{ install_mac_cask_packages }}"
   when:
     - ansible_facts['system'] == "Darwin"
 
@@ -150,30 +118,20 @@
     - ansible_facts['system'] == "Darwin"
 
 - name: Install Slidev CLI globally (npm)
+  # No Homebrew formula exists for this CLI, so it stays on npm.
   community.general.npm:
     name: "@slidev/cli"
     global: true
     state: present
   become: "{{ ansible_facts['system'] == 'Linux' }}"
 
-- name: Install OpenCode CLI globally (npm, Debian-family Linux only)
-  # macOS uses the Homebrew formula and Arch Linux uses the AUR package
-  # (see install_mac_packages / install_arch_linux_aur_packages); Debian-family
-  # distros have no native package, so fall back to npm.
-  community.general.npm:
-    name: opencode-ai
-    global: true
-    state: present
-  become: true
-  when:
-    - (ansible_os_family == 'Debian') or (ansible_os_family == 'Parrot OS')
-
 - name: Install Oh My OpenCode CLI globally (npm)
-  # Only fetches/caches the CLI (`oh-my-opencode`/`omo`); running its
-  # interactive `install` command (provider auth, subscription setup) is
-  # left to the user to do manually.
+  # Only fetches/caches the CLI (`oh-my-opencode`/`omo`); no Homebrew formula
+  # exists for it, and running its interactive `install` command (provider
+  # auth, subscription setup) is left to the user to do manually.
   community.general.npm:
     name: oh-my-opencode
     global: true
     state: present
   become: "{{ ansible_facts['system'] == 'Linux' }}"
+

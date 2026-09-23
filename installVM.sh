@@ -66,6 +66,46 @@ amIop(){
         logmsg "INFO" "${NC} User have root permissions!"
     fi
 }
+
+# Installs Homebrew (or Linuxbrew on Linux) if it isn't already present, then
+# makes sure `brew` is on PATH for the rest of this run and for future shells
+# (the official installer only wires this up automatically on macOS).
+installHomebrew() {
+    # Make Homebrew fully non-interactive (no "press y/RETURN to continue" prompts)
+    export NONINTERACTIVE=1
+    export HOMEBREW_NO_ENV_HINTS=1
+    export HOMEBREW_NO_INSTALL_CLEANUP=1
+    export HOMEBREW_NO_AUTO_UPDATE=1
+
+    if ! [ -x "$(command -v brew)" ];
+    then
+        logmsg "WARN" "${NC} HomeBrew not installed... installing..."
+        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        logmsg "INFO" "${NC} HomeBrew installed! (check log above)"
+    else
+        logmsg "INFO" "${NC} HomeBrew already installed!"
+    fi
+
+    for BREW_BIN in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew;
+    do
+        if [ -x "$BREW_BIN" ];
+        then
+            eval "$("$BREW_BIN" shellenv)"
+
+            SHELL_PROFILE="$HOME/.profile"
+            [ -n "$ZSH_VERSION" ] && SHELL_PROFILE="$HOME/.zprofile"
+            if ! grep -qs "brew shellenv" "$SHELL_PROFILE" 2>/dev/null;
+            then
+                logmsg "INFO" "${NC} Adding Homebrew to PATH in $SHELL_PROFILE"
+                echo "eval \"\$(${BREW_BIN} shellenv)\"" >> "$SHELL_PROFILE"
+            fi
+            break
+        fi
+    done
+
+    command -v brew >/dev/null 2>&1 || { echo >&2 "HomeBrew is required but it's not installed. Aborting."; exit 1; }
+}
+
 envDetector(){
     logmsg "INFO" "${NC} Detecting Environment"
     case "$(uname -s)" in
@@ -73,11 +113,6 @@ envDetector(){
         OS=MacOS
         DISTRO=none
         INSTALLCMD="brew install"
-        # Make Homebrew fully non-interactive (no "press y/RETURN to continue" prompts)
-        export NONINTERACTIVE=1
-        export HOMEBREW_NO_ENV_HINTS=1
-        export HOMEBREW_NO_INSTALL_CLEANUP=1
-        export HOMEBREW_NO_AUTO_UPDATE=1
         if ! [ -x "$(command -v clang)" ];
         then
             logmsg "WARN" "${NC} xcode cli tools not installed... installing..."
@@ -88,12 +123,7 @@ envDetector(){
 
         fi
 
-        if ! [ -x "$(command -v brew)" ];
-        then
-            logmsg "WARN" "${NC} HomeBrew not installed... installing..."
-            NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-            logmsg "INFO" "${NC} HomeBrew installed! (check log above)"
-        fi
+        installHomebrew
     ;;
     Linux)
         OS=Linux
@@ -125,6 +155,31 @@ envDetector(){
             INSTALLCMD="sudo emerge"
             DISTRO=Gentoo
         fi
+
+        # Homebrew on Linux ("Linuxbrew") needs a C compiler toolchain plus a
+        # few small utilities to build formulae from source - install those
+        # with the native package manager first, then bootstrap Homebrew
+        # itself, which is used afterwards (via the project Brewfile) to
+        # install everything else.
+        logmsg "INFO" "${NC} Installing Homebrew build prerequisites..."
+        case "$DISTRO" in
+            Debian)
+                sudo apt-get -y update
+                sudo apt-get -y --allow-unauthenticated install build-essential procps curl file git
+            ;;
+            RedHat)
+                sudo yum groupinstall -y 'Development Tools'
+                sudo yum install -y procps-ng curl file git
+            ;;
+            Arch)
+                sudo pacman -Sy --noconfirm --needed base-devel procps-ng curl file git
+            ;;
+            *)
+                logmsg "WARN" "${NC} Unknown/unsupported distro for Homebrew prerequisites, assuming they are already present..."
+            ;;
+        esac
+
+        installHomebrew
     ;;
     CYGWIN*|MINGW32*|MSYS*)
         logmsg "WARN" "${NC} Detected MS Windows - Please run the installWindows.bat script ..."
@@ -195,26 +250,17 @@ installAnsible(){
     if [ -n "$(command -v ansible)" ];
     then
         logmsg "INFO" "${NC} ansible already installed..."
+    elif [ -n "$(command -v brew)" ];
+    then
+        # Homebrew (bootstrapped in envDetector) ships ansible on both macOS
+        # and Linux, so prefer it over the old per-distro PPA dance.
+        logmsg "INFO" "${NC} Installing ansible via Homebrew..."
+        brew install ansible
     else
         if [ "${OS}" == "MacOS" ];
         then
             installTool ansible
         else
-            #mkdir tmp/
-            #curl https://bootstrap.pypa.io/get-pip.py -o ./tmp/get-pip.py
-            #python ./tmp/get-pip.py --user
-            #rm -rf ./tmp/
-            #
-            #if [ -n "$(command -v pip)" ];
-            #then
-            #    pip install --user ansible
-            #elif [ -n "$(command -v pip3)" ];
-            #then
-            #    pip3 install --user ansible
-            #else
-            #    logmsg "ERROR" "${NC} Unable to install ansible!"
-            #    exit 1
-            #fi
             sudo apt-add-repository ppa:ansible/ansible
             installTool ansible
         fi
