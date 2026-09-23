@@ -48,6 +48,7 @@ update
 - [x] Install Ansible (function: installAnsible)
 - [x] Check if requirements are met to start (Test @installReq & @installAnsible )
 - [x] Clone Repo (function: downloadRepo)
+- [x] Install/update every Homebrew-managed app via `brew bundle` (function: runBrewBundle)
 
 ### Ansible Playbooks Setups
 
@@ -71,19 +72,27 @@ update
 ## Global Apps
 
 Cross-platform CLI tools (macOS + Linux) are declared once in the root
-[`Brewfile`](./Brewfile) and installed via `brew bundle` on both OSes, using
-Homebrew on macOS and Homebrew on Linux ("Linuxbrew") - bootstrapped
-automatically by `installLinuxMac.sh`/`installVM.sh` if not already present.
+[`Brewfile`](./Brewfile) and installed by the shell scripts themselves -
+`installLinuxMac.sh`/`installVM.sh` bootstrap Homebrew (using Homebrew on
+Linux, "Linuxbrew", if it isn't already present) and then run
+`brew bundle --file=Brewfile` (function: `runBrewBundle`) *before* Ansible
+ever runs. This keeps Ansible focused on configuration rather than package
+management, and means `update` (which just re-runs `installLinuxMac.sh`)
+always re-applies the Brewfile too.
+
 macOS-only GUI apps and fonts (Homebrew casks) live in the same `Brewfile`,
 guarded by an `if OS.mac?` block, since Homebrew casks aren't available on
 Linux. That block also declares the default set of VS Code extensions
 (installed via `brew bundle`'s `vscode` entries, using the `code` CLI shim
-from the `visual-studio-code` cask).
+from the `visual-studio-code` cask). The one-time AltTab setup and the old
+VSCodium-cask removal that depend on that install also run right after
+`brew bundle`, from the same shell-script step (macOS only).
 
 Anything with no Homebrew formula/cask (native GUI apps, system fonts,
-distro package-manager-only tools) is still installed via the native package
-manager - see `install_debian_linux_packages` / `install_arch_linux_aur_packages`
-/ `install_linux_packages` in **playbook.yml**.
+distro package-manager-only tools) is still installed via Ansible using the
+native package manager - see `install_debian_linux_packages` /
+`install_arch_linux_aur_packages` / `install_linux_packages` in
+**playbook.yml**.
 
 ## Personal Configuration (One time Setup Option)
 - [x] Copy SSH Keys

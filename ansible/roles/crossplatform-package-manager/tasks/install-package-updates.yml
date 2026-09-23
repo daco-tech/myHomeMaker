@@ -54,34 +54,7 @@
     upgrade: yes
   when: (ansible_os_family == 'Archlinux') and (install_all_package_updates)
 
-- name: Update Homebrew itself and refresh formula/cask info
-  command: brew update
-  environment:
-    HOMEBREW_NO_ENV_HINTS: "1"
-    HOMEBREW_NO_AUTO_UPDATE: "1"
-  changed_when: false
-  when: (ansible_facts['system'] in ["Darwin", "Linux"]) and (install_all_package_updates)
+# Homebrew update/upgrade/cleanup is handled by installLinuxMac.sh/installVM.sh's
+# runBrewBundle() *before* this playbook runs (see the repo root Brewfile),
+# so there's nothing left to do here for Homebrew-managed packages.
 
-- name: Upgrade all outdated Homebrew formulae to their latest versions
-  command: brew upgrade
-  environment:
-    NONINTERACTIVE: "1"
-    HOMEBREW_NO_ENV_HINTS: "1"
-  changed_when: false
-  when: (ansible_facts['system'] in ["Darwin", "Linux"]) and (install_all_package_updates)
-
-- name: Upgrade all outdated Homebrew casks to their latest versions (including ones with auto_updates)
-  # Homebrew casks only exist on macOS - skip this on Linux.
-  command: brew upgrade --cask --greedy --force
-  environment:
-    NONINTERACTIVE: "1"
-    HOMEBREW_NO_ENV_HINTS: "1"
-  changed_when: false
-  when: (ansible_facts['system'] == "Darwin") and (install_all_package_updates)
-
-- name: Remove old/unused Homebrew versions and cached downloads
-  command: brew cleanup --prune=all
-  environment:
-    HOMEBREW_NO_ENV_HINTS: "1"
-  changed_when: false
-  when: (ansible_facts['system'] in ["Darwin", "Linux"]) and (install_all_package_updates)

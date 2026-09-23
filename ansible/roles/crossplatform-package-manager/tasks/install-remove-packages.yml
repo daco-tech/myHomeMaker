@@ -39,75 +39,12 @@
   when:
     - ansible_facts['system'] == "Linux"
 
-- name: Run brew bundle (installs all cross-platform CLI tools, plus macOS-only GUI apps/fonts, from the repo Brewfile)
-  # Homebrew refuses to run as root, so this always runs as the invoking
-  # user - never add `become: true` here.
-  command: brew bundle --file="{{ brewfile_path }}"
-  environment:
-    NONINTERACTIVE: "1"
-    HOMEBREW_NO_ENV_HINTS: "1"
-  register: brew_bundle_result
-  changed_when: "'Installing' in brew_bundle_result.stdout or 'Upgrading' in brew_bundle_result.stdout"
-  when:
-    - ansible_facts['system'] in ["Darwin", "Linux"]
-
-- name: Check if AltTab.app was already installed (before this run)
-  stat:
-    path: /Applications/AltTab.app
-  register: alttab_already_installed
-  when:
-    - ansible_facts['system'] == "Darwin"
-
-- name: Check if VSCodium is installed
-  stat:
-    path: /Applications/VSCodium.app
-  register: vscodium_app
-  when:
-    - ansible_facts['system'] == "Darwin"
-
-- name: Remove VSCodium (replaced by Visual Studio Code)
-  command: brew uninstall --cask --force vscodium
-  when:
-    - ansible_facts['system'] == "Darwin"
-    - vscodium_app.stat.exists
-
-- name: Check if AltTab.app is installed
-  stat:
-    path: /Applications/AltTab.app
-  register: alttab_app
-  when:
-    - ansible_facts['system'] == "Darwin"
-
-- name: Show every window individually in AltTab (not grouped by app)
-  shell: defaults write com.lwouis.alt-tab-macos showAppsOrWindows -string 1
-  when:
-    - ansible_facts['system'] == "Darwin"
-    - alttab_app.stat.exists
-    - not alttab_already_installed.stat.exists
-
-- name: Check current macOS login items
-  shell: osascript -e 'tell application "System Events" to get the name of every login item'
-  register: login_items
-  changed_when: false
-  when:
-    - ansible_facts['system'] == "Darwin"
-    - alttab_app.stat.exists
-    - not alttab_already_installed.stat.exists
-
-- name: Add AltTab as a login item (auto-start on login)
-  shell: osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/AltTab.app", hidden:false, name:"AltTab"}'
-  when:
-    - ansible_facts['system'] == "Darwin"
-    - alttab_app.stat.exists
-    - not alttab_already_installed.stat.exists
-    - "'AltTab' not in login_items.stdout"
-
-- name: Launch AltTab (applies preferences, triggers permission prompts on first run)
-  shell: open -a AltTab
-  when:
-    - ansible_facts['system'] == "Darwin"
-    - alttab_app.stat.exists
-    - not alttab_already_installed.stat.exists
+# Homebrew (formulae, casks, and the Brewfile's VSCodium/VS Code/AltTab
+# packages) is now installed *before* this playbook runs, via `brew bundle`
+# in installLinuxMac.sh/installVM.sh's runBrewBundle() - see the repo root
+# Brewfile. The VSCodium-removal and first-run AltTab setup that used to
+# live here moved into that same shell-script step (configureMacApps()),
+# since it needs to run right after the cask install, not after Ansible.
 
 - name: Uninstall homebrew packages
   homebrew:

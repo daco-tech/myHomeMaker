@@ -298,6 +298,55 @@ downloadRepo(){
     logmsg "INFO" "${NC} Repo Updated!"
 }
 
+###################################################  RUN BREW BUNDLE ###################################################
+
+runBrewBundle(){
+    logmsg "INFO" "${NC} Installing/updating apps via Homebrew (brew bundle)..."
+    export NONINTERACTIVE=1
+    export HOMEBREW_NO_ENV_HINTS=1
+    export HOMEBREW_NO_INSTALL_CLEANUP=1
+
+    # Snapshot AltTab's presence *before* installing, so we only run its
+    # one-time setup (prefs, login item, first launch) the first time it
+    # actually gets installed, not on every subsequent `update`.
+    local alttab_already_installed=false
+    [ -d "/Applications/AltTab.app" ] && alttab_already_installed=true
+
+    brew update
+    brew bundle --file="myHomeMaker/Brewfile"
+    brew upgrade
+    if [ "${OS}" == "MacOS" ];
+    then
+        # Homebrew casks only exist on macOS.
+        brew upgrade --cask --greedy --force
+    fi
+    brew cleanup --prune=all
+    logmsg "INFO" "${NC} Homebrew apps installed/updated! (check log above)"
+
+    if [ "${OS}" != "MacOS" ];
+    then
+        return
+    fi
+
+    if [ -d "/Applications/VSCodium.app" ];
+    then
+        logmsg "INFO" "${NC} Removing VSCodium (replaced by Visual Studio Code)..."
+        brew uninstall --cask --force vscodium
+    fi
+
+    if [ -d "/Applications/AltTab.app" ] && [ "${alttab_already_installed}" != "true" ];
+    then
+        logmsg "INFO" "${NC} Configuring AltTab for the first time..."
+        defaults write com.lwouis.alt-tab-macos showAppsOrWindows -string 1
+        LOGIN_ITEMS="$(osascript -e 'tell application "System Events" to get the name of every login item')"
+        if [[ "$LOGIN_ITEMS" != *"AltTab"* ]];
+        then
+            osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/AltTab.app", hidden:false, name:"AltTab"}'
+        fi
+        open -a AltTab
+    fi
+}
+
 ###################################################  RUN PLAYBOOK ###################################################
 
 runPlaybooks(){
@@ -315,6 +364,7 @@ amIop
 installReq
 installAnsible
 downloadRepo
+runBrewBundle
 runPlaybooks
 
 

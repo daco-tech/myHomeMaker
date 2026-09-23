@@ -13,11 +13,12 @@
   gather_facts: True
   vars:
     install_all_package_updates: true
-    # Homebrew Bundle file (repo root) - the single source of truth for CLI
-    # tools installed on both macOS and Linux, plus macOS-only GUI apps/fonts
-    # (Homebrew casks). Applied by the crossplatform-package-manager role via
-    # `brew bundle`. See ../Brewfile.
-    brewfile_path: "{{ playbook_dir }}/../Brewfile"
+    # Cross-platform CLI tools (and, on macOS, GUI apps/fonts/VS Code
+    # extensions) are installed via `brew bundle` against the repo root
+    # Brewfile *before* this playbook runs - see runBrewBundle() in
+    # installLinuxMac.sh / installVM.sh. The lists below only cover what has
+    # no Homebrew equivalent (native GUI apps, system fonts, systemd-adjacent
+    # tools) and are still handled here via the native package manager.
     repo_brew_tap: []
     rpm_keys:
       - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
@@ -27,9 +28,6 @@
         url: https://download.vscodium.com/rpms/
         gpg: yes
         file: vscodium.repo
-    # The lists below are now limited to packages with no Homebrew
-    # equivalent (GUI apps, system fonts, kernel/systemd-adjacent tools) -
-    # everything else moved to the Brewfile.
     install_arch_linux_aur_packages:
       - vscodium-bin
       - timeshift-bin
