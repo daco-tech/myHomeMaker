@@ -40,6 +40,7 @@ brew "opencode"
 brew "node"
 brew "podman"
 brew "podman-compose"
+brew "uv" # https://docs.astral.sh/uv/ - fast Python package/project manager
 
 # ---- macOS-only GUI apps & fonts (Homebrew casks) --------------------------
 if OS.mac?
