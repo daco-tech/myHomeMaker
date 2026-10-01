@@ -19,6 +19,7 @@
 brew "htop"
 brew "glances"
 brew "cmake"
+brew "tmux"
 brew "wget"
 brew "httpie"
 brew "fastfetch"

@@ -89,14 +89,14 @@
     #      - { key: "sidebarVisibility", val: "1" }
     #      - { key: "dateFormat", val: "YYYY-MM-DD" }
     #      - { key: "sync.target", val: "5" }
-    #- role: tmux
-    #  vars:
-    #    ctrlkey: "C-"
-    #    splitv: "\\\\"
-    #    splith: "-"
-    #    city: "Ermesinde"
-    #  when:
-    #    - ansible_system == "Linux"
+    - role: tmux
+      vars:
+        ctrlkey: "C-"
+        splitv: "\\\\"
+        splith: "-"
+        city: "Ermesinde"
+      when:
+        - ansible_system == "Linux"
     - role: tmux
       vars:
         ctrlkey: "^"
