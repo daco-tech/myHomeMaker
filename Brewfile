@@ -51,6 +51,7 @@ if OS.mac?
   cask "vlc"
   cask "copilot-cli"
   cask "visual-studio-code"
+  cask "dbeaver-community"
   cask "alt-tab"
   cask "ghostty"
 

@@ -30,6 +30,7 @@
         file: vscodium.repo
     install_arch_linux_aur_packages:
       - vscodium-bin
+      - dbeaver
       - timeshift-bin
       - stacer
       #- ttf-firacode
@@ -74,6 +75,7 @@
     - podman
     #- dep
     - nerdfonts
+    - dbeaver
     #- docker
     - role: oh-my-zsh
       users:

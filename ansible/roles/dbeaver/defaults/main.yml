@@ -1,0 +1,20 @@
+---
+# DBeaver itself is installed separately:
+#   - macOS: `cask "dbeaver-community"` in the repo-root Brewfile (brew
+#     bundle, run before this playbook - see runBrewBundle() in
+#     installLinuxMac.sh/installVM.sh).
+#   - Arch Linux: `dbeaver` in install_arch_linux_aur_packages
+#     (ansible/playbook.yml), installed via yay.
+#
+# This role only makes sure DBeaver has the latest JDBC drivers for
+# SQLite/PostgreSQL/MySQL already cached, so it can connect to those
+# databases immediately without prompting to download drivers on first use.
+dbeaver_data_dir: "{{ ansible_env.HOME }}/.local/share/DBeaverData"
+
+dbeaver_jdbc_drivers:
+  - group: org.xerial
+    artifact: sqlite-jdbc
+  - group: org.postgresql
+    artifact: postgresql
+  - group: com.mysql
+    artifact: mysql-connector-j

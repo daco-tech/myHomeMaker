@@ -1,0 +1,31 @@
+---
+# Pre-seed DBeaver's Maven driver cache (~/.local/share/DBeaverData/drivers/
+# maven/maven-central/<groupId>/<artifactId>-<version>.jar) with the latest
+# SQLite/PostgreSQL/MySQL JDBC drivers, so new connections work instantly
+# instead of DBeaver prompting to download the driver on first use.
+- name: Ensure DBeaver Maven driver cache directories exist
+  ansible.builtin.file:
+    path: "{{ dbeaver_data_dir }}/drivers/maven/maven-central/{{ item.group }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ dbeaver_jdbc_drivers }}"
+  loop_control:
+    label: "{{ item.group }}:{{ item.artifact }}"
+
+- name: Look up the latest version of each JDBC driver on Maven Central
+  ansible.builtin.uri:
+    url: "https://search.maven.org/solrsearch/select?q=g:%22{{ item.group }}%22+AND+a:%22{{ item.artifact }}%22&rows=1&wt=json"
+    return_content: true
+  register: dbeaver_maven_lookup
+  loop: "{{ dbeaver_jdbc_drivers }}"
+  loop_control:
+    label: "{{ item.group }}:{{ item.artifact }}"
+
+- name: Download the latest JDBC driver jars into DBeaver's driver cache
+  ansible.builtin.get_url:
+    url: "https://repo1.maven.org/maven2/{{ item.item.group | replace('.', '/') }}/{{ item.item.artifact }}/{{ item.json.response.docs[0].v }}/{{ item.item.artifact }}-{{ item.json.response.docs[0].v }}.jar"
+    dest: "{{ dbeaver_data_dir }}/drivers/maven/maven-central/{{ item.item.group }}/{{ item.item.artifact }}-{{ item.json.response.docs[0].v }}.jar"
+    mode: "0644"
+  loop: "{{ dbeaver_maven_lookup.results }}"
+  loop_control:
+    label: "{{ item.item.group }}:{{ item.item.artifact }}"
