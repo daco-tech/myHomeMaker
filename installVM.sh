@@ -301,6 +301,13 @@ downloadRepo(){
 ###################################################  RUN BREW BUNDLE ###################################################
 
 runBrewBundle(){
+    if ! command -v brew >/dev/null 2>&1;
+    then
+        logmsg "WARN" "${NC} Homebrew is missing; installing it before processing the Brewfile..."
+        installHomebrew
+    fi
+    command -v brew >/dev/null 2>&1 || { echo >&2 "Homebrew is required to process the Brewfile. Aborting."; exit 1; }
+
     logmsg "INFO" "${NC} Installing/updating apps via Homebrew (brew bundle)..."
     export NONINTERACTIVE=1
     export HOMEBREW_NO_ENV_HINTS=1
