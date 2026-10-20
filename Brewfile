@@ -52,7 +52,6 @@ if OS.mac?
   cask "copilot-cli"
   cask "visual-studio-code"
   cask "dbeaver-community"
-  cask "alt-tab"
   cask "ghostty"
 
   # ---- VS Code extensions -------------------------------------------------

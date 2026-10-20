@@ -84,9 +84,9 @@ macOS-only GUI apps and fonts (Homebrew casks) live in the same `Brewfile`,
 guarded by an `if OS.mac?` block, since Homebrew casks aren't available on
 Linux. That block also declares the default set of VS Code extensions
 (installed via `brew bundle`'s `vscode` entries, using the `code` CLI shim
-from the `visual-studio-code` cask). The one-time AltTab setup and the old
-VSCodium-cask removal that depend on that install also run right after
-`brew bundle`, from the same shell-script step (macOS only).
+from the `visual-studio-code` cask). The old VSCodium-cask removal and
+AltTab uninstall also run after `brew bundle` from the same shell-script
+step (macOS only).
 
 Anything with no Homebrew formula/cask (native GUI apps, system fonts,
 distro package-manager-only tools) is still installed via Ansible using the

@@ -1,6 +1,13 @@
 #!/bin/bash
 
 configGit(){
+    # Do not rewrite HTTPS URLs to SSH: public dependency clones should work
+    # without SSH keys or pre-populated known_hosts (and SSH URLs remain usable
+    # when explicitly configured). Remove rewrites left by older setup runs.
+    if command -v git >/dev/null 2>&1; then
+        git config --global --unset-all url."git@github.com:".insteadOf 2>/dev/null || true
+        git config --global --unset-all url."git@gitlab.com:".insteadOf 2>/dev/null || true
+    fi
     echo "Please provide your GIT e-mail (leave empty to skip GIT config):"
     read gitMail
     if [ -z "$gitMail" ]; then
@@ -14,8 +21,6 @@ configGit(){
         return
     fi
     command -v git >/dev/null 2>&1 || { echo >&2 "git is required but it's not installed. Aborting."; exit 1; }
-    git config --global url."git@github.com:".insteadOf "https://github.com/"
-    git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
     git config --global user.email "$gitMail"
     git config --global user.name "$gitName"
     git config --global http.postBuffer 1048576000

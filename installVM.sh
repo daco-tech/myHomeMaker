@@ -306,12 +306,6 @@ runBrewBundle(){
     export HOMEBREW_NO_ENV_HINTS=1
     export HOMEBREW_NO_INSTALL_CLEANUP=1
 
-    # Snapshot AltTab's presence *before* installing, so we only run its
-    # one-time setup (prefs, login item, first launch) the first time it
-    # actually gets installed, not on every subsequent `update`.
-    local alttab_already_installed=false
-    [ -d "/Applications/AltTab.app" ] && alttab_already_installed=true
-
     brew update
     brew bundle --file="myHomeMaker/Brewfile"
     brew upgrade
@@ -328,23 +322,19 @@ runBrewBundle(){
         return
     fi
 
+    if brew list --cask --versions alt-tab >/dev/null 2>&1;
+    then
+        logmsg "INFO" "${NC} Removing AltTab (no longer part of this setup)..."
+        brew uninstall --cask alt-tab
+        osascript -e 'tell application "System Events" to if exists login item "AltTab" then delete login item "AltTab"'
+    fi
+
     if [ -d "/Applications/VSCodium.app" ];
     then
         logmsg "INFO" "${NC} Removing VSCodium (replaced by Visual Studio Code)..."
         brew uninstall --cask --force vscodium
     fi
 
-    if [ -d "/Applications/AltTab.app" ] && [ "${alttab_already_installed}" != "true" ];
-    then
-        logmsg "INFO" "${NC} Configuring AltTab for the first time..."
-        defaults write com.lwouis.alt-tab-macos showAppsOrWindows -string 1
-        LOGIN_ITEMS="$(osascript -e 'tell application "System Events" to get the name of every login item')"
-        if [[ "$LOGIN_ITEMS" != *"AltTab"* ]];
-        then
-            osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/AltTab.app", hidden:false, name:"AltTab"}'
-        fi
-        open -a AltTab
-    fi
 }
 
 ###################################################  RUN PLAYBOOK ###################################################

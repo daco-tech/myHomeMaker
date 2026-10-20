@@ -39,12 +39,10 @@
   when:
     - ansible_facts['system'] == "Linux"
 
-# Homebrew (formulae, casks, and the Brewfile's VSCodium/VS Code/AltTab
-# packages) is now installed *before* this playbook runs, via `brew bundle`
-# in installLinuxMac.sh/installVM.sh's runBrewBundle() - see the repo root
-# Brewfile. The VSCodium-removal and first-run AltTab setup that used to
-# live here moved into that same shell-script step (configureMacApps()),
-# since it needs to run right after the cask install, not after Ansible.
+# Homebrew packages are installed *before* this playbook runs, via
+# `brew bundle` in installLinuxMac.sh/installVM.sh's runBrewBundle() - see
+# the repo root Brewfile. VSCodium removal and legacy AltTab uninstall are
+# also handled in that shell-script step.
 
 - name: Uninstall homebrew packages
   homebrew:
