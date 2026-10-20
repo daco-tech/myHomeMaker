@@ -5,6 +5,28 @@
 
 #Clone Plugins
 
+- name: Inspect existing tmux path
+  ansible.builtin.stat:
+    path: "{{ ansible_facts['user_dir'] }}/.tmux"
+    follow: false
+  register: tmux_path_entry
+
+- name: Inspect tmux path target
+  ansible.builtin.stat:
+    path: "{{ ansible_facts['user_dir'] }}/.tmux"
+    follow: true
+  register: tmux_path
+
+- name: Back up conflicting non-directory tmux path
+  ansible.builtin.command:
+    argv:
+      - mv
+      - "{{ ansible_facts['user_dir'] }}/.tmux"
+      - "{{ ansible_facts['user_dir'] }}/.tmux.backup-{{ ansible_date_time.epoch }}"
+  when: >-
+    (tmux_path_entry.stat.islnk and not tmux_path.stat.exists) or
+    (tmux_path.stat.exists and not tmux_path.stat.isdir)
+
 - name: Ensure tmux plugin directory exists
   ansible.builtin.file:
     path: "{{ ansible_facts['user_dir'] }}/.tmux/plugins"
