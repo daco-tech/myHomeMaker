@@ -54,6 +54,15 @@ if OS.mac?
   cask "dbeaver-community"
   cask "ghostty"
 
+  # Local LLM inference. Ollama provides an easy model/runtime API, while
+  # llama.cpp supports GGUF models with Metal acceleration. MLX-LM is tuned
+  # for Apple Silicon and uses Apple's MLX framework.
+  brew "ollama"
+  brew "llama.cpp"
+  if Hardware::CPU.arm?
+    brew "mlx-lm"
+  end
+
   # ---- VS Code extensions -------------------------------------------------
   # Installed via the `code` CLI shim from the visual-studio-code cask
   # above (Homebrew Bundle installs casks before vscode entries), based on

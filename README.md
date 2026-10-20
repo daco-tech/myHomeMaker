@@ -88,6 +88,12 @@ from the `visual-studio-code` cask). The old VSCodium-cask removal and
 AltTab uninstall also run after `brew bundle` from the same shell-script
 step (macOS only).
 
+On Apple Silicon Macs, the Brewfile also installs Ollama, `llama.cpp`, and
+MLX-LM for local model inference using Metal/MLX acceleration. These are
+runtimes only; models are downloaded on demand. For example, run
+`ollama run <model>` to download and start a model with Ollama. Start its
+background service at login with `brew services start ollama` if desired.
+
 Anything with no Homebrew formula/cask (native GUI apps, system fonts,
 distro package-manager-only tools) is still installed via Ansible using the
 native package manager - see `install_debian_linux_packages` /
