@@ -315,6 +315,11 @@ runBrewBundle(){
 
     brew update
     brew bundle --file="myHomeMaker/Brewfile"
+    if brew list --formula --versions azure-cli >/dev/null 2>&1;
+    then
+        logmsg "INFO" "${NC} Removing Azure CLI (no longer part of this setup)..."
+        brew uninstall azure-cli
+    fi
     brew upgrade
     if [ "${OS}" == "MacOS" ];
     then
