@@ -5,16 +5,23 @@
 
 #Clone Plugins
 
-- name: clone tmux plugin - {{ plugin.name }}
+- name: Ensure tmux plugin directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts['user_dir'] }}/.tmux/plugins"
+    state: directory
+    mode: "0755"
+
+- name: Clone tmux plugins
   ansible.builtin.git:
     repo: https://git::@github.com/{{ plugin.git }}
     dest: ~/.tmux/plugins/{{ plugin.folder }}
     clone: yes
     update: yes
     force: yes
-  with_items: "{{ plugins }}"
+  loop: "{{ plugins }}"
   loop_control:
     loop_var: plugin
+    label: "{{ plugin.name }}"
     
 
 - name: Copy tmux conf

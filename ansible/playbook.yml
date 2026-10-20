@@ -4,7 +4,7 @@
   tasks:
     - debug:
         msg: Check we are running in the directory of the script
-      failed_when: not ansible_env.PWD.endswith('/ansible')
+      failed_when: not lookup('env', 'PWD').endswith('/ansible')
 
 - hosts: localhost
   strategy: free
@@ -79,7 +79,7 @@
     #- docker
     - role: oh-my-zsh
       users:
-        - username: "{{ ansible_user_id | default('daco') }}"
+        - username: "{{ ansible_facts['user_id'] | default('daco') }}"
           oh_my_zsh:
             theme: robbyrussell
             plugins:
@@ -98,7 +98,7 @@
         splith: "-"
         city: "Ermesinde"
       when:
-        - ansible_system == "Linux"
+        - ansible_facts['system'] == "Linux"
     - role: tmux
       vars:
         ctrlkey: "^"
@@ -106,26 +106,26 @@
         splith: "-"
         city: "Porto"
       when:
-        - ansible_system == "Darwin"
+        - ansible_facts['system'] == "Darwin"
     - role: ghostty
       when:
-        - ansible_system == "Darwin"
+        - ansible_facts['system'] == "Darwin"
     - role: vscodium
       vars:
         terminal_font: "Hack"
       users:
-        - username: "{{ ansible_user_id | default('daco') }}"
+        - username: "{{ ansible_facts['user_id'] | default('daco') }}"
           #visual_studio_code_extensions:
           visual_studio_code_settings_overwrite: yes
       when:
-        - ansible_system == "Linux"
+        - ansible_facts['system'] == "Linux"
     - role: vscodium
       vars:
         terminal_font: "Hack Nerd Fonts"
         visual_studio_code_flavor: vscode
       users:
-        - username: "{{ ansible_user_id }}"
+        - username: "{{ ansible_facts['user_id'] }}"
           #visual_studio_code_extensions:
           visual_studio_code_settings_overwrite: yes
       when:
-        - ansible_system == "Darwin"
+        - ansible_facts['system'] == "Darwin"

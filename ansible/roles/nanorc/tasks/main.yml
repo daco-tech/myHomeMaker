@@ -1,9 +1,11 @@
 - name: Copy Nano Highlights
-  copy:
+  ansible.builtin.copy:
     src: .nano/
     dest: ~/.nano/
+    force: true
 
 - name: Copy NanoRC
-  copy:
+  ansible.builtin.copy:
     src: .nanorc
     dest: ~/.nanorc
+    force: true
