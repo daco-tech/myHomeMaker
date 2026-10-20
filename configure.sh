@@ -85,10 +85,26 @@ configSudo(){
     esac
 }
 
+fixSSHPermissions() {
+    # A stale dotfiles symlink prevents SSH from creating known_hosts.
+    if [ -L "$HOME/.ssh" ] && [ ! -e "$HOME/.ssh" ]; then
+        echo "Removing broken SSH directory symlink at $HOME/.ssh"
+        rm "$HOME/.ssh"
+    fi
+
+    mkdir -p "$HOME/.ssh"
+    chmod 700 "$HOME/.ssh"
+    if [ -f "$HOME/.ssh/known_hosts" ]; then
+        chmod 600 "$HOME/.ssh/known_hosts"
+    fi
+    if [ -f "$HOME/.ssh/config" ]; then
+        chmod 600 "$HOME/.ssh/config"
+    fi
+}
+
 configSSH()
 {
-    mkdir -p ~/.ssh
-    chmod 700 ~/.ssh
+    fixSSHPermissions
     echo "Host *" > ~/.ssh/config
     echo " AddKeysToAgent yes" >> ~/.ssh/config
     echo " IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
@@ -169,6 +185,9 @@ if [ -n "$dotfilesDir" ]; then
 else
     echo "No dotfiles directory provided, skipping."
 fi
+
+# Apply after dotfiles linking too, since .ssh may be a symlink to synced files.
+fixSSHPermissions
 
 ## Create tmp dir
 echo "..:::: CREATE TMP DIR ::::.."
