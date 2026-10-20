@@ -53,6 +53,8 @@ if OS.mac?
   cask "visual-studio-code"
   cask "dbeaver-community"
   cask "ghostty"
+  cask "obsidian"
+  cask "drawio"
 
   # Local LLM inference. Ollama provides an easy model/runtime API, while
   # llama.cpp supports GGUF models with Metal acceleration. MLX-LM is tuned
