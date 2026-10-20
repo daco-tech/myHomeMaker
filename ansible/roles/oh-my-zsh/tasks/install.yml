@@ -1,25 +1,48 @@
 ---
-- name: Delete oh-my-zsh user directory
-  become: yes
-  become_user: "{{ username }}"
-  file:
-    state: absent
-    path: ~/.oh-my-zsh
-  with_items: "{{ users | map(attribute='username') | list }}"
-  loop_control:
-    loop_var: username
-
 - name: clone oh-my-zsh for users
   become: yes
   become_user: "{{ username }}"
   ansible.builtin.git:
-    repo: git@github.com:ohmyzsh/ohmyzsh.git
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: ~/.oh-my-zsh
     clone: yes
-    update: yes
+    update: no
   with_items: "{{ users | map(attribute='username') | list }}"
   loop_control:
     loop_var: username
+
+- name: Configure Oh My Zsh HTTPS update remote for users
+  become: yes
+  become_user: "{{ username }}"
+  ansible.builtin.command:
+    argv:
+      - git
+      - -C
+      - "{{ ansible_facts['user_dir'] }}/.oh-my-zsh"
+      - remote
+      - set-url
+      - origin
+      - https://github.com/ohmyzsh/ohmyzsh.git
+  changed_when: false
+  with_items: "{{ users | map(attribute='username') | list }}"
+  loop_control:
+    loop_var: username
+    label: "{{ username }}"
+
+- name: Upgrade Oh My Zsh for users
+  become: yes
+  become_user: "{{ username }}"
+  ansible.builtin.command:
+    argv:
+      - "{{ ansible_facts['user_dir'] }}/.oh-my-zsh/tools/upgrade.sh"
+      - -v
+      - minimal
+  register: oh_my_zsh_upgrade
+  changed_when: "'Hooray! Oh My Zsh has been updated!' in oh_my_zsh_upgrade.stdout"
+  with_items: "{{ users | map(attribute='username') | list }}"
+  loop_control:
+    loop_var: username
+    label: "{{ username }}"
 
 - name: set permissions of oh-my-zsh for users
   become: yes
