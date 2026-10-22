@@ -88,6 +88,10 @@ from the `visual-studio-code` cask). The old VSCodium-cask removal and
 AltTab uninstall also run after `brew bundle` from the same shell-script
 step (macOS only).
 
+MQTT Explorer is installed from the Mac App Store via `mas` in the Brewfile:
+the Homebrew cask was disabled because it fails Gatekeeper checks. Sign in to
+the Mac App Store on each Mac before running the setup or `update` command.
+
 On Apple Silicon Macs, the Brewfile also installs Ollama, `llama.cpp`, and
 MLX-LM for local model inference using Metal/MLX acceleration. These are
 runtimes only; models are downloaded on demand. For example, run

@@ -55,6 +55,12 @@ if OS.mac?
   cask "obsidian"
   cask "drawio"
 
+  # The official Homebrew cask was disabled in 2026 for failing Gatekeeper
+  # checks, so install the signed Mac App Store version instead. `mas` needs
+  # the user to be signed in to the Mac App Store.
+  brew "mas"
+  mas "MQTT Explorer", id: 1455214828
+
   # Local LLM inference. Ollama provides an easy model/runtime API, while
   # llama.cpp supports GGUF models with Metal acceleration. MLX-LM is tuned
   # for Apple Silicon and uses Apple's MLX framework.
