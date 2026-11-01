@@ -34,6 +34,7 @@ brew "gh"
 brew "k9s"
 brew "kubecolor"
 brew "kubespy"
+brew "vault" # HashiCorp Vault CLI client
 brew "terraform-docs"
 brew "tfsec"
 brew "opencode"
