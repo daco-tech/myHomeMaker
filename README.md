@@ -80,6 +80,11 @@ ever runs. This keeps Ansible focused on configuration rather than package
 management, and means `update` (which just re-runs `installLinuxMac.sh`)
 always re-applies the Brewfile too.
 
+Vault is installed from the explicitly declared `hashicorp/tap`. On Homebrew
+versions with formula trust enforcement, `runBrewBundle` trusts only
+`hashicorp/tap/vault` before applying the Brewfile, so `update` can install it
+without requiring a separate manual Homebrew command.
+
 macOS-only GUI apps and fonts (Homebrew casks) live in the same `Brewfile`,
 guarded by an `if OS.mac?` block, since Homebrew casks aren't available on
 Linux. That block also declares the default set of VS Code extensions
@@ -121,5 +126,4 @@ native package manager - see `install_debian_linux_packages` /
 - VSCode Ansible Role: https://github.com/gantsign/ansible-role-visual-studio-code
 - ZSH Configuration and Installation: https://github.com/gantsign/ansible-role-oh-my-zsh
 - Nerdfonts Ansible Role: https://github.com/drew-kun/ansible-nerdfonts
-
 

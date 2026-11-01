@@ -409,7 +409,14 @@ runBrewBundle(){
     export HOMEBREW_NO_INSTALL_CLEANUP=1
 
     brew update
-    brew bundle --file="myHomeMaker/Brewfile"
+    # Vault is explicitly declared in Brewfile from HashiCorp's third-party
+    # tap. Homebrew 7+ requires non-official formulae to be trusted before
+    # brew bundle can load them; trust only the formula we use.
+    if brew help trust >/dev/null 2>&1;
+    then
+        brew trust --formula hashicorp/tap/vault || return 1
+    fi
+    brew bundle --file="myHomeMaker/Brewfile" || return 1
     if brew list --formula --versions azure-cli >/dev/null 2>&1;
     then
         logmsg "INFO" "${NC} Removing Azure CLI (no longer part of this setup)..."
@@ -470,7 +477,7 @@ configureSudo
 installReq
 installAnsible
 downloadRepo
-runBrewBundle
+runBrewBundle || exit 1
 runPlaybooks
 endinstall
 
