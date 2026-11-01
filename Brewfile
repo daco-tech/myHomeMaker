@@ -16,6 +16,7 @@
 # ansible/playbook.yml.
 
 # ---- Cross-platform CLI tools (macOS + Linux) ------------------------------
+tap "hashicorp/tap"
 brew "htop"
 brew "glances"
 brew "cmake"
@@ -34,7 +35,7 @@ brew "gh"
 brew "k9s"
 brew "kubecolor"
 brew "kubespy"
-brew "vault" # HashiCorp Vault CLI client
+brew "hashicorp/tap/vault" # HashiCorp Vault CLI client
 brew "terraform-docs"
 brew "tfsec"
 brew "opencode"
