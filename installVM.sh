@@ -320,6 +320,10 @@ runBrewBundle(){
     if brew help trust >/dev/null 2>&1;
     then
         brew trust --formula hashicorp/tap/vault || return 1
+        if [ "$(uname -s)" = "Darwin" ];
+        then
+            brew trust --formula incoai/tap/splash || return 1
+        fi
     fi
     brew bundle --file="myHomeMaker/Brewfile" || return 1
     if brew list --formula --versions azure-cli >/dev/null 2>&1;
