@@ -46,6 +46,9 @@ brew "uv" # https://docs.astral.sh/uv/ - fast Python package/project manager
 
 # ---- macOS-only GUI apps & fonts (Homebrew casks) --------------------------
 if OS.mac?
+  # Local inference engine (Apple silicon only) - https://github.com/incoai/splash
+  tap "incoai/tap"
+  brew "incoai/tap/splash" if Hardware::CPU.arm?
   cask "font-fira-code"
   cask "font-hack-nerd-font"
   cask "font-jetbrains-mono"
