@@ -6,6 +6,9 @@
 # Ansible role (see ansible/roles/crossplatform-package-manager), which is
 # run on every supported OS.
 #
+# Entries are grouped by type for readability only; the grouping does not
+# change how Homebrew Bundle installs them.
+#
 # Homebrew casks (pre-built GUI apps and fonts) and `vscode` extension
 # entries only work on macOS here (they need the `code` CLI shim that the
 # visual-studio-code cask installs), so they are wrapped in an `if OS.mac?`
@@ -16,100 +19,160 @@
 # ansible/playbook.yml.
 
 # ---- Cross-platform CLI tools (macOS + Linux) ------------------------------
-tap "hashicorp/tap"
+
+# System monitoring & diagnostics
 brew "htop"
 brew "glances"
-brew "cmake"
-brew "tmux"
-brew "wget"
-brew "httpie"
+brew "watch"
 brew "fastfetch"
-brew "graphviz"
+
+# Terminal & shell
+brew "tmux"
 brew "bash-completion"
 brew "fzf" # https://github.com/junegunn/fzf
-brew "watch"
-brew "jq"
 brew "nano"
+
+# Networking & HTTP clients
+brew "wget"
+brew "httpie"
+
+# Data processing & visualization
+brew "jq"
+brew "graphviz"
+
+# Language runtimes & build tooling
+brew "cmake"
 brew "go"
+brew "node"
+brew "uv" # https://docs.astral.sh/uv/ - fast Python package/project manager
+
+# Git & GitHub
 brew "gh"
+
+# Containers & Kubernetes
+brew "podman"
+brew "podman-compose"
 brew "k9s"
 brew "kubecolor"
 brew "kubespy"
+
+# Infrastructure as Code & security
+tap "hashicorp/tap"
 brew "hashicorp/tap/vault" # HashiCorp Vault CLI client
 brew "terraform-docs"
 brew "tfsec"
-brew "opencode"
-brew "node"
-brew "podman"
-brew "podman-compose"
-brew "uv" # https://docs.astral.sh/uv/ - fast Python package/project manager
 
-# ---- macOS-only GUI apps & fonts (Homebrew casks) --------------------------
+# AI
+brew "opencode"
+
+# ---- macOS-only apps, tools & fonts -----------------------------------------
 if OS.mac?
   # Local inference engine (Apple silicon only) - https://github.com/incoai/splash
   tap "incoai/tap"
   brew "incoai/tap/splash" if Hardware::CPU.arm?
-  cask "font-fira-code"
-  cask "font-hack-nerd-font"
-  cask "font-jetbrains-mono"
-  cask "vlc"
+
+  # AI & local LLM inference: Ollama provides an easy model/runtime API,
+  # llama.cpp supports GGUF models with Metal acceleration, and MLX-LM is
+  # tuned for Apple Silicon and uses Apple's MLX framework.
   cask "copilot-cli"
-  cask "visual-studio-code"
-  cask "dbeaver-community"
-  cask "ghostty"
-  cask "obsidian"
-  cask "drawio"
-
-  # The official Homebrew cask was disabled in 2026 for failing Gatekeeper
-  # checks, so install the signed Mac App Store version instead. `mas` needs
-  # the user to be signed in to the Mac App Store.
-  brew "mas"
-  mas "MQTT Explorer", id: 1455214828
-
-  # Local LLM inference. Ollama provides an easy model/runtime API, while
-  # llama.cpp supports GGUF models with Metal acceleration. MLX-LM is tuned
-  # for Apple Silicon and uses Apple's MLX framework.
   brew "ollama"
   brew "llama.cpp"
   if Hardware::CPU.arm?
     brew "mlx-lm"
+
+    # whichllm recommends the best local LLM for this machine's GPU/RAM.
+    # Its formula is served from a third-party tap and only ships Apple
+    # Silicon wheels, so it is scoped to this block. On Linux use
+    # `uv tool install whichllm` instead (uv is installed above).
+    tap "andyyyy64/whichllm"
+    brew "whichllm"
   end
+
+  # Fonts
+  cask "font-fira-code"
+  cask "font-hack-nerd-font"
+  cask "font-jetbrains-mono"
+
+  # Media
+  cask "vlc"
+
+  # Terminal
+  cask "ghostty"
+
+  # Editors, notes & diagramming
+  cask "visual-studio-code"
+  cask "obsidian"
+  cask "drawio"
+
+  # Databases
+  cask "dbeaver-community"
+
+  # Mac App Store apps. The official Homebrew cask for MQTT Explorer was
+  # disabled in 2026 for failing Gatekeeper checks, so install the signed
+  # Mac App Store version instead. `mas` needs the user to be signed in to
+  # the Mac App Store.
+  brew "mas"
+  mas "MQTT Explorer", id: 1455214828
 
   # ---- VS Code extensions -------------------------------------------------
   # Installed via the `code` CLI shim from the visual-studio-code cask
   # above (Homebrew Bundle installs casks before vscode entries), based on
   # https://github.com/josemaia/dotfiles/blob/master/files/Brewfile
-  vscode "ban.spellright"
-  vscode "casualjim.gotemplate"
+
+  # Python
   vscode "charliermarsh.ruff"
-  vscode "davidanson.vscode-markdownlint"
-  vscode "eamodio.gitlens"
-  vscode "editorconfig.editorconfig"
-  vscode "github.vscode-github-actions"
-  vscode "github.vscode-pull-request-github"
-  vscode "golang.go"
-  vscode "hashicorp.terraform"
-  vscode "mdickin.markdown-shortcuts"
-  vscode "ms-azuretools.vscode-azurefunctions"
-  vscode "ms-azuretools.vscode-azureresourcegroups"
-  vscode "ms-azuretools.vscode-azurestorage"
-  vscode "ms-azuretools.vscode-containers"
-  vscode "ms-azuretools.vscode-docker"
-  vscode "ms-dotnettools.csharp"
-  vscode "ms-dotnettools.vscode-dotnet-runtime"
   vscode "ms-python.black-formatter"
   vscode "ms-python.debugpy"
   vscode "ms-python.isort"
   vscode "ms-python.python"
   vscode "ms-python.vscode-pylance"
-  vscode "ms-vscode-remote.remote-containers"
+
+  # Go
+  vscode "casualjim.gotemplate"
+  vscode "golang.go"
+
+  # C# / .NET
+  vscode "ms-dotnettools.csharp"
+  vscode "ms-dotnettools.vscode-dotnet-runtime"
+
+  # C++
   vscode "ms-vscode.cpp-devtools"
-  vscode "ms-vscode.powershell"
-  vscode "ms-vscode.wordcount"
-  vscode "ms-vsliveshare.vsliveshare"
-  vscode "redhat.vscode-commons"
-  vscode "redhat.vscode-yaml"
-  vscode "rogalmic.bash-debug"
+
+  # Markdown
+  vscode "davidanson.vscode-markdownlint"
+  vscode "mdickin.markdown-shortcuts"
   vscode "yzane.markdown-pdf"
   vscode "yzhang.markdown-all-in-one"
+
+  # Git & GitHub
+  vscode "eamodio.gitlens"
+  vscode "github.vscode-github-actions"
+  vscode "github.vscode-pull-request-github"
+
+  # Cloud & Azure
+  vscode "ms-azuretools.vscode-azurefunctions"
+  vscode "ms-azuretools.vscode-azureresourcegroups"
+  vscode "ms-azuretools.vscode-azurestorage"
+
+  # Containers & remote development
+  vscode "ms-azuretools.vscode-containers"
+  vscode "ms-azuretools.vscode-docker"
+  vscode "ms-vscode-remote.remote-containers"
+
+  # Infrastructure as Code
+  vscode "hashicorp.terraform"
+
+  # Shell & PowerShell
+  vscode "rogalmic.bash-debug"
+  vscode "ms-vscode.powershell"
+
+  # YAML & configuration
+  vscode "redhat.vscode-commons"
+  vscode "redhat.vscode-yaml"
+
+  # Editing & productivity
+  vscode "ban.spellright"
+  vscode "editorconfig.editorconfig"
+  vscode "ms-vscode.wordcount"
+  vscode "ms-vsliveshare.vsliveshare"
 end

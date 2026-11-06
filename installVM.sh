@@ -314,15 +314,19 @@ runBrewBundle(){
     export HOMEBREW_NO_INSTALL_CLEANUP=1
 
     brew update
-    # Vault is explicitly declared in Brewfile from HashiCorp's third-party
-    # tap. Homebrew 7+ requires non-official formulae to be trusted before
-    # brew bundle can load them; trust only the formula we use.
+    # Vault, splash and whichllm are explicitly declared in Brewfile from
+    # third-party taps. Homebrew 7+ requires non-official formulae to be
+    # trusted before brew bundle can load them; trust only the formulae we use.
     if brew help trust >/dev/null 2>&1;
     then
         brew trust --formula hashicorp/tap/vault || return 1
         if [ "$(uname -s)" = "Darwin" ];
         then
             brew trust --formula incoai/tap/splash || return 1
+            if [ "$(uname -m)" = "arm64" ];
+            then
+                brew trust --formula andyyyy64/whichllm/whichllm || return 1
+            fi
         fi
     fi
     brew bundle --file="myHomeMaker/Brewfile" || return 1
