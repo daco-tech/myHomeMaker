@@ -112,6 +112,14 @@ opens a chat with it. The upstream Homebrew formula only ships Apple Silicon
 wheels; on Linux, install it with `uv tool install whichllm` (the Brewfile
 already installs `uv`).
 
+On macOS, the Brewfile also installs
+[clipaste](https://github.com/hqhq1025/clipaste) from the `hqhq1025/clipaste`
+tap (plus `pngpaste`) and starts the clipaste daemon via `brew services` so
+clipboard screenshots paste cleanly into terminal AI tools (Claude Code, Codex,
+Cursor). Manage it afterwards with `brew services {info,restart,stop} clipaste`.
+The generated `.zshrc` also defines a `clipimg` helper that saves the clipboard
+image with `pngpaste` and stages its file path on the clipboard.
+
 Anything with no Homebrew formula/cask (native GUI apps, system fonts,
 distro package-manager-only tools) is still installed via Ansible using the
 native package manager - see `install_debian_linux_packages` /

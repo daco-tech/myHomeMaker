@@ -186,3 +186,15 @@ fi
 if [ -x "$(command -v podman-compose)" ]; then
     alias docker-compose="podman-compose"
 fi
+
+# PrintScreen to terminal - captures the clipboard image with pngpaste,
+# saves it to /tmp/snap.png, then puts that path on the clipboard so a
+# following Cmd+V/Ctrl+V in a terminal AI tool (Claude Code, Codex, Cursor)
+# pastes the screenshot instead of nothing. macOS-only: pbcopy and pngpaste
+# are not available on Linux.
+if [ "$(uname)" = "Darwin" ]; then
+    clipimg() {
+        local img="/tmp/snap.png"
+        pngpaste "$img" && echo -n "$img" | pbcopy && echo "Image staged!"
+    }
+fi

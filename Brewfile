@@ -96,6 +96,17 @@ if OS.mac?
   # Media
   cask "vlc"
 
+  # Clipboard & screenshots
+  # clipaste is a tiny background daemon that makes macOS clipboard screenshots
+  # pasteable in terminal AI tools (Claude Code, Codex, Cursor). pngpaste saves
+  # the current clipboard image to a file and backs the `clipimg` helper defined
+  # in the generated .zshrc, which stages that file's path on the clipboard.
+  # `start_service: true` runs `brew services start clipaste` (a user-level
+  # LaunchAgent) after install so the daemon is picked up on every `update`.
+  tap "hqhq1025/clipaste"
+  brew "hqhq1025/clipaste/clipaste", start_service: true
+  brew "pngpaste"
+
   # Terminal
   cask "ghostty"
 
