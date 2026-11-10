@@ -81,9 +81,10 @@ management, and means `update` (which just re-runs `installLinuxMac.sh`)
 always re-applies the Brewfile too.
 
 Vault is installed from the explicitly declared `hashicorp/tap`. On Homebrew
-versions with formula trust enforcement, `runBrewBundle` trusts only
-`hashicorp/tap/vault` before applying the Brewfile, so `update` can install it
-without requiring a separate manual Homebrew command.
+versions with formula trust enforcement, `runBrewBundle` trusts only the
+third-party formulae this repo declares (`hashicorp/tap/vault` and
+`andyyyy64/whichllm/whichllm`) before applying the Brewfile, so `update` can
+install them without requiring a separate manual Homebrew command.
 
 macOS-only GUI apps and fonts (Homebrew casks) live in the same `Brewfile`,
 guarded by an `if OS.mac?` block, since Homebrew casks aren't available on
@@ -139,6 +140,22 @@ MLX-LM for local model inference using Metal/MLX acceleration. These are
 runtimes only; models are downloaded on demand. For example, run
 `ollama run <model>` to download and start a model with Ollama. Start its
 background service at login with `brew services start ollama` if desired.
+
+[whichllm](https://github.com/Andyyyy64/whichllm) is installed alongside them
+from the `andyyyy64/whichllm` tap. It inspects the GPU, RAM, and memory
+bandwidth, then ranks the local models that fit and how fast they should run:
+`whichllm` prints the table, and `whichllm run` downloads the top pick and
+opens a chat with it. The upstream Homebrew formula only ships Apple Silicon
+wheels; on Linux, install it with `uv tool install whichllm` (the Brewfile
+already installs `uv`).
+
+On macOS, the Brewfile also installs
+[clipaste](https://github.com/hqhq1025/clipaste) from the `hqhq1025/clipaste`
+tap (plus `pngpaste`) and starts the clipaste daemon via `brew services` so
+clipboard screenshots paste cleanly into terminal AI tools (Claude Code, Codex,
+Cursor). Manage it afterwards with `brew services {info,restart,stop} clipaste`.
+The generated `.zshrc` also defines a `clipimg` helper that saves the clipboard
+image with `pngpaste` and stages its file path on the clipboard.
 
 Anything with no Homebrew formula/cask (native GUI apps, system fonts,
 distro package-manager-only tools) is still installed via Ansible using the
