@@ -46,6 +46,9 @@ brew "uv" # https://docs.astral.sh/uv/ - fast Python package/project manager
 
 # ---- macOS-only GUI apps & fonts (Homebrew casks) --------------------------
 if OS.mac?
+  # Supports API-secret authentication as well as Nightscout access tokens.
+  tap "gabe565/tap"
+  cask "gabe565/tap/nightscout-menu-bar"
   # Local inference engine (Apple silicon only) - https://github.com/incoai/splash
   tap "incoai/tap"
   brew "incoai/tap/splash" if Hardware::CPU.arm?

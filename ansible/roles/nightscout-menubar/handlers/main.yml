@@ -1,0 +1,10 @@
+---
+- name: Restart Nightscout Menu Bar
+  command:
+    argv:
+      - /usr/bin/pkill
+      - -f
+      - "^{{ nightscout_menubar_app }}/Contents/MacOS/"
+  register: nightscout_menubar_stop
+  failed_when: nightscout_menubar_stop.rc not in [0, 1]
+  changed_when: nightscout_menubar_stop.rc == 0

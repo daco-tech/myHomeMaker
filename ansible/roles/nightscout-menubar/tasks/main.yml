@@ -1,0 +1,76 @@
+---
+- name: Read Nightscout API key from environment or private local file
+  set_fact:
+    nightscout_menubar_api_key: >-
+      {{ lookup('env', 'NIGHTSCOUT_API_KEY') or
+         (lookup('file', nightscout_menubar_api_key_file, errors='ignore') | default('', true) | trim) }}
+  no_log: true
+
+# These names match the upstream app's internal/secret and internal/config code.
+- name: Read existing Nightscout credential from macOS Keychain
+  command:
+    argv:
+      - /usr/bin/security
+      - find-generic-password
+      - -s
+      - com.gabe565.nightscout-menu-bar
+      - -a
+      - api-token
+      - -w
+  register: nightscout_menubar_stored_key
+  changed_when: false
+  failed_when: nightscout_menubar_stored_key.rc not in [0, 44]
+  check_mode: false
+  no_log: true
+
+- name: Require a Nightscout credential before configuring the app
+  assert:
+    that:
+      - nightscout_menubar_api_key | length > 0 or nightscout_menubar_stored_key.rc == 0
+    fail_msg: >-
+      Run configure.sh to save your Nightscout API secret on this Mac, or supply
+      NIGHTSCOUT_API_KEY in the environment, then rerun update. See README.md.
+
+- name: Store Nightscout credential in the app's macOS Keychain entry
+  command:
+    argv:
+      - /usr/bin/security
+      - add-generic-password
+      - -U
+      - -s
+      - com.gabe565.nightscout-menu-bar
+      - -a
+      - api-token
+      - -w
+      - "{{ nightscout_menubar_api_key }}"
+  when:
+    - nightscout_menubar_api_key | length > 0
+    - nightscout_menubar_stored_key.rc != 0 or nightscout_menubar_stored_key.stdout != nightscout_menubar_api_key
+  no_log: true
+  notify: Restart Nightscout Menu Bar
+
+- name: Ensure Nightscout configuration directory exists
+  file:
+    path: "{{ nightscout_menubar_config_dir }}"
+    state: directory
+    mode: "0700"
+
+- name: Configure Nightscout server without replacing display preferences
+  lineinfile:
+    path: "{{ nightscout_menubar_config_dir }}/config.toml"
+    regexp: '^url\s*='
+    line: "url = {{ nightscout_menubar_url | to_json }}"
+    insertbefore: BOF
+    create: true
+    mode: "0600"
+  notify: Restart Nightscout Menu Bar
+
+- meta: flush_handlers
+
+- name: Launch Nightscout Menu Bar
+  command:
+    argv:
+      - /usr/bin/open
+      - -g
+      - "{{ nightscout_menubar_app }}"
+  changed_when: false

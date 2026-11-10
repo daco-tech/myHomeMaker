@@ -68,6 +68,27 @@ configDotfiles(){
     done
 }
 
+configNightscout(){
+    [ "$(uname -s)" = "Darwin" ] || return 0
+    local nightscoutKey
+    echo "Nightscout API secret (hidden; leave empty to keep existing configuration):"
+    IFS= read -r -s nightscoutKey
+    echo
+    if [ -z "$nightscoutKey" ]; then
+        echo "Nightscout credential unchanged."
+        return 0
+    fi
+    (
+        umask 077
+        mkdir -p "$HOME/.config/myhomemaker" || exit 1
+        chmod 700 "$HOME/.config/myhomemaker" || exit 1
+        printf '%s' "$nightscoutKey" > "$HOME/.config/myhomemaker/nightscout-api-key" || exit 1
+        chmod 600 "$HOME/.config/myhomemaker/nightscout-api-key"
+    ) || { echo "Could not save Nightscout credential."; return 1; }
+    unset nightscoutKey
+    echo "Nightscout credential saved locally; setup/update will configure the app."
+}
+
 configSudo(){
     case "$(uname -s)" in
     Darwin)
@@ -188,6 +209,9 @@ fi
 
 # Apply after dotfiles linking too, since .ssh may be a symlink to synced files.
 fixSSHPermissions
+
+## Nightscout credential (never stored in the repository)
+configNightscout
 
 ## Create tmp dir
 echo "..:::: CREATE TMP DIR ::::.."

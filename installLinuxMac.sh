@@ -420,6 +420,8 @@ runBrewBundle(){
             brew trust --formula incoai/tap/splash || return 1
         fi
     fi
+    source "myHomeMaker/scripts/prepare-nightscout.sh" || return 1
+    prepareNightscoutApp || return 1
     brew bundle --file="myHomeMaker/Brewfile" || return 1
     if brew list --formula --versions azure-cli >/dev/null 2>&1;
     then

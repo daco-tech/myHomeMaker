@@ -110,6 +110,10 @@
     - role: ghostty
       when:
         - ansible_facts['system'] == "Darwin"
+    - role: nightscout-menubar
+      tags: nightscout
+      when:
+        - ansible_facts['system'] == "Darwin"
     - role: vscodium
       vars:
         terminal_font: "Hack"

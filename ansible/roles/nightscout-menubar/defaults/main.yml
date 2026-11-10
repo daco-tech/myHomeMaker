@@ -1,0 +1,6 @@
+---
+nightscout_menubar_url: https://nightscout.danielcosta.pt
+nightscout_menubar_app: /Applications/Nightscout Menu Bar.app
+nightscout_menubar_config_dir: "{{ ansible_facts['user_dir'] }}/Library/Application Support/nightscout-menu-bar"
+# Outside the checkout: update replaces its downloaded copy of this repository.
+nightscout_menubar_api_key_file: "{{ ansible_facts['user_dir'] }}/.config/myhomemaker/nightscout-api-key"

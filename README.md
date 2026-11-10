@@ -97,6 +97,43 @@ MQTT Explorer is installed from the Mac App Store via `mas` in the Brewfile:
 the Homebrew cask was disabled because it fails Gatekeeper checks. Sign in to
 the Mac App Store on each Mac before running the setup or `update` command.
 
+### Nightscout menu bar (macOS)
+
+On every setup or `update`, Homebrew installs/updates
+[gabe565/nightscout-menu-bar](https://github.com/gabe565/nightscout-menu-bar)
+from `gabe565/tap`. Unlike the native App Store app, it supports API-secret
+authentication. The `nightscout-menubar` Ansible role configures
+`https://nightscout.danielcosta.pt`, stores the credential in the app's macOS
+Keychain entry, and launches the app. Existing display preferences are preserved;
+the app restarts only when the managed URL or credential changes.
+
+**One-time setup on each Mac:** run `bash configure.sh` and enter your Nightscout
+API secret at the hidden prompt. It is saved in
+`~/.config/myhomemaker/nightscout-api-key` with owner-only permissions, outside
+the disposable checkout used by `update`. Alternatively, create just that file
+without running the other configuration steps (run this snippet in Bash):
+
+```bash
+mkdir -p ~/.config/myhomemaker
+chmod 700 ~/.config/myhomemaker
+IFS= read -r -s -p 'Nightscout API secret: ' nightscout_key; echo
+(umask 077; printf '%s' "$nightscout_key" > ~/.config/myhomemaker/nightscout-api-key)
+chmod 600 ~/.config/myhomemaker/nightscout-api-key
+unset nightscout_key
+update
+```
+
+You can also supply `NIGHTSCOUT_API_KEY` in the environment. Later updates reuse
+the Keychain credential even without the source file. Secrets are not committed
+or printed in Ansible output. On first launch, macOS may ask you to allow the app
+to access its Keychain entry. Enable **Start on login** in the app if desired.
+
+If the native App Store app is already installed, setup preserves it at
+`~/Applications/Nightscout Menu Bar (App Store).app` before installing the new app,
+leaving its preferences intact. Disable the old app's login item if enabled.
+The upstream Homebrew cask removes the new app's quarantine attribute because
+it is not notarized. This integration is macOS-only; Linux setup is unchanged.
+
 On Apple Silicon Macs, the Brewfile also installs Ollama, `llama.cpp`, and
 MLX-LM for local model inference using Metal/MLX acceleration. These are
 runtimes only; models are downloaded on demand. For example, run
@@ -126,4 +163,3 @@ native package manager - see `install_debian_linux_packages` /
 - VSCode Ansible Role: https://github.com/gantsign/ansible-role-visual-studio-code
 - ZSH Configuration and Installation: https://github.com/gantsign/ansible-role-oh-my-zsh
 - Nerdfonts Ansible Role: https://github.com/drew-kun/ansible-nerdfonts
-
