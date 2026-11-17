@@ -75,7 +75,9 @@
     - podman
     #- dep
     - nerdfonts
-    - dbeaver
+    # JDBC pre-seeding always fell through to its skip warning; DBeaver
+    # downloads drivers itself on first use.
+    #- dbeaver
     #- docker
     - role: oh-my-zsh
       users:
