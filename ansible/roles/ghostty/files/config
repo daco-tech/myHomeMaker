@@ -40,3 +40,7 @@ window-save-state = never
 # window-colorspace = srgb
 window-colorspace = display-p3
 keybind = shift+enter=text:\n
+# cmd+v pastes text as usual. When the clipboard holds only an image (e.g. a
+# cmd+shift+4 screenshot) the paste isn't performable, so cmd+v is passed
+# through to the app (opencode maps it to its image paste, see ghostty role).
+keybind = performable:super+v=paste_from_clipboard

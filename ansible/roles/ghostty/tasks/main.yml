@@ -10,3 +10,29 @@
     src: config
     dest: ~/.config/ghostty/config
     mode: "u=rw,go=r"
+
+# opencode only pastes clipboard images on ctrl+v by default. Also accept
+# cmd+v (forwarded by Ghostty when the clipboard has no text), merging into any
+# existing tui.json instead of overwriting it.
+- name: Ensure ~/.config/opencode directory exists
+  file:
+    path: ~/.config/opencode
+    state: directory
+    mode: "0755"
+
+- name: Read existing opencode tui.json
+  slurp:
+    src: ~/.config/opencode/tui.json
+  register: opencode_tui_raw
+  failed_when: false
+
+- name: Allow cmd+v to paste images in opencode
+  copy:
+    dest: ~/.config/opencode/tui.json
+    mode: "u=rw,go=r"
+    content: >-
+      {{ (({'$schema': 'https://opencode.ai/tui.json'}
+          | combine((opencode_tui_raw.content | default('e30=') | b64decode | from_json) if opencode_tui_raw.content is defined else {}))
+          | combine({'keybinds': ((opencode_tui_raw.content | default('e30=') | b64decode | from_json).keybinds | default({}))
+              | combine({'input_paste': {'key': 'ctrl+v,super+v', 'preventDefault': false}})}))
+          | to_nice_json }}
